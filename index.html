@@ -1,29 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Web Interactive</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Bienvenue sur mon site interactif ps: ne pas demander son squat a mael !</h1>
-    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Site à Sept Pages</title>
+</head>
+<body>
+    <div class="container">
+        <div class="page" id="page1">Page 1</div>
+        <div class="page" id="page2">Page 2</div>
+        <div class="page" id="page3">Page 3</div>
+        <div class="page" id="page4">Page 4</div>
+        <div class="page" id="page5">Page 5</div>
+        <div class="page" id="page6">Page 6</div>
+        <div class="page" id="page7">Page 7</div>
+    </div>
+    <div class="navigation">
+        <button class="nav-button" id="upButton">↑</button>
+        <button class="nav-button" id="downButton">↓</button>
+    </div>
 
-    <section class="visualisation">
-      <div class="circle-container">
-        <div class="circle" id="circle1"></div>
-        <div class="circle" id="circle2"></div>
-        <div class="circle" id="circle3"></div>
-      </div>
-      <p class="info">Les cercles vont changer de couleur et se déplacer automatiquement.</p>
-    </section>
+    <script>
+        let currentPage = 0;
+        const pages = document.querySelectorAll('.page');
 
-    <footer>
-      <p>Créé avec 💻 par OpenAI &amp; toi !</p>
-    </footer>
+        function showPage(index) {
+            pages.forEach((page, i) => {
+                page.style.display = (i === index) ? 'block' : 'none';
+            });
+        }
 
-    <script src="script.js"></script>
-  </body>
+        document.getElementById('upButton').addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        document.getElementById('downButton').addEventListener('click', () => {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        // Initial display
+        showPage(currentPage);
+    </script>
+</body>
 </html>
