@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Site Web</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Web Interactive</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <h1>Bienvenue sur mon site web</h1>
+      <h1>Bienvenue sur mon site interactif !</h1>
     </header>
-    <section>
-        <p>Ceci est un site hébergé sur GitHub Pages.</p>
+
+    <section class="visualisation">
+      <div class="circle-container">
+        <div class="circle" id="circle1"></div>
+        <div class="circle" id="circle2"></div>
+        <div class="circle" id="circle3"></div>
+      </div>
+      <p class="info">Les cercles vont changer de couleur et se déplacer automatiquement.</p>
     </section>
-</body>
+
+    <footer>
+      <p>Créé avec 💻 par OpenAI &amp; toi !</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>
