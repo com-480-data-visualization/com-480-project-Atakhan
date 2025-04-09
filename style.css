@@ -1,33 +1,26 @@
-function generateRandomData() {
-    return Array.from({ length: 5 }, () => Math.floor(Math.random() * 100));
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    overflow: hidden; /* Empêche le défilement */
 }
 
-function createChart(canvasId) {
-    const ctx = document.getElementById(canvasId).getContext('2d');
-    const data = generateRandomData();
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['A', 'B', 'C', 'D', 'E'],
-            datasets: [{
-                label: 'Random Data',
-                data: data,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+.container {
+    position: relative;
+    height: 100vh;
 }
 
-// Créez les graphiques pour chaque page
-for (let i = 1; i <= 7; i++) {
-    createChart(`chart${i}`);
+.page {
+    display: none; /* Masque toutes les pages par défaut */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
 }
+
+canvas {
+    max-width: 80%;
+    max-height: 
