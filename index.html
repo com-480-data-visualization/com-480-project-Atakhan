@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Site à Sept Pages</title>
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="visualization.js" defer></script>
 </head>
 <body>
     <div class="container">
+        <div class="indicator-bar" id="indicatorBar"></div>
+
         <div class="page" id="page1">
             <h1>Page 1</h1>
             <canvas id="chart1"></canvas>
@@ -41,13 +43,23 @@
     </div>
 
     <script>
-        let currentPage = 0;
         const pages = document.querySelectorAll('.page');
+        const indicatorBar = document.getElementById('indicatorBar');
+        let currentPage = 0;
 
         function showPage(index) {
             pages.forEach((page, i) => {
-                page.style.display = (i === index) ? 'block' : 'none';
+                page.style.display = (i === index) ? 'flex' : 'none';
+                indicatorBar.children[i].classList.toggle('active', i === index);
             });
+        }
+
+        function createIndicators() {
+            for (let i = 0; i < pages.length; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('indicator');
+                indicatorBar.appendChild(dot);
+            }
         }
 
         document.addEventListener('keydown', (event) => {
@@ -60,7 +72,7 @@
             }
         });
 
-        // Initial display
+        createIndicators();
         showPage(currentPage);
     </script>
 </body>
