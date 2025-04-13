@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="visualization.js" defer></script>
+    <script src="square.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -41,39 +42,5 @@
             <canvas id="chart7"></canvas>
         </div>
     </div>
-
-    <script>
-        const pages = document.querySelectorAll('.page');
-        const indicatorBar = document.getElementById('indicatorBar');
-        let currentPage = 0;
-
-        function showPage(index) {
-            pages.forEach((page, i) => {
-                page.style.display = (i === index) ? 'flex' : 'none';
-                indicatorBar.children[i].classList.toggle('active', i === index);
-            });
-        }
-
-        function createIndicators() {
-            for (let i = 0; i < pages.length; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('indicator');
-                indicatorBar.appendChild(dot);
-            }
-        }
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'ArrowUp' && currentPage > 0) {
-                currentPage--;
-                showPage(currentPage);
-            } else if (event.key === 'ArrowDown' && currentPage < pages.length - 1) {
-                currentPage++;
-                showPage(currentPage);
-            }
-        });
-
-        createIndicators();
-        showPage(currentPage);
-    </script>
 </body>
 </html>
