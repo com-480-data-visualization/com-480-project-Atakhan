@@ -21,7 +21,7 @@ function createIndicators() {
     }
 }
 
-// Navigation clavier
+// Clavier
 document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowUp' && currentPage > 0) {
         currentPage--;
@@ -32,13 +32,10 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-// Navigation molette (verticale + horizontale)
+// Molette
 let scrollTimeout = false;
-
 document.addEventListener('wheel', (event) => {
     if (scrollTimeout) return;
-
-    // vertical ou horizontal selon sens dominant
     const delta = Math.abs(event.deltaY) > Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
 
     if (delta > 0 && currentPage < pages.length - 1) {
@@ -52,7 +49,7 @@ document.addEventListener('wheel', (event) => {
     scrollTimeout = true;
     setTimeout(() => {
         scrollTimeout = false;
-    }, 500); // délai de 500 ms entre scrolls
+    }, 500);
 });
 
 createIndicators();
