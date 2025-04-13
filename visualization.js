@@ -22,20 +22,94 @@ function createChart(canvasId) {
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: {
-                        color: '#333'
-                    }
+                    grid: { color: '#333' },
+                    ticks: { color: '#ccc' }
                 },
                 x: {
-                    grid: {
-                        color: '#333'
-                    }
+                    grid: { color: '#333' },
+                    ticks: { color: '#ccc' }
                 }
             },
             plugins: {
                 legend: {
-                    labels: {
-                        color: '#ccc'
+                    labels: { color: '#ccc' }
+                }
+            }
+        }
+    });
+}
+
+async function loadAndCreateComparisonChart() {
+    const response = await fetch('comparison_data.json');
+    const data = await response.json();
+
+    const categories = Object.keys(data.win);
+    const winValues = Object.values(data.win);
+    const loseValues = Object.values(data.lose);
+
+    // Normalisation
+    const allValues = winValues.map((v, i) => [v, loseValues[i]]).flat();
+    const maxVal = Math.max(...allValues);
+    const minVal = Math.min(...allValues);
+
+    const norm = (v) => (v - minVal) / (maxVal - minVal);
+    const normalizedWin = winValues.map(norm);
+    const normalizedLose = loseValues.map(norm);
+
+    const ctx = document.getElementById('chart8').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: categories,
+            datasets: [
+                {
+                    label: 'Win',
+                    data: normalizedWin,
+                    backgroundColor: 'rgba(0, 172, 193, 0.8)'
+                },
+                {
+                    label: 'Lose',
+                    data: normalizedLose,
+                    backgroundColor: 'rgba(239, 83, 80, 0.8)'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 1,
+                    grid: { color: '#333' },
+                    ticks: { color: '#ccc', stepSize: 0.25 }
+                },
+                x: {
+                    grid: { color: '#333' },
+                    ticks: { color: '#ccc' }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            const raw = context.dataset.label === 'Win'
+                                ? winValues[context.dataIndex]
+                                : loseValues[context.dataIndex];
+                            return `${context.dataset.label}: ${raw}`;
+                        }
+                    }
+                },
+                legend: {
+                    labels: { color: '#ccc' }
+                },
+                title: {
+                    display: true,
+                    text: 'Page 8 : Comparaison Win / Lose',
+                    color: '#fff',
+                    padding: 20,
+                    font: {
+                        size: 20
                     }
                 }
             }
@@ -43,75 +117,10 @@ function createChart(canvasId) {
     });
 }
 
+// Charger tous les graphiques au chargement
 window.addEventListener('load', () => {
     for (let i = 1; i <= 7; i++) {
         createChart(`chart${i}`);
     }
-
-    fetch('comparison_data.json')
-      .then(response => response.json())
-      .then(data => {
-        const labels = data.labels;
-        const winRaw = data.win;
-        const loseRaw = data.lose;
-        const allValues = winRaw.concat(loseRaw);
-        const min = Math.min(...allValues);
-        const max = Math.max(...allValues);
-        const normalize = (arr) => arr.map(v => (v - min) / (max - min));
-        const winNorm = normalize(winRaw);
-        const loseNorm = normalize(loseRaw);
-
-        const ctx = document.getElementById('comparisonChart').getContext('2d');
-
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [
-              {
-                label: 'Win',
-                data: winNorm,
-                raw: winRaw,
-                backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-              },
-              {
-                label: 'Lose',
-                data: loseNorm,
-                raw: loseRaw,
-                backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            interaction: {
-              mode: 'index',
-              intersect: false
-            },
-            plugins: {
-              tooltip: {
-                callbacks: {
-                  label: function (context) {
-                    const raw = context.dataset.raw[context.dataIndex];
-                    return `${context.dataset.label}: ${raw.toFixed(1)}`;
-                  }
-                }
-              }
-            },
-            scales: {
-              y: {
-                display: false
-              },
-              x: {
-                ticks: { color: '#ccc' },
-                grid: { color: '#333' }
-              }
-            }
-          }
-        });
-      });
+    loadAndCreateComparisonChart();
 });
