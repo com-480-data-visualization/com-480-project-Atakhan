@@ -1,53 +1,60 @@
-const pages = document.querySelectorAll('.page');
-const indicatorBar = document.getElementById('indicatorBar');
+
 let currentPage = 0;
+const pages = document.querySelectorAll(".page");
 
 function showPage(index) {
     pages.forEach((page, i) => {
-        page.style.display = (i === index) ? 'flex' : 'none';
-        indicatorBar.children[i].classList.toggle('active', i === index);
+        page.style.display = i === index ? "block" : "none";
     });
+    updateIndicators(index);
 }
 
+function nextPage() {
+    currentPage = (currentPage + 1) % pages.length;
+    showPage(currentPage);
+}
+
+function prevPage() {
+    currentPage = (currentPage - 1 + pages.length) % pages.length;
+    showPage(currentPage);
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowRight") {
+        nextPage();
+    } else if (event.key === "ArrowLeft") {
+        prevPage();
+    }
+});
+
+window.addEventListener("wheel", function(event) {
+    if (event.deltaY > 0) {
+        nextPage();
+    } else if (event.deltaY < 0) {
+        prevPage();
+    }
+});
+
 function createIndicators() {
-    for (let i = 0; i < pages.length; i++) {
-        const dot = document.createElement('div');
-        dot.classList.add('indicator');
-        dot.addEventListener('click', () => {
+    const container = document.getElementById("indicators");
+    for (let i = 0; i < document.querySelectorAll(".page").length; i++) {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        dot.addEventListener("click", () => {
             currentPage = i;
             showPage(currentPage);
         });
-        indicatorBar.appendChild(dot);
+        container.appendChild(dot);
     }
+    updateIndicators(0);
 }
 
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowUp' && currentPage > 0) {
-        currentPage--;
-        showPage(currentPage);
-    } else if (event.key === 'ArrowDown' && currentPage < pages.length - 1) {
-        currentPage++;
-        showPage(currentPage);
-    }
-});
-
-let scrollTimeout = false;
-document.addEventListener('wheel', (event) => {
-    if (scrollTimeout) return;
-
-    if (event.deltaY > 0 && currentPage < pages.length - 1) {
-        currentPage++;
-        showPage(currentPage);
-    } else if (event.deltaY < 0 && currentPage > 0) {
-        currentPage--;
-        showPage(currentPage);
-    }
-
-    scrollTimeout = true;
-    setTimeout(() => {
-        scrollTimeout = false;
-    }, 500);
-});
+function updateIndicators(index) {
+    const dots = document.querySelectorAll(".dot");
+    dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+    });
+}
 
 createIndicators();
-showPage(currentPage);
+showPage(0);
