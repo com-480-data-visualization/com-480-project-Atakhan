@@ -50,26 +50,41 @@ window.addEventListener('load', () => {
 fetch('comparison_data.json')
   .then(response => response.json())
   .then(data => {
+    const labels = data.labels;
+    const winRaw = data.win;
+    const loseRaw = data.lose;
+
+    // Normalisation min-max
+    const allValues = winRaw.concat(loseRaw);
+    const min = Math.min(...allValues);
+    const max = Math.max(...allValues);
+
+    const normalize = (arr) => arr.map(v => (v - min) / (max - min));
+    const winNorm = normalize(winRaw);
+    const loseNorm = normalize(loseRaw);
+
     const ctx = document.getElementById('comparisonChart').getContext('2d');
 
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: data.labels,
+        labels: labels,
         datasets: [
           {
             label: 'Win',
-            data: data.win,
+            data: winNorm,
             backgroundColor: 'rgba(75, 192, 192, 0.7)',
             borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
+            borderWidth: 1,
+            raw: winRaw
           },
           {
             label: 'Lose',
-            data: data.lose,
+            data: loseNorm,
             backgroundColor: 'rgba(255, 99, 132, 0.7)',
             borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1
+            borderWidth: 1,
+            raw: loseRaw
           }
         ]
       },
@@ -81,17 +96,24 @@ fetch('comparison_data.json')
         },
         plugins: {
           tooltip: {
-            enabled: true,
             callbacks: {
               label: function (context) {
-                return `${context.dataset.label}: ${context.formattedValue}`;
+                const raw = context.dataset.raw[context.dataIndex];
+                return `${context.dataset.label}: ${raw.toFixed(1)}`;
               }
             }
+          },
+          legend: {
+            labels: { color: '#ccc' }
           }
         },
         scales: {
           y: {
-            beginAtZero: true
+            display: false
+          },
+          x: {
+            ticks: { color: '#ccc' },
+            grid: { color: '#333' }
           }
         }
       }
