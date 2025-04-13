@@ -31,5 +31,15 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+// Navigtion avec la molete
+document.addEventListener('wheel', (event) => {
+    if (event.deltaY > 0 && currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
+    } else if (event.deltaY < 0 && currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+    }
+});
 createIndicators();
 showPage(currentPage);
