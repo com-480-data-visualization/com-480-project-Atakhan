@@ -49,7 +49,7 @@ document.addEventListener('wheel', (event) => {
     scrollTimeout = true;
     setTimeout(() => {
         scrollTimeout = false;
-    }, 500);
+    }, 100);
 });
 
 createIndicators();
