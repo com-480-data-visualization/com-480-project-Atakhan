@@ -21,7 +21,6 @@ function createIndicators() {
     }
 }
 
-// Clavier
 document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowUp' && currentPage > 0) {
         currentPage--;
@@ -32,16 +31,14 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-// Molette
 let scrollTimeout = false;
 document.addEventListener('wheel', (event) => {
     if (scrollTimeout) return;
-    const delta = Math.abs(event.deltaY) > Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
 
-    if (delta > 0 && currentPage < pages.length - 1) {
+    if (event.deltaY > 0 && currentPage < pages.length - 1) {
         currentPage++;
         showPage(currentPage);
-    } else if (delta < 0 && currentPage > 0) {
+    } else if (event.deltaY < 0 && currentPage > 0) {
         currentPage--;
         showPage(currentPage);
     }

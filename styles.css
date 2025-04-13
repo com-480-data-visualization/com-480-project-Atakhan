@@ -4,26 +4,28 @@ body {
     background-color: #111;
     color: white;
 }
-
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .page {
     display: none;
     justify-content: center;
     align-items: center;
     height: 100vh;
     flex-direction: column;
+    transition: opacity 0.4s ease;
+    opacity: 0;
 }
-
+.page.active {
+    opacity: 1;
+    display: flex;
+}
 canvas {
     width: 80%;
     height: 60%;
 }
-
 .indicator-bar {
     position: fixed;
     top: 10px;
@@ -31,7 +33,6 @@ canvas {
     display: flex;
     gap: 10px;
 }
-
 .indicator {
     width: 12px;
     height: 12px;
@@ -39,7 +40,6 @@ canvas {
     border-radius: 50%;
     cursor: pointer;
 }
-
 .indicator.active {
     background-color: white;
 }
