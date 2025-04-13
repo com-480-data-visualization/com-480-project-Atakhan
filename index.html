@@ -1,52 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Site à Sept Pages</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Site à Huit Pages</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="visualization.js" defer></script>
+    <script src="square.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <div class="page" id="page1">Page 1</div>
-        <div class="page" id="page2">Page 2</div>
-        <div class="page" id="page3">Page 3</div>
-        <div class="page" id="page4">Page 4</div>
-        <div class="page" id="page5">Page 5</div>
-        <div class="page" id="page6">Page 6</div>
-        <div class="page" id="page7">Page 7</div>
+        <div class="indicator-bar" id="indicatorBar"></div>
+
+        <div class="page" id="page1"><h1>Page 1</h1><canvas id="chart1"></canvas></div>
+        <div class="page" id="page2"><h1>Page 2</h1><canvas id="chart2"></canvas></div>
+        <div class="page" id="page3"><h1>Page 3</h1><canvas id="chart3"></canvas></div>
+        <div class="page" id="page4"><h1>Page 4</h1><canvas id="chart4"></canvas></div>
+        <div class="page" id="page5"><h1>Page 5</h1><canvas id="chart5"></canvas></div>
+        <div class="page" id="page6"><h1>Page 6</h1><canvas id="chart6"></canvas></div>
+        <div class="page" id="page7"><h1>Page 7</h1><canvas id="chart7"></canvas></div>
+        <div class="page" id="page8">
+            <h1>Page 8 : Comparaison Win / Lose</h1>
+            <canvas id="comparisonChart"></canvas>
+        </div>
     </div>
-    <div class="navigation">
-        <button class="nav-button" id="upButton">↑</button>
-        <button class="nav-button" id="downButton">↓</button>
-    </div>
-
-    <script>
-        let currentPage = 0;
-        const pages = document.querySelectorAll('.page');
-
-        function showPage(index) {
-            pages.forEach((page, i) => {
-                page.style.display = (i === index) ? 'block' : 'none';
-            });
-        }
-
-        document.getElementById('upButton').addEventListener('click', () => {
-            if (currentPage > 0) {
-                currentPage--;
-                showPage(currentPage);
-            }
-        });
-
-        document.getElementById('downButton').addEventListener('click', () => {
-            if (currentPage < pages.length - 1) {
-                currentPage++;
-                showPage(currentPage);
-            }
-        });
-
-        // Initial display
-        showPage(currentPage);
-    </script>
 </body>
 </html>
