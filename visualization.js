@@ -43,6 +43,8 @@ function createChart(canvasId) {
     });
 }
 
-for (let i = 1; i <= 7; i++) {
-    createChart(`chart${i}`);
-}
+window.addEventListener('load', () => {
+    for (let i = 1; i <= 7; i++) {
+        createChart(`chart${i}`);
+    }
+});
