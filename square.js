@@ -4,16 +4,8 @@ let currentPage = 0;
 
 function showPage(index) {
     pages.forEach((page, i) => {
-        if (i === index) {
-            page.classList.add('active');
-            page.style.display = 'flex';
-        } else {
-            page.classList.remove('active');
-            page.style.display = 'none';
-        }
-    });
-    indicatorBar.querySelectorAll('.indicator').forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
+        page.style.display = (i === index) ? 'flex' : 'none';
+        indicatorBar.children[i].classList.toggle('active', i === index);
     });
 }
 
@@ -40,17 +32,20 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-// Molette verticale uniquement
+// Molette
 let scrollTimeout = false;
 document.addEventListener('wheel', (event) => {
     if (scrollTimeout) return;
-    if (event.deltaY > 0 && currentPage < pages.length - 1) {
+    const delta = Math.abs(event.deltaY) > Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+
+    if (delta > 0 && currentPage < pages.length - 1) {
         currentPage++;
         showPage(currentPage);
-    } else if (event.deltaY < 0 && currentPage > 0) {
+    } else if (delta < 0 && currentPage > 0) {
         currentPage--;
         showPage(currentPage);
     }
+
     scrollTimeout = true;
     setTimeout(() => {
         scrollTimeout = false;
