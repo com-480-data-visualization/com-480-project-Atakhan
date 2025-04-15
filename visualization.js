@@ -48,3 +48,76 @@ window.addEventListener('load', () => {
         createChart(`chart${i}`);
     }
 });
+
+
+// Function to render the correlation matrix
+function renderCorrelationMatrix() {
+    fetch('figures/correlation_matrix.json') // Adjust the path if necessary
+        .then(response => response.json())
+        .then(data => {
+            const labels = Object.keys(data);
+            const matrixData = labels.map(label => labels.map(innerLabel => data[label][innerLabel]));
+
+            const ctx = document.getElementById('correlationMatrixChart').getContext('2d');
+
+            // Create a heatmap using Chart.js
+            const correlationMatrixChart = new Chart(ctx, {
+                type: 'matrix', // Use a matrix chart type
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Correlation Matrix',
+                        data: matrixData.flat().map((value, index) => ({
+                            x: labels[index % labels.length],
+                            y: labels[Math.floor(index / labels.length)],
+                            v: value
+                        })),
+                        backgroundColor: (context) => {
+                            const value = context.dataset.data[context.dataIndex].v;
+                            return value > 0.5 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)';
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return `Correlation: ${tooltipItem.raw.v}`;
+                                }
+                            }
+                        }
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Features'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Features'
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            enabled: true,
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching correlation matrix data:', error));
+}
+
+// Call the function to render the correlation matrix when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('correlationMatrixChart')) {
+        renderCorrelationMatrix();
+    }
+});
