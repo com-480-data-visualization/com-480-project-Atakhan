@@ -50,77 +50,100 @@ window.addEventListener('load', () => {
 });
 
 
-// Function to render the correlation matrix
-// Function to render the correlation matrix
+
+
 function renderCorrelationMatrix() {
-    fetch('figures/correlation_matrix.json') // Adjust the path if necessary
+    fetch('./figures/correlation_matrix.json')
         .then(response => response.json())
         .then(data => {
             const labels = Object.keys(data);
-            const matrixData = labels.map(label => labels.map(innerLabel => data[label][innerLabel]));
+            const matrixData = [];
+            labels.forEach((rowLabel, i) => {
+                labels.forEach((colLabel, j) => {
+                    matrixData.push({
+                        x: colLabel,
+                        y: rowLabel,
+                        v: data[rowLabel][colLabel]
+                    });
+                });
+            });
 
             const ctx = document.getElementById('correlationMatrixChart').getContext('2d');
 
-            // Create a heatmap using Chart.js
-            const correlationMatrixChart = new Chart(ctx, {
-                type: 'matrix', // Use a matrix chart type
+            new Chart(ctx, {
+                type: 'matrix',
                 data: {
-                    labels: labels,
                     datasets: [{
                         label: 'Correlation Matrix',
-                        data: matrixData.flat().map((value, index) => ({
-                            x: labels[index % labels.length],
-                            y: labels[Math.floor(index / labels.length)],
-                            v: value
-                        })),
-                        backgroundColor: (context) => {
-                            const value = context.dataset.data[context.dataIndex].v;
-                            // Create a color gradient based on the correlation value
-                            const color = value > 0 ? `rgba(75, 192, 192, ${value})` : `rgba(255, 99, 132, ${-value})`;
-                            return color;
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    return `Correlation: ${tooltipItem.raw.v}`;
-                                }
+                        data: matrixData,
+                        width: ({chart}) => (chart.chartArea || {}).width / labels.length - 2,
+                        height: ({chart}) => (chart.chartArea || {}).height / labels.length - 2,
+                        backgroundColor: ctx => {
+                            const value = ctx.dataset.data[ctx.dataIndex].v;
+                            // bleu pour positif, rouge pour négatif
+                            if (value > 0) {
+                                return `rgba(33, 150, 243, ${value})`;
+                            } else if (value < 0) {
+                                return `rgba(244, 67, 54, ${-value})`;
                             }
-                        }
+                            return 'rgba(200,200,200,0.5)';
+                        },
+                        borderColor: 'rgba(80,80,80,0.2)',
+                        borderWidth: 1
                     }]
                 },
                 options: {
-                    scales: {
-                        x: {
-                            display: true,
-                            title: {
-                                display: true,
-                                text: 'Features'
-                            }
-                        },
-                        y: {
-                            display: true,
-                            title: {
-                                display: true,
-                                text: 'Features'
-                            }
-                        }
-                    },
-                    plugins: {
-                        tooltip: {
-                            enabled: true,
-                            mode: 'index',
-                            intersect: false
-                        }
-                    }
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        x: {
+            type: 'category',
+            title: {
+                display: true,
+                text: 'Features'
+            },
+            grid: { color: '#333' }
+        },
+        y: {
+            type: 'category',
+            title: {
+                display: true,
+                text: 'Features'
+            },
+            grid: { color: '#333' }
+        }
+    },
+    plugins: {
+        tooltip: {
+            enabled: true,
+            callbacks: {
+                label: function (tooltipItem) {
+                    return `Correlation: ${tooltipItem.raw.v}`;
                 }
+            }
+        },
+        legend: {
+            labels: {
+                color: '#ccc'
+            }
+        }
+    },
+    elements: {
+        rectangle: {
+            borderWidth: 1
+        }
+    }
+}
             });
         })
         .catch(error => console.error('Error fetching correlation matrix data:', error));
 }
 
-// Call the function to render the correlation matrix when the page loads
+// Appelle la fonction après le chargement du DOM
 document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('correlationMatrixChart')) {
         renderCorrelationMatrix();
     }
 });
+
+
