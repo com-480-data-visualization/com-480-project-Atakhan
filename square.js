@@ -31,23 +31,5 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-let scrollTimeout = false;
-document.addEventListener('wheel', (event) => {
-    if (scrollTimeout) return;
-
-    if (event.deltaY > 0 && currentPage < pages.length - 1) {
-        currentPage++;
-        showPage(currentPage);
-    } else if (event.deltaY < 0 && currentPage > 0) {
-        currentPage--;
-        showPage(currentPage);
-    }
-
-    scrollTimeout = true;
-    setTimeout(() => {
-        scrollTimeout = false;
-    }, 500);
-});
-
 createIndicators();
 showPage(currentPage);
