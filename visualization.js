@@ -51,6 +51,7 @@ window.addEventListener('load', () => {
 
 
 // Function to render the correlation matrix
+// Function to render the correlation matrix
 function renderCorrelationMatrix() {
     fetch('figures/correlation_matrix.json') // Adjust the path if necessary
         .then(response => response.json())
@@ -74,7 +75,9 @@ function renderCorrelationMatrix() {
                         })),
                         backgroundColor: (context) => {
                             const value = context.dataset.data[context.dataIndex].v;
-                            return value > 0.5 ? 'rgba(255, 99, 132, 0.5)' : 'rgba(54, 162, 235, 0.5)';
+                            // Create a color gradient based on the correlation value
+                            const color = value > 0 ? `rgba(75, 192, 192, ${value})` : `rgba(255, 99, 132, ${-value})`;
+                            return color;
                         },
                         tooltip: {
                             callbacks: {
