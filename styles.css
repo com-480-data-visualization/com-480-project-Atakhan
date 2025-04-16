@@ -19,19 +19,17 @@ body {
 }
 
 .page {
-  display: none;
-  width: 100%;
-  min-height: 100vh; /* ou auto si tu préfères */
-  padding: 20px;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  overflow-y: auto;
+    display: none;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 canvas {
     max-width: 80%;
-    max-height: 80%;
+    max-height: 60%;
     margin-top: 20px;
 }
 
@@ -60,42 +58,4 @@ canvas {
     width: 14px;
     height: 14px;
     background-color: #00aaff;
-}
-
-#winLoseComparisonPage {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* ✅ centre verticalement */
-  align-items: center;      /* ✅ centre horizontalement */
-  min-height: 100vh;
-  padding: 20px;
-  box-sizing: border-box;
-}
-.dual-chart {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 10px;
-  padding: 10px;
-}
-
-.chart-half {
-  flex: 1;
-  display: flex;
-flex-direction: row; /* ← horizontal */
-  align-items: center;
-  gap: 10px;
-}
-
-.chart-half h2 {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  margin: 0;
-  font-size: 1.2em;
-}
-
-.chart-half canvas {
-  flex: 1;
-  width: 100% !important;
-  height: 100% !important;
 }
