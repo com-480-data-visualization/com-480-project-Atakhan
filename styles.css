@@ -59,3 +59,18 @@ canvas {
     height: 14px;
     background-color: #00aaff;
 }
+
+button#toggleRadarBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button#toggleRadarBtn:hover {
+  background-color: #0077cc;
+}
