@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0/dist/chartjs-chart-matrix.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
     <script src="visualization.js" defer></script>
     <script src="square.js" defer></script>
 </head>
@@ -15,7 +16,7 @@
         <div class="indicator-bar" id="indicatorBar"></div>
 
         <div class="page" id="page1">
-            <h1>Page 12</h1>
+            <h1>Page 1</h1>
             <canvas id="chart1"></canvas>
         </div>
         <div class="page" id="page2">
@@ -23,8 +24,8 @@
             <canvas id="chart2"></canvas>
         </div>
         <div class="page" id="page3">
-            <h1>Page 3</h1>
-            <canvas id="chart3"></canvas>
+            <h1>Grouped SHAP Beeswarm (Page 3)</h1>
+            <div id="chart3" style="width: 90%; height: 600px;"></div>
         </div>
         <div class="page" id="page4">
             <h1>Page 4</h1>
@@ -39,13 +40,10 @@
             <canvas id="chart6"></canvas>
         </div>
         <div class="page" id="page7">
-            <h1>Page 71</h1>
+            <h1>Page 7</h1>
             <canvas id="chart7"></canvas>
         </div>
 
-      
-        
-        <!-- New Page for Correlation Matrix -->
         <div class="page" id="correlationMatrixPage">
             <h1>Correlation Matrix</h1>
             <canvas id="correlationMatrixChart"></canvas>
