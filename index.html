@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Site à Sept Pages</title>
     <link rel="stylesheet" href="styles.css" />
+    
+    <!-- Chart.js & Matrix -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0/dist/chartjs-chart-matrix.min.js"></script>
+
+    <!-- Plotly for SHAP -->
     <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
+
+    <!-- Custom scripts -->
     <script src="visualization.js" defer></script>
     <script src="square.js" defer></script>
 </head>
@@ -19,26 +25,32 @@
             <h1>Page 1</h1>
             <canvas id="chart1"></canvas>
         </div>
+
         <div class="page" id="page2">
             <h1>Page 2</h1>
             <canvas id="chart2"></canvas>
         </div>
+
         <div class="page" id="page3">
             <h1>Grouped SHAP Beeswarm (Page 3)</h1>
-            <div id="chart3" style="width: 90%; height: 600px;"></div>
+            <div id="chart3" style="width: 100%; max-width: 1200px; height: 600px; margin: auto;"></div>
         </div>
+
         <div class="page" id="page4">
             <h1>Page 4</h1>
             <canvas id="chart4"></canvas>
         </div>
+
         <div class="page" id="page5">
             <h1>Page 5</h1>
             <canvas id="chart5"></canvas>
         </div>
+
         <div class="page" id="page6">
             <h1>Page 6</h1>
             <canvas id="chart6"></canvas>
         </div>
+
         <div class="page" id="page7">
             <h1>Page 7</h1>
             <canvas id="chart7"></canvas>
