@@ -1,55 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Site à Sept Pages</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0/dist/chartjs-chart-matrix.min.js"></script>
-    <script src="visualization.js" defer></script>
-    <script src="square.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualisation LoL</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0/dist/chartjs-chart-matrix.min.js"></script>
+  <script src="main.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <div class="indicator-bar" id="indicatorBar"></div>
+  <div class="container">
+    <div class="indicator-bar" id="indicatorBar"></div>
 
-        <div class="page" id="page1">
-            <h1>Page 12</h1>
-            <canvas id="chart1"></canvas>
-        </div>
-        <div class="page" id="page2">
-            <h1>Page 2</h1>
-            <canvas id="chart2"></canvas>
-        </div>
-        <div class="page" id="page3">
-            <h1>Page 3</h1>
-            <canvas id="chart3"></canvas>
-        </div>
-        <div class="page" id="page4">
-            <h1>Page 4</h1>
-            <canvas id="chart4"></canvas>
-        </div>
-        <div class="page" id="page5">
-            <h1>Page 5</h1>
-            <canvas id="chart5"></canvas>
-        </div>
-        <div class="page" id="page6">
-            <h1>Page 6</h1>
-            <canvas id="chart6"></canvas>
-        </div>
-        <div class="page" id="page7">
-            <h1>Page 71</h1>
-            <canvas id="chart7"></canvas>
-        </div>
-
-      
-        
-        <!-- New Page for Correlation Matrix -->
-        <div class="page" id="correlationMatrixPage">
-            <h1>Correlation Matrix</h1>
-            <canvas id="correlationMatrixChart"></canvas>
-        </div>
+    <div class="page" id="page1">
+      <h1>Données Générales</h1>
+      <canvas id="chart1"></canvas>
     </div>
+
+    <div class="page" id="page2">
+      <h1>Matrice de Corrélation</h1>
+      <canvas id="correlationMatrix"></canvas>
+    </div>
+
+    <div class="page" id="page3">
+      <h1>Radar Win vs Lose</h1>
+      <div class="chart-section">
+        <canvas id="radarChart"></canvas>
+        <div id="radarExplanation" class="explanation"></div>
+      </div>
+    </div>
+
+    <div class="page" id="page4">
+      <h1>Effets Causaux</h1>
+      <div id="causalList"></div>
+    </div>
+  </div>
 </body>
 </html>
