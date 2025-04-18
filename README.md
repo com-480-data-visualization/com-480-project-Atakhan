@@ -76,7 +76,7 @@ Beyond a simple statistical analysis, we also want to develop a straightforward 
 To present our data, we may take inspiration from previous years' projects, particularly the use of a slide-based scrolling system rather than continuous scrolling. This approach can provide a more immersive and structured experience, allowing users to focus on key insights step by step.
 
 ## Milestone 2 (18th April, 5pm)
-
+Here is the PDF of ![Milestone 2](milestone_2_project_atakhan.pdf)
 **10% of the final grade**
 
 
