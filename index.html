@@ -16,6 +16,7 @@
     <!-- Custom scripts -->
     <script src="visualization.js" defer></script>
     <script src="square.js" defer></script>
+    <script src="mapviz.js" defer></script> <!-- AJOUT POUR MAP -->
 </head>
 <body>
     <div class="container">
@@ -59,6 +60,17 @@
         <div class="page" id="correlationMatrixPage">
             <h1>Correlation Matrix</h1>
             <canvas id="correlationMatrixChart"></canvas>
+        </div>
+
+        <!-- ✅ Page 8 : Map Interactive -->
+        <div class="page" id="page8">
+            <h1>Interactive Summoner's Rift</h1>
+            <div class="map-container">
+                <img src="assets/Map.webp" class="map" alt="Summoner's Rift Map">
+                <img src="assets/dragon.png" class="monster" id="dragon" alt="Dragon">
+                <img src="assets/Rift_Herald_Render.webp" class="monster" id="herald" alt="Herald">
+                <img src="assets/minion.png" class="monster" id="minion" alt="Minion">
+            </div>
         </div>
     </div>
 </body>

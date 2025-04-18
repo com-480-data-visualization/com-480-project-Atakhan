@@ -107,3 +107,65 @@ h1 {
     height: 12px;
   }
 }
+
+/* ✅ Map styles (AJOUT) */
+.map-container {
+  position: relative;
+  width: 945px;
+  height: 628px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.map {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  border: 2px solid #444;
+  z-index: 1; /* facultatif mais clair */
+  position: relative; /* pour que z-index s’applique correctement */
+}
+
+
+.monster {
+  position: absolute;
+  width: 70px;           /* ← zoom augmenté */
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease;
+}
+
+.monster:hover {
+  transform: scale(1.1); /* petit effet de zoom au survol */
+}
+
+
+#dragon {
+  top: 350px;
+  left: 540px;
+}
+
+#herald {
+  top: 150px;
+  left: 325px;
+}
+
+#minion {
+  top: 230px;
+  left: 422px;
+}
+
+
+
+.map-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: pre-line;
+  pointer-events: none;
+  z-index: 9999;
+}
