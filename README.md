@@ -76,9 +76,10 @@ Beyond a simple statistical analysis, we also want to develop a straightforward 
 To present our data, we may take inspiration from previous years' projects, particularly the use of a slide-based scrolling system rather than continuous scrolling. This approach can provide a more immersive and structured experience, allowing users to focus on key insights step by step.
 
 ## Milestone 2 (18th April, 5pm)
-Here is the PDF of ![Milestone 2](milestone_2_project_atakhan.pdf) — [Website](https://com-480-data-visualization.github.io/com-480-project-Atakhan/)
 
-**10% of the final grade**
+Here is the [PDF of Milestone 2](milestone_2_project_atakhan.pdf), and [here is the current state of the website](https://com-480-data-visualization.github.io/com-480-project-Atakhan/).
+
+
 
 
 ## Milestone 3 (30th May, 5pm)
