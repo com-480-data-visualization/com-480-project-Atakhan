@@ -156,6 +156,13 @@ h1 {
   left: 422px;
 }
 
+#tower {
+  top : 280px;
+  left: 335px;
+  width: 40px;       /* taille réduite par rapport aux autres icônes */
+  height: auto;
+}
+
 .placeholder {
   font-size: 28px;
   margin-top: 20px;
