@@ -40,7 +40,6 @@ canvas {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
-/* SHAP beeswarm Plotly chart style */
 #chart3 {
   width: 100%;
   max-width: 1000px;
@@ -85,7 +84,6 @@ h1 {
   background-color: #00aaff;
 }
 
-/* Responsive tweaks */
 @media screen and (max-width: 768px) {
   canvas,
   #chart3 {
@@ -108,7 +106,6 @@ h1 {
   }
 }
 
-/* ✅ Map styles (AJOUT) */
 .map-container {
   position: relative;
   width: 945px;
@@ -123,23 +120,21 @@ h1 {
   display: block;
   border-radius: 12px;
   border: 2px solid #444;
-  z-index: 1; /* facultatif mais clair */
-  position: relative; /* pour que z-index s’applique correctement */
+  z-index: 1;
+  position: relative;
 }
-
 
 .monster {
   position: absolute;
-  width: 70px;           /* ← zoom augmenté */
+  width: 70px;
   cursor: pointer;
   z-index: 10;
   transition: transform 0.2s ease;
 }
 
 .monster:hover {
-  transform: scale(1.1); /* petit effet de zoom au survol */
+  transform: scale(1.1);
 }
-
 
 #dragon {
   top: 350px;
@@ -157,9 +152,9 @@ h1 {
 }
 
 #tower {
-  top : 280px;
+  top: 280px;
   left: 335px;
-  width: 40px;       /* taille réduite par rapport aux autres icônes */
+  width: 40px;
   height: auto;
 }
 
@@ -184,9 +179,6 @@ h1 {
   100% { content: ''; }
 }
 
-
-
-
 .map-tooltip {
   position: absolute;
   background: rgba(0, 0, 0, 0.85);
@@ -198,7 +190,6 @@ h1 {
   pointer-events: none;
   z-index: 9999;
 }
-
 
 .image-wrapper {
   display: flex;
@@ -213,4 +204,76 @@ h1 {
   border: 2px solid #444;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* ✅ Page détails monstre */
+#monsterDetailsPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e;
+  color: #fff;
+  height: 100vh;
+  padding: 20px;
+}
+
+#monsterDetailsPage h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #00aaff;
+}
+
+#monsterDetailsPage button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#monsterDetailsPage button:hover {
+  background-color: #0088cc;
+}
+
+#monsterDetailsPage {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #1e1e1e;
+  color: #fff;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#monsterDetailsPage h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #00aaff;
+}
+
+#monsterDetailsPage button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#monsterDetailsPage button:hover {
+  background-color: #0088cc;
 }

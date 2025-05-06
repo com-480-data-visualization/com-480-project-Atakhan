@@ -1,72 +1,73 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Site à Sept Pages</title>
-    <link rel="stylesheet" href="styles.css" />
-    
-    <!-- Chart.js & Matrix -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0/dist/chartjs-chart-matrix.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Site à Sept Pages</title>
+  <link rel="stylesheet" href="styles.css" />
 
-    <!-- Plotly for SHAP -->
-    <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0/dist/chartjs-chart-matrix.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
 
-    <!-- Custom scripts -->
-    <script src="visualization.js" defer></script>
-    <script src="square.js" defer></script>
-    <script src="mapviz.js" defer></script> <!-- AJOUT POUR MAP -->
+  <script src="visualization.js" defer></script>
+  <script src="square.js" defer></script>
+  <script src="mapviz.js" defer></script>
+  <script src="monsterDetails.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <div class="indicator-bar" id="indicatorBar"></div>
+  <div class="container">
+    <div class="indicator-bar" id="indicatorBar"></div>
 
-        <div class="page" id="page1">
-  <h1>Page 1</h1>
-  <div class="placeholder">To be updated<span class="dots">.</span></div>
-</div>
-
-
-        <div class="page" id="page2">
-  <h1>Page 2</h1>
-  <div class="placeholder">To be updated<span class="dots">.</span></div>
-</div>
-
-        <div class="page" id="page3">
-            <h1>Grouped SHAP Beeswarm (Page 3)</h1>
-            <div id="chart3" style="width: 100%; max-width: 1200px; height: 600px; margin: auto;"></div>
-        </div>
-
-        <div class="page" id="page4">
-  <h1>Page 4</h1>
-  <div class="placeholder">To be updated<span class="dots">.</span></div>
-</div>
-
-        <div class="page" id="page6">
-  <h1>Page 6</h1>
-  <div class="image-wrapper">
-    <img src="Radar1.png" alt="Radar Chart" class="responsive-img" />
-  </div>
-</div>
-
-
-        <div class="page" id="correlationMatrixPage">
-            <h1>Correlation Matrix, to be removed, here just as a test</h1>
-            <canvas id="correlationMatrixChart"></canvas>
-        </div>
-
-        <!-- ✅ Page 8 : Map Interactive -->
-        <div class="page" id="page8">
-            <h1>Interactive Summoner's Rift</h1>
-            <div class="map-container">
-                <img src="assets/Map.webp" class="map" alt="Summoner's Rift Map">
-                <img src="assets/dragon.png" class="monster" id="dragon" alt="Dragon">
-                <img src="assets/Rift_Herald_Render.webp" class="monster" id="herald" alt="Herald">
-                <img src="assets/minion.png" class="monster" id="minion" alt="Minion">
-                <img src="assets/tower.png" class="monster" id="tower" alt="Tower">
-            </div>
-        </div>
+    <div class="page" id="page1">
+      <h1>Page 1</h1>
+      <div class="placeholder">To be updated<span class="dots">.</span></div>
     </div>
+
+    <div class="page" id="page2">
+      <h1>Page 2</h1>
+      <div class="placeholder">To be updated<span class="dots">.</span></div>
+    </div>
+
+    <div class="page" id="page3">
+      <h1>Grouped SHAP Beeswarm (Page 3)</h1>
+      <div id="chart3" style="width: 100%; max-width: 1200px; height: 600px; margin: auto;"></div>
+    </div>
+
+    <div class="page" id="page4">
+      <h1>Page 4</h1>
+      <div class="placeholder">To be updated<span class="dots">.</span></div>
+    </div>
+
+    <div class="page" id="page6">
+      <h1>Page 6</h1>
+      <div class="image-wrapper">
+        <img src="Radar1.png" alt="Radar Chart" class="responsive-img" />
+      </div>
+    </div>
+
+    <div class="page" id="correlationMatrixPage">
+      <h1>Correlation Matrix, to be removed, here just as a test</h1>
+      <canvas id="correlationMatrixChart"></canvas>
+    </div>
+
+    <!-- ✅ Page 8 : Carte interactive -->
+    <div class="page" id="page8">
+      <h1>Interactive Summoner's Rift</h1>
+      <div class="map-container">
+        <img src="assets/Map.webp" class="map" alt="Summoner's Rift Map">
+        <img src="assets/dragon.png" class="monster" id="dragon" alt="Dragon">
+        <img src="assets/Rift_Herald_Render.webp" class="monster" id="herald" alt="Herald">
+        <img src="assets/minion.png" class="monster" id="minion" alt="Minion">
+        <img src="assets/tower.png" class="monster" id="tower" alt="Tower">
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Vue de détail indépendante (hors .page) -->
+  <div id="monsterDetailsPage">
+    <h1 id="monsterTitle">Détail du Monstre</h1>
+    <button onclick="hideMonsterDetails()">⬅ Retour à la carte</button>
+  </div>
 </body>
 </html>
