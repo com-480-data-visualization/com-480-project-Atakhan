@@ -1,3 +1,5 @@
+// mapviz.js
+
 const tooltip = document.createElement("div");
 tooltip.className = "map-tooltip";
 tooltip.style.display = "none";
@@ -10,7 +12,23 @@ const stats = {
   tower: "Tower\nHP: 5000–5500\nArmor: +40 early\nGold: 250 team gold + 150 local gold\nFirst Tower: +400 bonus gold"
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+// Fonction qui génère dynamiquement le contenu HTML de la page 8
+function generateInteractiveMap() {
+  const container = document.getElementById("page8");
+  container.innerHTML = `
+    <h1>Interactive Summoner's Rift</h1>
+    <div class="map-container">
+      <img src="assets/Map.webp" class="map" alt="Summoner's Rift Map">
+      <img src="assets/dragon.png" class="monster" id="dragon" alt="Dragon" style="top: 350px; left: 540px;">
+      <img src="assets/Rift_Herald_Render.webp" class="monster" id="herald" alt="Herald" style="top: 150px; left: 325px;">
+      <img src="assets/minion.png" class="monster" id="minion" alt="Minion" style="top: 230px; left: 422px;">
+      <img src="assets/tower.png" class="monster" id="tower" alt="Tower" style="top: 280px; left: 335px; width: 40px;">
+    </div>
+  `;
+}
+
+// Fonction qui attache les événements de survol et clic aux monstres
+function attachMonsterEvents() {
   document.querySelectorAll('.monster').forEach(monster => {
     const id = monster.id;
 
@@ -29,4 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
       showMonsterDetails(id);  // Fonction dans monsterDetails.js
     });
   });
+}
+
+// Initialise la page 8 dynamiquement au chargement
+document.addEventListener("DOMContentLoaded", () => {
+  generateInteractiveMap();
+  attachMonsterEvents();
 });
