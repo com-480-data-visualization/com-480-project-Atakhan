@@ -10,12 +10,23 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0/dist/chartjs-chart-matrix.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
 
-  <script src="visualization.js" defer></script>
+  
+        <!-- <script src="visualization.js" defer></script> -->
+
+
+  <script src="js/chartsBar.js" defer></script>
+  <script src="js/correlationMatrix.js" defer></script>
+  <script src="js/shapBeeswarm.js" defer></script>
+  <script src="js/init.js" defer></script>
+
+
   <script src="square.js" defer></script>
   <script src="mapviz.js" defer></script>
   <script src="monsterDetails.js" defer></script>
 </head>
 <body>
+
+
   <div class="container">
     <div class="indicator-bar" id="indicatorBar"></div>
 
@@ -46,10 +57,7 @@
       </div>
     </div>
 
-    <div class="page" id="correlationMatrixPage">
-      <h1>Correlation Matrix, to be removed, here just as a test</h1>
-      <canvas id="correlationMatrixChart"></canvas>
-    </div>
+
 
     <!-- ✅ Page 8 : Carte interactive -->
     <div class="page" id="page8">
