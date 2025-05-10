@@ -1,0 +1,79 @@
+{
+  "dragon": {
+    "name": "Dragon",
+    "image": "assets/dragon.png",
+    "description": "The Dragon grants powerful elemental buffs. Killing it is crucial to obtain the Dragon Soul.",
+    "stats": {
+      "Armor": 30,
+      "MagicResist": 30,
+      "HP": 3500,
+      "Gold": 25,
+      "Experience": 150,
+      "VictoryRate": 67
+    }
+  },
+  "herald": {
+    "name": "Rift Herald",
+    "image": "assets/Rift_Herald_Render.webp",
+    "description": "The Rift Herald helps break enemy lines by dealing heavy damage to towers.",
+    "stats": {
+      "Armor": 60,
+      "MagicResist": 50,
+      "HP": 8000,
+      "Gold": 100,
+      "Experience": 200,
+      "VictoryRate": 55
+    }
+  },
+  "minion": {
+    "name": "Minions",
+    "image": "assets/minion.png",
+    "description": "Minions are the primary source of gold and experience during the laning phase.",
+    "types": {
+      "melee": {
+        "Armor": 0,
+        "MagicResist": 0,
+        "SpawnFrequency": "30s",
+        "Gold": 21,
+        "Experience": 60,
+        "VictoryCorrelation": 0.35
+      },
+      "ranged": {
+        "Armor": 0,
+        "MagicResist": 0,
+        "SpawnFrequency": "30s",
+        "Gold": 14,
+        "Experience": 29,
+        "VictoryCorrelation": 0.29
+      },
+      "cannon": {
+        "Armor": 15,
+        "MagicResist": 15,
+        "SpawnFrequency": "every 3rd wave",
+        "Gold": 60,
+        "Experience": 92,
+        "VictoryCorrelation": 0.48
+      },
+      "super": {
+        "Armor": 30,
+        "MagicResist": 30,
+        "SpawnFrequency": "when an inhibitor is destroyed",
+        "Gold": 90,
+        "Experience": 100,
+        "VictoryCorrelation": 0.72
+      }
+    }
+  },
+  "tower": {
+    "name": "Tower",
+    "image": "assets/tower.png",
+    "description": "Towers defend key objectives. Destroying the first tower grants a strategic advantage.",
+    "stats": {
+      "Armor": 40,
+      "MagicResist": 0,
+      "TeamGold": 250,
+      "FirstTowerBonus": 400,
+      "VictoryCorrelation": 0.65
+    }
+  }
+}
