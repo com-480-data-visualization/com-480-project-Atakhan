@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Projet Atakhan</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="RadarPlot/css/radar.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
@@ -13,12 +14,11 @@
   <script src="js/shapBeeswarm.js" defer></script>
   <script src="js/init.js" defer></script>
   <script src="js/square.js" defer></script>
-  <script src="RadarPlot/js/radarPage.js" defer></script> <!-- ✅ Script radar -->
+  <script src="RadarPlot/js/radarPage.js" defer></script>
   <script src="Map_Mael/fonction_js/mapviz.js" defer></script>
   <script src="Map_Mael/fonction_js/monsterDetails.js" defer></script>
 </head>
 <body>
-
   <div class="container">
     <div class="indicator-bar" id="indicatorBar"></div>
 
@@ -49,25 +49,37 @@
       </div>
     </div>
 
-<div class="page" id="page7">
-  <h1>Radar Win vs Lose</h1>
-  <div class="chart-section">
-    <div class="radar-container">
-      <canvas id="radarChart" width="700" height="700"></canvas>
+    <!-- PAGE RADAR -->
+    <div class="page" id="page7">
+      <h1>Radar Win vs Lose</h1>
+      <div class="radar-buttons">
+        <button class="radar-button" onclick="highlightTeam('Win')">Voir Win</button>
+        <button class="radar-button" onclick="highlightTeam('Lose')">Voir Lose</button>
+      </div>
+      <div class="chart-section">
+        <div class="radar-container">
+          <canvas id="radarChart" width="700" height="700"></canvas>
+        </div>
+        <div id="radarExplanation" class="explanation">Cliquez sur Win ou Lose pour voir l’analyse.</div>
+      </div>
     </div>
-    <div id="radarExplanation" class="explanation">Cliquez sur Win ou Lose pour voir l’analyse.</div>
-  </div>
-</div>
 
-    <!-- Page 8 : Carte interactive -->
-    <div class="page" id="page8"></div>
+    <!-- PAGE MAP -->
+    <div class="page" id="page8">
+      <div class="map-container">
+        <img src="Map_Mael/assets/map_clean.png" alt="Carte" class="map" id="map"/>
+        <img src="Map_Mael/assets/dragon.png" class="monster" id="dragon" data-monster="Dragon"/>
+        <img src="Map_Mael/assets/herald.png" class="monster" id="herald" data-monster="Herald"/>
+        <img src="Map_Mael/assets/minion.png" class="monster" id="minion" data-monster="Minion"/>
+        <img src="Map_Mael/assets/tower.png" class="monster" id="tower" data-monster="Tower"/>
+      </div>
+    </div>
 
-    <!-- ✅ Vue de détail indépendante -->
+    <!-- PAGE DETAIL MONSTRE -->
     <div id="monsterDetailsPage">
       <h1 id="monsterTitle">Détail du Monstre</h1>
       <button onclick="hideMonsterDetails()">⬅ Retour à la carte</button>
     </div>
-
   </div>
 </body>
 </html>
