@@ -7,25 +7,17 @@
   <link rel="stylesheet" href="styles.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0/dist/chartjs-chart-matrix.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
 
-  
-  <!-- <script src="visualization.js" defer></script> -->
-
-
   <script src="js/chartsBar.js" defer></script>
-  <script src="js/correlationMatrix.js" defer></script>
   <script src="js/shapBeeswarm.js" defer></script>
   <script src="js/init.js" defer></script>
-
-
   <script src="js/square.js" defer></script>
+  <script src="RadarPlot/js/radarPage.js" defer></script> <!-- ✅ Script radar -->
   <script src="Map_Mael/fonction_js/mapviz.js" defer></script>
   <script src="Map_Mael/fonction_js/monsterDetails.js" defer></script>
 </head>
 <body>
-
 
   <div class="container">
     <div class="indicator-bar" id="indicatorBar"></div>
@@ -57,17 +49,25 @@
       </div>
     </div>
 
-
-
-    <!-- Page 8 : Carte interactive (VIDE → remplie dynamiquement en JS) -->
-<div class="page" id="page8"></div>
-
-  <!-- ✅ Vue de détail indépendante (hors .page) -->
-  <div id="monsterDetailsPage">
-    <h1 id="monsterTitle">Détail du Monstre</h1>
-    <button onclick="hideMonsterDetails()">⬅ Retour à la carte</button>
+<div class="page" id="page7">
+  <h1>Radar Win vs Lose</h1>
+  <div class="chart-section">
+    <div class="radar-container">
+      <canvas id="radarChart" width="700" height="700"></canvas>
+    </div>
+    <div id="radarExplanation" class="explanation">Cliquez sur Win ou Lose pour voir l’analyse.</div>
   </div>
+</div>
 
+    <!-- Page 8 : Carte interactive -->
+    <div class="page" id="page8"></div>
 
+    <!-- ✅ Vue de détail indépendante -->
+    <div id="monsterDetailsPage">
+      <h1 id="monsterTitle">Détail du Monstre</h1>
+      <button onclick="hideMonsterDetails()">⬅ Retour à la carte</button>
+    </div>
+
+  </div>
 </body>
 </html>

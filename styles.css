@@ -31,8 +31,8 @@ body {
 }
 
 canvas {
-  max-width: 80%;
-  max-height: 60%;
+  max-width: 96%;
+  max-height: 90%;
   margin-top: 20px;
   background-color: #1a1a1a;
   border: 1px solid #444;
@@ -276,4 +276,37 @@ h1 {
 
 #monsterDetailsPage button:hover {
   background-color: #0088cc;
+}
+
+#radarChart {
+  width: 600px;
+  height: 600px;
+  max-width: 90vw;
+  max-height: 90vh;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+.radar-container {
+  width: 700px;
+  height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 20px;
+}
+.explanation {
+  max-width: 300px;
+  padding: 15px;
+  background: #1e1e1e;
+  border: 2px solid #00aaff;
+  border-radius: 8px;
+  color: #fff;
 }
