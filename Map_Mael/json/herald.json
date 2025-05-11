@@ -1,0 +1,9 @@
+{
+  "name": "Rift Herald",
+  "description": "Helps break enemy lines by damaging towers.",
+  "HP": 8000,
+  "Armor": 60,
+  "MagicResist": 50,
+  "Gold": 100,
+  "VictoryCorrelation": 55
+}

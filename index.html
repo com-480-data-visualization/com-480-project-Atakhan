@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Projet Atakhan</title>
+
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="RadarPlot/css/radar.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
 
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Scripts des différents modules -->
   <script src="js/chartsBar.js" defer></script>
   <script src="js/shapBeeswarm.js" defer></script>
   <script src="js/init.js" defer></script>
@@ -20,10 +20,17 @@
   <script src="RadarPlot/js/radarPage.js" defer></script>
   <script src="Map_Mael/fonction_js/mapviz.js" defer></script>
   <script src="Map_Mael/fonction_js/monsterDetails.js" defer></script>
-  <script src="Map_Mael/fonction_js/loadDragon.js"></script>
+
+  <!-- Chargement des scripts de diagrammes individuels -->
+  <script src="Map_Mael/fonction_js/loadDragon.js" defer></script>
+  <script src="Map_Mael/fonction_js/loadHerald.js" defer></script>
+  <script src="Map_Mael/fonction_js/loadMinion.js" defer></script>
+  <script src="Map_Mael/fonction_js/loadTower.js" defer></script>
 </head>
+
 <body>
   <div class="container">
+
     <div class="indicator-bar" id="indicatorBar"></div>
 
     <div class="page" id="page1">
@@ -69,34 +76,41 @@
     </div>
 
     <!-- PAGE MAP -->
-    <div class="page" id="page8">
+    <div class="page" id="page8" style="display: flex;">
       <div class="map-container">
         <img src="Map_Mael/assets/map_clean.png" alt="Carte" class="map" id="map"/>
-        <img src="Map_Mael/assets/dragon.png" class="monster" id="dragon" data-monster="Dragon"/>
-        <img src="Map_Mael/assets/herald.png" class="monster" id="herald" data-monster="Herald"/>
-        <img src="Map_Mael/assets/minion.png" class="monster" id="minion" data-monster="Minion"/>
-        <img src="Map_Mael/assets/tower.png" class="monster" id="tower" data-monster="Tower"/>
+        <img src="Map_Mael/assets/dragon.png" class="monster" id="dragon" />
+        <img src="Map_Mael/assets/herald.png" class="monster" id="herald" />
+        <img src="Map_Mael/assets/minion.png" class="monster" id="minion" />
+        <img src="Map_Mael/assets/tower.png" class="monster" id="tower" />
       </div>
     </div>
 
-    <!-- PAGE DETAIL MONSTRE -->
-    <div id="monsterDetailsPage">
-      <h1 id="monsterTitle">Détail du Monstre</h1>
-      <button onclick="hideMonsterDetails()">⬅ Retour à la carte</button>
+    <!-- Pages dédiées aux monstres -->
+    <div class="page exclude-from-scroll" id="page-dragon">
+      <h1>Statistiques du Dragon</h1>
+      <div id="chart-dragon" style="width:500px; height:500px; margin: auto;"></div>
+      <button onclick="returnToMap()">⬅ Retour</button>
     </div>
 
+    <div class="page exclude-from-scroll" id="page-herald">
+      <h1>Statistiques du Herald</h1>
+      <div id="chart-herald" style="width:500px; height:500px; margin: auto;"></div>
+      <button onclick="returnToMap()">⬅ Retour</button>
+    </div>
 
-<!-- PAGE 9 - Diagramme cyclique avec Plotly -->
-<div class="page" id="page9">
-  <h1>Statistiques du Dragon</h1>
-  <div id="plotlyCycleChart" style="width:500px; height:500px; margin: auto;"></div>
-</div>
+    <div class="page exclude-from-scroll" id="page-minion">
+      <h1>Statistiques du Minion</h1>
+      <div id="chart-minion" style="width:500px; height:500px; margin: auto;"></div>
+      <button onclick="returnToMap()">⬅ Retour</button>
+    </div>
+
+    <div class="page exclude-from-scroll" id="page-tower">
+      <h1>Statistiques de la Tower</h1>
+      <div id="chart-tower" style="width:500px; height:500px; margin: auto;"></div>
+      <button onclick="returnToMap()">⬅ Retour</button>
+    </div>
 
   </div>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    loadDragon(); // Appel direct au chargement
-  });
-</script>
 </body>
 </html>

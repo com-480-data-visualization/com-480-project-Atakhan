@@ -1,6 +1,6 @@
 
-function loadDragonChart() {
-  fetch("Map_Mael/json/dragon.json")
+function loadTowerChart() {
+  fetch("Map_Mael/json/tower.json")
     .then(res => res.json())
     .then(data => {
       const labels = ["Description", "PV", "Armure + Résistance Magique", "Gold", "Corrélation Victoire"];
@@ -14,7 +14,7 @@ function loadDragonChart() {
       ];
       const colors = ["#F67250", "#1B2B34", "#45B8AC", "#F4C95D", "#66BB6A"];
 
-      Plotly.newPlot("chart-dragon", [{
+      Plotly.newPlot("chart-tower", [{
         type: "pie",
         values: values,
         labels: labels,

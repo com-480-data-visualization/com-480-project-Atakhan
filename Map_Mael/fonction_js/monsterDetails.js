@@ -1,24 +1,31 @@
-// Gère le passage à la page détail au clic
 function showMonsterDetails(id) {
-  // Masquer toutes les pages
+  // Cacher toutes les pages
   document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
 
-  // Afficher la page de détails
-  const detailPage = document.getElementById('monsterDetailsPage');
-  detailPage.style.display = 'flex';
+  // Afficher la page correspondante
+  const pageId = 'page-' + id;
+  const page = document.getElementById(pageId);
+  if (page) {
+    page.style.display = 'flex';
+  }
 
-  // Mettre à jour le titre avec le nom du monstre cliqué
-  const nameMap = {
-    dragon: "Dragon",
-    herald: "Rift Herald",
-    tower: "Tower",
-    minion: "Minion"
+  // Appeler la fonction de chargement du bon graphique
+  const loaderMap = {
+    dragon: loadDragonChart,
+    herald: loadHeraldChart,
+    minion: loadMinionChart,
+    tower: loadTowerChart
   };
-  document.getElementById('monsterTitle').textContent = nameMap[id] || id;
+
+  const loader = loaderMap[id];
+  if (typeof loader === 'function') {
+    loader();
+  } else {
+    console.warn(`Aucune fonction de chargement pour : ${id}`);
+  }
 }
 
-// Bouton retour
-function hideMonsterDetails() {
-  document.getElementById('monsterDetailsPage').style.display = 'none';
+function returnToMap() {
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
   document.getElementById('page8').style.display = 'flex';
 }

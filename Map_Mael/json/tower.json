@@ -1,0 +1,9 @@
+{
+  "name": "Tower",
+  "description": "Defends objectives. First tower gives a strategic bonus.",
+  "HP": 5000,
+  "Armor": 40,
+  "MagicResist": 0,
+  "Gold": 400,
+  "VictoryCorrelation": 65
+}

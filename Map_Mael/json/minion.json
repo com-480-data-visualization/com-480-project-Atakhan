@@ -1,0 +1,9 @@
+{
+  "name": "Minion",
+  "description": "Provides gold and experience during laning phase.",
+  "HP": 450,
+  "Armor": 0,
+  "MagicResist": 0,
+  "Gold": 21,
+  "VictoryCorrelation": 35
+}
