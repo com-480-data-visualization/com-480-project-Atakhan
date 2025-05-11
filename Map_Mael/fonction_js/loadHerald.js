@@ -1,8 +1,18 @@
-
 function loadHeraldChart() {
   fetch("Map_Mael/json/herald.json")
     .then(res => res.json())
     .then(data => {
+      // Cibler le conteneur de la page Herald
+      const page = document.getElementById("page-herald");
+      page.innerHTML = `
+        <h1>Statistiques du Herald</h1>
+        <div class="monster-layout">
+          <img src="assets/herald_draw.webp" alt="Herald" class="monster-image"/>
+          <div id="chart-herald" class="monster-chart"></div>
+        </div>
+        <button onclick="returnToMap()">⬅ Retour</button>
+      `;
+
       const labels = ["Description", "PV", "Armure + Résistance Magique", "Gold", "Corrélation Victoire"];
       const values = [1, 1, 1, 1, 1];
       const hoverTexts = [

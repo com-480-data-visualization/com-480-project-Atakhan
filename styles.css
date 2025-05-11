@@ -332,5 +332,44 @@ h1 {
   transform: scale(1.05);
 }
 
+.monster-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.monster-image {
+  width: 280px;
+  height: auto;
+  border-radius: 12px;
+  border: 2px solid #444;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  object-fit: contain;
+}
+
+.monster-chart {
+  width: 500px;
+  height: 500px;
+  flex-shrink: 0;
+}
+
+/* Responsive : pile en colonne sur petit écran */
+@media screen and (max-width: 768px) {
+  .monster-layout {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .monster-image,
+  .monster-chart {
+    width: 90%;
+    max-width: 400px;
+  }
+}
 
 

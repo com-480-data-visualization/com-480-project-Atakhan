@@ -1,9 +1,26 @@
-
 function loadDragonChart() {
   fetch("Map_Mael/json/dragon.json")
     .then(res => res.json())
     .then(data => {
-      const labels = ["Description", "PV", "Armure + Résistance Magique", "Gold", "Corrélation Victoire"];
+      const page = document.getElementById("page-dragon");
+
+      // Injecte le contenu HTML avec image + graphique
+      page.innerHTML = `
+        <h1>Statistiques du Dragon</h1>
+        <div class="monster-layout">
+          <img src="assets/dragon_draw.webp" alt="Dragon" class="monster-image"/>
+          <div id="chart-dragon" class="monster-chart"></div>
+        </div>
+        <button onclick="returnToMap()">⬅ Retour</button>
+      `;
+
+      const labels = [
+        "Description",
+        "PV",
+        "Armure + Résistance Magique",
+        "Gold",
+        "Corrélation Victoire"
+      ];
       const values = [1, 1, 1, 1, 1];
       const hoverTexts = [
         data.description || "-",
