@@ -13,6 +13,14 @@ body {
   overflow: hidden;
 }
 
+body {
+  font-family: 'Rubik', sans-serif;
+  background-color: #121212;
+  color: #fff;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .container {
   position: relative;
   width: 100vw;
@@ -311,6 +319,18 @@ h1 {
   color: #fff;
 }
 
+/* Conteneur stylisé pour le donut Plotly */
+#plotlyCycleChart {
+  transition: transform 0.1s ease;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 170, 255, 0.3);
+}
+
+/* Exemple de survol (si tu ajoutes une classe à la volée) */
+#plotlyCycleChart.zoomed {
+  transform: scale(1.05);
+}
 
 
 

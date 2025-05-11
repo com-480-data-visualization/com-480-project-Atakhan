@@ -6,6 +6,9 @@
   <title>Projet Atakhan</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="RadarPlot/css/radar.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
@@ -17,6 +20,7 @@
   <script src="RadarPlot/js/radarPage.js" defer></script>
   <script src="Map_Mael/fonction_js/mapviz.js" defer></script>
   <script src="Map_Mael/fonction_js/monsterDetails.js" defer></script>
+  <script src="Map_Mael/fonction_js/loadDragon.js"></script>
 </head>
 <body>
   <div class="container">
@@ -80,6 +84,19 @@
       <h1 id="monsterTitle">Détail du Monstre</h1>
       <button onclick="hideMonsterDetails()">⬅ Retour à la carte</button>
     </div>
+
+
+<!-- PAGE 9 - Diagramme cyclique avec Plotly -->
+<div class="page" id="page9">
+  <h1>Statistiques du Dragon</h1>
+  <div id="plotlyCycleChart" style="width:500px; height:500px; margin: auto;"></div>
+</div>
+
   </div>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    loadDragon(); // Appel direct au chargement
+  });
+</script>
 </body>
 </html>
