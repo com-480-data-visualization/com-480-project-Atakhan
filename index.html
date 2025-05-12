@@ -5,13 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Projet Atakhan</title>
 
+  <!-- ✅ Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="RadarPlot/css/radar.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
   <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
   <!-- Scripts des différents modules -->
   <script src="js/chartsBar.js" defer></script>
   <script src="js/shapBeeswarm.js" defer></script>
@@ -20,32 +25,56 @@
   <script src="RadarPlot/js/radarPage.js" defer></script>
   <script src="Map_Mael/fonction_js/mapviz.js" defer></script>
   <script src="Map_Mael/fonction_js/monsterDetails.js" defer></script>
-
-  <!-- Chargement des scripts de diagrammes individuels -->
   <script src="Map_Mael/fonction_js/loadDragon.js" defer></script>
   <script src="Map_Mael/fonction_js/loadHerald.js" defer></script>
   <script src="Map_Mael/fonction_js/loadMinion.js" defer></script>
   <script src="Map_Mael/fonction_js/loadTower.js" defer></script>
 </head>
 
-<body>
+<body class="bg-gray-900 text-white font-rubik">
   <div class="container">
 
     <div class="indicator-bar" id="indicatorBar"></div>
 
-    <div class="page" id="page1">
-      <h1>Page 1</h1>
-      <div class="placeholder">To be updated<span class="dots">.</span></div>
-    </div>
+    <!-- ✅ Page 1 – League of Legends Title Page -->
+<div class="page relative flex flex-col items-center justify-center min-h-screen text-center text-white px-4 py-10" id="page1"
+     style="background: url('assets/walpaper.png') no-repeat center center / cover;">
+  
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
 
-    <div class="page" id="page2">
-      <h1>Page 2</h1>
-      <div class="placeholder">To be updated<span class="dots">.</span></div>
+  <!-- Content -->
+  <div class="relative z-10">
+    <h1 class="text-5xl md:text-6xl font-extrabold tracking-wide mb-6 uppercase" style="font-family: 'Orbitron', sans-serif;">
+      Data Visualization<br>League of Legends
+    </h1>
+    <div class="text-xl md:text-2xl font-semibold space-y-2">
+      <p>Andrija Jelenkovic</p>
+      <p>Aleksa Milisavljevic</p>
+      <p>Lazar Radojevic</p>
     </div>
+  </div>
+</div>
 
-    <div class="page" id="page3">
-      <h1>Grouped SHAP Beeswarm (Page 3)</h1>
-      <div id="chart3" style="width: 100%; max-width: 1200px; height: 600px; margin: auto;"></div>
+
+<!-- ✅ Page 2 – League of Legends Description with Orbitron Font -->
+<div class="page flex flex-col items-center justify-center min-h-screen px-6 py-10 text-center text-white orbitron" id="page2">
+  <h1 class="text-4xl md:text-5xl font-bold text-cyan-400 mb-6 uppercase">
+    What is League of Legends?
+  </h1>
+  <p class="text-lg md:text-xl text-gray-300 max-w-3xl leading-relaxed">
+    League of Legends (LoL) is a competitive, team-based strategy game developed by Riot Games.
+    In each match, two teams of five champions battle to destroy the opposing base. Each player controls a unique character with special abilities,
+    playing a specific role on the map such as top laner, jungler, mid laner, ADC, or support. Known for its fast-paced gameplay,
+    strategic depth, and global esports presence, League of Legends is one of the most popular multiplayer online games in the world.
+  </p>
+</div>
+
+
+    <!-- ✅ Page 3 -->
+    <div class="page flex flex-col items-center justify-center min-h-screen px-6 py-10 text-center" id="page3">
+      <h1 class="text-4xl font-bold text-cyan-400 mb-6">Grouped SHAP Beeswarm (Page 3)</h1>
+      <div id="chart3" class="w-full max-w-5xl h-[600px] bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-600"></div>
     </div>
 
     <div class="page" id="page4">
@@ -110,7 +139,80 @@
       <div id="chart-tower" style="width:500px; height:500px; margin: auto;"></div>
       <button onclick="returnToMap()">⬅ Retour</button>
     </div>
-
+   <!-- ✅ Page 9 – Pyramide Animée Corrigée -->
+<div class="page flex flex-col items-center justify-center min-h-screen px-6 py-10 text-center" id="page9">
+  <div class="relative w-full flex justify-center mb-10">
+    <div class="pyramide relative">
+      <div class="niveau trapeze3"></div>
+      <div class="niveau trapeze2"></div>
+      <div class="niveau trapeze1"></div>
+      <div class="niveau sommet"></div>
+    </div>
   </div>
+  <h1 class="text-4xl font-bold text-yellow-400">Pyramide Animée</h1>
+</div>
+
+<style>
+  .pyramide {
+    position: relative;
+    width: 300px;
+    height: 260px;
+  }
+
+  .niveau {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: bottom;
+    animation: grow 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .trapeze3 {
+    bottom: 0;
+    width: 220px;
+    height: 60px;
+    background: #123;
+    clip-path: polygon(0% 100%, 10% 0%, 90% 0%, 100% 100%);
+    animation-delay: 0s;
+  }
+
+  .trapeze2 {
+    bottom: 60px;
+    width: 160px;
+    height: 60px;
+    background: #1e5e70;
+    clip-path: polygon(0% 100%, 15% 0%, 85% 0%, 100% 100%);
+    animation-delay: 0.4s;
+  }
+
+  .trapeze1 {
+    bottom: 120px;
+    width: 100px;
+    height: 60px;
+    background: #28b3af;
+    clip-path: polygon(0% 100%, 20% 0%, 80% 0%, 100% 100%);
+    animation-delay: 0.8s;
+  }
+
+  .sommet {
+    bottom: 180px;
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 60px solid #eac46b;
+    animation-delay: 1.2s;
+    transform-origin: bottom center;
+  }
+
+  @keyframes grow {
+    to {
+      transform: translateX(-50%) scaleY(1);
+      opacity: 1;
+    }
+  }
+</style>
+</div>
 </body>
 </html>
