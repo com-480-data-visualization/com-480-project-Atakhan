@@ -4,7 +4,7 @@ function loadDragonChart() {
     .then(data => {
       const page = document.getElementById("page-dragon");
 
-      // Injecte image + graphique, sans <h1> général
+      // Remplace le contenu de la page
       page.innerHTML = `
         <div class="monster-layout">
           <img src="assets/dragon_draw.webp" alt="Dragon" class="monster-image dragon-img"/>
@@ -13,43 +13,68 @@ function loadDragonChart() {
         <button onclick="returnToMap()">⬅ Retour</button>
       `;
 
-      const labels = ["📜", "❤️", "🛡️", "💰", "🏆"];
-const values = [1, 1, 1, 1, 1];
-const hoverTexts = [
-  data.description || "-",
-  `PV : ${data.HP}`,
-  `Armure : ${data.Armor}, RM : ${data.MagicResist}`,
-  `Gold : ${data.Gold}`,
-  `Taux de victoire : ${data.VictoryCorrelation}%`
-];
-      const colors = ["#F67250", "#1B2B34", "#45B8AC", "#F4C95D", "#66BB6A"];
+      // Données du graphique
+      const stats = [
+        { label: "📜", value: 1, color: "#F67250" },
+        { label: "❤️", value: 1, color: "#1B2B34" },
+        { label: "🛡️", value: 1, color: "#45B8AC" },
+        { label: "💰", value: 1, color: "#F4C95D" },
+        { label: "🏆", value: 1, color: "#66BB6A" }
+      ];
 
-      Plotly.newPlot("chart-dragon", [{
-        type: "pie",
-        values: values,
-        labels: labels,
-        textinfo: "label",
-        textposition: "inside",
-        hole: 0.5,
-        marker: {
-          colors: colors,
-          line: { color: "black", width: 2 }
-        },
-        hoverinfo: "text",
-        hovertext: hoverTexts,
-        insidetextfont: {
-          family: "Orbitron, sans-serif",
-          size: [25, 25, 25, 25, 25],
-          color: "white"
-        }
-      }], {
-        title: {
-          text: `Pie statistics: ${data.name}`,
-          font: { family: "Orbitron, sans-serif", size: 22, color: "#fff" }
-        },
-        showlegend: false,
-        paper_bgcolor: "rgba(0,0,0,0)",
-        plot_bgcolor: "rgba(0,0,0,0)"
-      });
+      const width = 500;
+      const height = 500;
+      const radius = Math.min(width, height) / 2;
+
+      const svg = d3.select("#chart-dragon")
+        .append("svg")
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .append("g")
+        .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+      const arc = d3.arc()
+        .innerRadius(radius - 80)
+        .outerRadius(radius - 20);
+
+      const pie = d3.pie().sort(null).value(d => d.value);
+      const arcs = pie(stats);
+
+      const g = svg.selectAll(".arc")
+        .data(arcs)
+        .enter()
+        .append("g")
+        .attr("class", "arc");
+
+      // Animation progressive : chaque arc s'étend depuis 0
+      g.append("path")
+        .attr("fill", d => d.data.color)
+        .attr("d", d3.arc()
+          .innerRadius(radius - 80)
+          .outerRadius(radius - 20)
+          .startAngle(d => d.startAngle)
+          .endAngle(d => d.startAngle)) // démarre à 0
+        .transition()
+        .delay((d, i) => i * 300)
+        .duration(600)
+        .attrTween("d", function(d) {
+          const interpolate = d3.interpolate(d.startAngle, d.endAngle);
+          return t => {
+            const newArc = { ...d, endAngle: interpolate(t) };
+            return arc(newArc);
+          };
+        });
+
+      // Émojis au centre des arcs
+      g.append("text")
+        .attr("transform", d => `translate(${arc.centroid(d)})`)
+        .text(d => d.data.label)
+        .style("opacity", 0)
+        .style("font-size", "26px")
+        .style("fill", "#fff")
+        .style("font-family", "Orbitron, sans-serif")
+        .transition()
+        .delay((d, i) => i * 300 + 500)
+        .duration(300)
+        .style("opacity", 1);
     });
 }

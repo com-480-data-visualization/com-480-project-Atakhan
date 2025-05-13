@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="RadarPlot/css/radar.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
-
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.24.2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -29,6 +29,7 @@
   <script src="Map_Mael/fonction_js/loadHerald.js" defer></script>
   <script src="Map_Mael/fonction_js/loadMinion.js" defer></script>
   <script src="Map_Mael/fonction_js/loadTower.js" defer></script>
+  <script src="js/donut.js" defer></script>
 </head>
 
 <body class="bg-gray-900 text-white font-rubik">
@@ -213,6 +214,12 @@
     }
   }
 </style>
+<!-- ✅ Page 10 – Donut D3 SVG avec effet horloge -->
+<div class="page flex flex-col items-center justify-center min-h-screen px-6 py-10 text-center" id="page10">
+  <h1 class="text-4xl font-bold text-cyan-400 mb-6">Horloge Donut Chart (D3.js)</h1>
+  <div id="chart-d3" class="w-[500px] h-[500px]"></div>
+</div>
+
 </div>
 </body>
 </html>
