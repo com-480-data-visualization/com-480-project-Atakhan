@@ -55,7 +55,7 @@ function loadDragonChart() {
           .endAngle(d => d.startAngle)) // démarre à 0
         .transition()
         .delay((d, i) => i * 300)
-        .duration(600)
+        .duration(1500)
         .attrTween("d", function(d) {
           const interpolate = d3.interpolate(d.startAngle, d.endAngle);
           return t => {
@@ -66,12 +66,15 @@ function loadDragonChart() {
 
       // Émojis au centre des arcs
       g.append("text")
-        .attr("transform", d => `translate(${arc.centroid(d)})`)
-        .text(d => d.data.label)
-        .style("opacity", 0)
-        .style("font-size", "26px")
-        .style("fill", "#fff")
-        .style("font-family", "Orbitron, sans-serif")
+  .attr("transform", d => `translate(${arc.centroid(d)})`)
+  .text(d => d.data.label)
+  .attr("text-anchor", "middle")
+  .attr("dominant-baseline", "central") // ✅ centre verticalement
+  .style("opacity", 0)
+  .style("font-size", "32px") // 🧼 légèrement agrandi pour lisibilité
+  .style("fill", "#fff")
+  .style("font-family", "Orbitron, sans-serif")
+
         .transition()
         .delay((d, i) => i * 300 + 500)
         .duration(300)
