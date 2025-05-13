@@ -14,16 +14,14 @@ function loadDragonChart() {
           text-align: center;
           margin-bottom: 20px;
         "></h2>
-        <div class="monster-layout">
+        <div class="dragon-card monster-layout">
           <img src="assets/dragon_draw.webp" alt="Dragon" class="monster-image dragon-img"/>
           <div id="chart-dragon" class="monster-chart"></div>
         </div>
-        <button onclick="returnToMap()" style="
-          margin-top: 20px;
-          font-size: 14px;
-          font-family: Orbitron, sans-serif;
-        ">⬅ Return to Map</button>
+        <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>
       `;
+
+      page.style.background = "linear-gradient(135deg, #0f2027, #2c5364)";
 
       // Floating tooltip
       const tooltip = document.createElement("div");
@@ -38,7 +36,10 @@ function loadDragonChart() {
         fontSize: "14px",
         pointerEvents: "none",
         opacity: 0,
-        transition: "opacity 0.2s ease"
+        transition: "opacity 0.2s ease",
+        backdropFilter: "blur(4px)",
+        border: "1px solid #00ccff",
+        boxShadow: "0 2px 12px #00ccff55"
       });
       document.body.appendChild(tooltip);
 
@@ -88,8 +89,21 @@ function loadDragonChart() {
         .append("g")
         .attr("class", "arc");
 
+      // Add this before drawing arcs
+      const defs = svg.append("defs");
+      const filter = defs.append("filter")
+        .attr("id", "dropshadow")
+        .attr("height", "130%");
+      filter.append("feDropShadow")
+        .attr("dx", 0)
+        .attr("dy", 2)
+        .attr("stdDeviation", 3)
+        .attr("flood-color", "#000")
+        .attr("flood-opacity", 0.15);
+
       // Animate arc appearance
       g.append("path")
+        .attr("filter", "url(#dropshadow)")
         .attr("fill", d => d.data.color)
         .attr("d", d3.arc()
           .innerRadius(radius - 80)
