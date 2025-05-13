@@ -392,5 +392,58 @@ h1 {
   }
 }
 
+.monster-image.herald-img {
+  width: 360px;
+  height: auto;
+  border-radius: 16px;
+  border: 4px solid transparent;
+  box-shadow: 0 0 32px 8px #a259f7, 0 0 64px 16px #7c3aed55;
+  position: relative;
+  z-index: 2;
+  transition: width 0.3s, box-shadow 0.4s;
+}
+
+@media screen and (max-width: 1200px) {
+  .monster-image.herald-img {
+    width: 260px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .monster-image.herald-img {
+    width: 90%;
+    max-width: 340px;
+  }
+}
+
+.herald-glow {
+  border: 4px solid transparent;
+  outline: 3px solid #2a0845;
+  outline-offset: 2px;
+  box-shadow: 0 0 32px 8px #a259f7, 0 0 64px 16px #7c3aed55;
+  transition: box-shadow 0.4s, border 0.4s, outline 0.4s;
+  animation: herald-border-animate 3s linear infinite;
+  background: linear-gradient(135deg, #a259f7, #7c3aed, #00ccff, #a259f7);
+  background-size: 400% 400%;
+}
+
+@keyframes herald-border-animate {
+  0% {
+    box-shadow: 0 0 32px 8px #a259f7, 0 0 64px 16px #7c3aed55;
+    border-color: #a259f7;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    box-shadow: 0 0 40px 16px #00ccff, 0 0 80px 24px #a259f7aa;
+    border-color: #00ccff;
+    filter: hue-rotate(180deg);
+  }
+  100% {
+    box-shadow: 0 0 32px 8px #a259f7, 0 0 64px 16px #7c3aed55;
+    border-color: #a259f7;
+    filter: hue-rotate(360deg);
+  }
+}
+
 
 

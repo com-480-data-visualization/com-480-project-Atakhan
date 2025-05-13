@@ -3,6 +3,11 @@ function loadHeraldChart() {
     .then(res => res.json())
     .then(data => {
       const page = document.getElementById("page-herald");
+
+      // Clean up any existing tooltip
+      const oldTooltip = document.getElementById("herald-tooltip");
+      if (oldTooltip) oldTooltip.remove();
+
       page.innerHTML = `
         <h2 id="herald-title" style="
           opacity: 0;
@@ -19,6 +24,9 @@ function loadHeraldChart() {
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>
       `;
+
+      // Now select the new chart container (for D3)
+      // (No need to clear it, as it's freshly created)
 
       // Tooltip (same as dragon)
       const tooltip = document.createElement("div");
@@ -40,25 +48,39 @@ function loadHeraldChart() {
       });
       document.body.appendChild(tooltip);
 
+      // Normalization factors (based on max values for each stat)
+      const maxHP = 8000;
+      const maxArmorMR = 110; // Armor + MR
+      const maxGold = 100;
+      // VictoryCorrelation is already a percentage
+
+      // Calculate normalized values
+      const hpVal = (data.HP / maxHP) * 100;
+      const armorMRVal = ((data.Armor + data.MagicResist) / maxArmorMR) * 100;
+      const goldVal = (data.Gold / maxGold) * 100;
+      const victoryVal = data.VictoryCorrelation;
+      // Description arc value: average of the other arcs
+      const descVal = (hpVal + armorMRVal + goldVal + victoryVal) / 4;
+
       const stats = [
         {
-          label: "📜", value: 1, color: "#F67250", name: "Description",
+          label: "📜", value: descVal, color: "#A259F7", name: "Description",
           format: () => data.description || "-"
         },
         {
-          label: "❤️", value: 1, color: "#1B2B34", name: "PV",
+          label: "❤️", value: hpVal, color: "#1B2B34", name: "PV",
           format: () => `PV : ${data.HP}`
         },
         {
-          label: "🛡️", value: 1, color: "#45B8AC", name: "Armure + Résistance Magique",
+          label: "🛡️", value: armorMRVal, color: "#45B8AC", name: "Armure + Résistance Magique",
           format: () => `Armure : ${data.Armor}, RM : ${data.MagicResist}`
         },
         {
-          label: "💰", value: 1, color: "#F4C95D", name: "Gold",
+          label: "💰", value: goldVal, color: "#F4C95D", name: "Gold",
           format: () => `Gold : ${data.Gold}`
         },
         {
-          label: "🏆", value: 1, color: "#66BB6A", name: "Corrélation Victoire",
+          label: "🏆", value: victoryVal, color: "#66BB6A", name: "Corrélation Victoire",
           format: () => `Taux de victoire : ${data.VictoryCorrelation}%`
         }
       ];
@@ -173,5 +195,14 @@ function loadHeraldChart() {
 
         tooltip.style.opacity = 0;
       });
+
+      // Add darker purple fade background to the page
+      page.style.background = "linear-gradient(135deg, #140024 0%, #3a1c5c 100%)";
+
+      // Add glowing border to the Herald image
+      setTimeout(() => {
+        const heraldImg = document.querySelector('.herald-img');
+        if (heraldImg) heraldImg.classList.add('herald-glow');
+      }, 100);
     });
 }
