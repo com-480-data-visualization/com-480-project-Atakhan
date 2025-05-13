@@ -73,3 +73,93 @@ button.radar-button:hover {
 .radar-point {
   animation: pulse-points 2s ease-in-out infinite;
 }
+
+.radar-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(15, 15, 15, 0.95);
+    border: 2px solid;
+    border-radius: 12px;
+    padding: 20px;
+    z-index: 1000;
+    min-width: 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+.radar-modal.win {
+    border-color: #00ff00;
+}
+
+.radar-modal.lose {
+    border-color: #ff0000;
+}
+
+.radar-modal-content {
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.radar-modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.radar-modal-stat {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+}
+
+.radar-modal-stat:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.radar-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.radar-modal-close:hover {
+    opacity: 1;
+}
+
+.radar-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    backdrop-filter: blur(2px);
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -48%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
