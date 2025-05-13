@@ -325,15 +325,14 @@ h1 {
 
 .monster-layout {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
   flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 20px auto;
 }
-
 .monster-image {
   width: 280px;
   height: auto;
@@ -362,5 +361,36 @@ h1 {
     max-width: 400px;
   }
 }
+
+.dragon-img {
+  width: 420px;
+  max-width: 100%;
+  border-radius: 16px;
+  padding: 4px;
+  margin-left: -20px; /* ✅ shifts image slightly left */
+  background: linear-gradient(135deg, #00aaff, #ff00cc, #00ff99);
+  background-size: 300% 300%;
+  animation: borderPulse 6s ease infinite;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dragon-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 36px rgba(0, 170, 255, 0.6);
+}
+
+@keyframes borderPulse {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 

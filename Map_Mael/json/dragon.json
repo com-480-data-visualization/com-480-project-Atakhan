@@ -1,6 +1,5 @@
 {
   "name": "Dragon",
-  "description": "Grants powerful elemental buffs. Crucial for Dragon Soul.",
   "HP": 3500,
   "Armor": 30,
   "MagicResist": 30,

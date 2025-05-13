@@ -18,10 +18,14 @@ function loadDragonChart() {
           <img src="assets/dragon_draw.webp" alt="Dragon" class="monster-image dragon-img"/>
           <div id="chart-dragon" class="monster-chart"></div>
         </div>
-        <button onclick="returnToMap()">⬅ Retour</button>
+        <button onclick="returnToMap()" style="
+          margin-top: 20px;
+          font-size: 14px;
+          font-family: Orbitron, sans-serif;
+        ">⬅ Return to Map</button>
       `;
 
-      // Tooltip flottant
+      // Floating tooltip
       const tooltip = document.createElement("div");
       tooltip.id = "dragon-tooltip";
       Object.assign(tooltip.style, {
@@ -39,11 +43,26 @@ function loadDragonChart() {
       document.body.appendChild(tooltip);
 
       const stats = [
-        { label: "📜", value: 1, color: "#F67250", key: "description", name: "Description" },
-        { label: "❤️", value: 1, color: "#1B2B34", key: "HP", name: "Points de vie" },
-        { label: "🛡️", value: 1, color: "#45B8AC", key: "Armor", name: "Défense", format: () => `${data.Armor} / ${data.MagicResist}` },
-        { label: "💰", value: 1, color: "#F4C95D", key: "Gold", name: "Gold" },
-        { label: "🏆", value: 1, color: "#66BB6A", key: "VictoryCorrelation", name: "Taux de victoire", format: () => `${data.VictoryCorrelation}%` }
+        {
+          label: "📜", value: 1, color: "#F67250", name: "Strategic Purpose",
+          format: () => "Grants permanent elemental bonuses and enables the Dragon Soul when captured repeatedly."
+        },
+        {
+          label: "❤️", value: 1, color: "#1B2B34", name: "Health Points",
+          format: () => `${data.HP} HP – Slaying the dragon early takes time and requires coordination.`
+        },
+        {
+          label: "🛡️", value: 1, color: "#45B8AC", name: "Defense",
+          format: () => `Armor: ${data.Armor}, Magic Resist: ${data.MagicResist}`
+        },
+        {
+          label: "💰", value: 1, color: "#F4C95D", name: "Reward",
+          format: () => `${data.Gold} Gold granted when killed`
+        },
+        {
+          label: "🏆", value: 1, color: "#66BB6A", name: "Victory Impact",
+          format: () => `${data.VictoryCorrelation}% correlation with winning`
+        }
       ];
 
       const width = 500;
@@ -69,7 +88,7 @@ function loadDragonChart() {
         .append("g")
         .attr("class", "arc");
 
-      // Animation effet horloge
+      // Animate arc appearance
       g.append("path")
         .attr("fill", d => d.data.color)
         .attr("d", d3.arc()
@@ -87,12 +106,12 @@ function loadDragonChart() {
         .on("end", function(_, i) {
           if (i === stats.length - 1) {
             const titleEl = document.getElementById("dragon-title");
-            titleEl.textContent = `Statistiques : ${data.name}`;
+            titleEl.textContent = `Pie Chart: ${data.name}`;
             titleEl.style.opacity = 1;
           }
         });
 
-      // Texte émojis au centre
+      // Emoji labels
       g.append("text")
         .attr("transform", d => `translate(${arc.centroid(d)})`)
         .text(d => d.data.label)
@@ -107,7 +126,7 @@ function loadDragonChart() {
         .duration(400)
         .style("opacity", 1);
 
-      // Interactions : agrandissement et tooltip
+      // Interactivity
       g.on("mouseenter", function(event, d) {
         d3.select(this).select("path")
           .transition()
@@ -119,8 +138,7 @@ function loadDragonChart() {
           .duration(200)
           .style("font-size", "40px");
 
-        const val = d.data.format ? d.data.format() : data[d.data.key];
-        tooltip.textContent = `${d.data.name} : ${val}`;
+        tooltip.textContent = `${d.data.name}: ${d.data.format()}`;
         tooltip.style.opacity = 1;
       });
 
