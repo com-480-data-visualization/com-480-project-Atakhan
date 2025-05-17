@@ -2,7 +2,7 @@
 function renderSHAPBeeswarm() {
     console.log('Starting to render SHAP beeswarm plot...');
     
-    fetch('http://localhost:8000/processed_data/shap_beeswarm_data.json')
+    fetch('Beeswarm/processed_data/shap_beeswarm_data.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -18,8 +18,8 @@ function renderSHAPBeeswarm() {
             const targetFeatures = ['Deaths', 'Gold Difference', 'Experience Difference', 'Dragons'];
             const features = data.features.filter(f => targetFeatures.includes(f.name));
             
-            // Sort features by absolute importance
-            features.sort((a, b) => Math.abs(b.importance) - Math.abs(a.importance));
+            // Sort features by mean absolute SHAP value
+            features.sort((a, b) => Math.abs(b.mean_shap) - Math.abs(a.mean_shap));
             
             // Adjust margins to center the visualization
             const margin = {top: 100, right: 200, bottom: 40, left: 200};
