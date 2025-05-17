@@ -2,7 +2,7 @@
 function renderSHAPBeeswarm() {
     console.log('Starting to render SHAP beeswarm plot...');
     
-    fetch('processed_data/shap_beeswarm_data.json')
+    fetch('Beeswarm/processed_data/shap_beeswarm_data.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
