@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         allChampions = data;
         data.forEach(champ => {
             champ.Name = champ.Name ? champ.Name.trim() : 'N/A';
-            // Générer un nom de fichier sûr pour l'image
-            champ.ImageName = champ.Name.replace(/[^a-zA-Z0-9]/g, '') + '.png'; // Exemple: Kai'Sa -> KaiSa.png
+            // Générer un nom de fichier sûr pour l'image et le mettre en minuscule
+            champ.ImageName = champ.Name.replace(/[^a-zA-Z0-9]/g, '').toLowerCase() + '.png'; // Exemple: Kai'Sa -> kaisa.png
             
             const champClasses = champ.Classes ? champ.Classes.split(',').map(c => c.trim()).filter(c => c) : [];
             champClasses.forEach(c => uniqueClasses.add(c));
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr('alt', d => d.Name)
             .attr('class', 'champion-image')
             .on('error', function() {
-                d3.select(this).attr('src', 'JulesLeChampion/img_champions/Default.png');
+                d3.select(this).attr('src', 'JulesLeChampion/img_champions/default.png'); // Fallback en minuscule
             });
 
         // Verso de la carte (Texte)
