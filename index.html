@@ -265,6 +265,177 @@
   <div id="chart-d3" class="w-[500px] h-[500px]"></div>
 </div>
 
+<!-- ✅ Page Champion Explorer (JulesLeChampion) -->
+<div class="page flex flex-col items-center justify-start min-h-screen py-10 text-white" id="page-champion-explorer">
+    <header class="w-full py-6 mb-8 champ-explorer-header">
+        <h1 class="text-4xl md:text-5xl font-bold text-amber-400 uppercase text-center">
+            Explorateur de Champions
+        </h1>
+    </header>
+
+    <div class="champ-filters-container w-full max-w-6xl mx-auto p-6 bg-gray-800 bg-opacity-70 rounded-xl shadow-lg mb-8">
+        <div class="filter-group">
+            <label for="champ-class-filter">Classe:</label>
+            <select id="champ-class-filter" multiple></select>
+        </div>
+        <div class="filter-group">
+            <label for="champ-difficulty-filter">Difficulté:</label>
+            <select id="champ-difficulty-filter">
+                <option value="all">Toutes</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="champ-role-filter">Rôle:</label>
+            <select id="champ-role-filter" multiple></select>
+        </div>
+        <div class="filter-group">
+            <label for="champ-range-type-filter">Type de portée:</label>
+            <select id="champ-range-type-filter">
+                <option value="all">Tous</option>
+            </select>
+        </div>
+        <button id="champ-reset-filters">Réinitialiser les filtres</button>
+    </div>
+
+    <div id="champion-visualization-container" class="w-full max-w-7xl mx-auto px-4">
+        <!-- Les cartes des champions seront injectées ici par D3.js -->
+    </div>
 </div>
+
+<style>
+/* Styles spécifiques pour la page Champion Explorer */
+.champ-explorer-header {
+    background-color: rgba(22, 36, 71, 0.5); /* #162447 avec opacité */
+    border-bottom: 3px solid rgba(31, 64, 104, 0.7); /* #1f4068 avec opacité */
+}
+
+.champ-filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.champ-filters-container .filter-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+}
+
+.champ-filters-container .filter-group label {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    color: #c0c0c0;
+}
+
+.champ-filters-container .filter-group select,
+.champ-filters-container button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #2a2a4a; /* Un bleu-gris foncé */
+    color: #e0e0e0;
+    font-size: 1em;
+}
+
+.champ-filters-container .filter-group select[multiple] {
+    height: 100px;
+}
+
+.champ-filters-container button {
+    background-color: #e43f5a; /* Rouge-rose pour accent */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: fit-content;
+    align-self: flex-end;
+}
+
+.champ-filters-container button:hover {
+    background-color: #b83248;
+}
+
+#champion-visualization-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 30px;
+    perspective: 1000px;
+}
+
+.champion-card {
+    width: 280px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.7s ease, box-shadow 0.3s ease;
+    position: relative;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.champion-card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-face--front {
+    background-color: #2a2a4a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-face--back {
+    background-color: #303050;
+    transform: rotateY(180deg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.champion-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    margin: 0;
+    border: none;
+}
+
+.card-face--back h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    color: #ffc107;
+    text-align: center;
+}
+
+.card-face--back p {
+    margin: 6px 0;
+    font-size: 0.9em;
+    color: #e0e0e0;
+}
+
+.card-face--back p strong {
+    color: #82aaff;
+    margin-right: 5px;
+}
+</style>
+
+</div>
+<script src="JulesLeChampion/champion_viz.js" defer></script>
 </body>
 </html>

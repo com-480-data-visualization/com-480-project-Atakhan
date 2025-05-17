@@ -276,15 +276,16 @@ function renderRadarChart() {
         });
       
       // Pulse animation
-      points.each(function pulseAnimation() {
+      points.each(function pulseAnimation(d, i) {
           const point = d3.select(this);
+          const baseRadius = teamClass === 'Win' ? pointRadius : pointRadius * 0.8;
           (function repeat() {
-              point.transition()
-                  .duration(800)
-                  .attr("r", pointRadius * 1.5)
-                  .transition()
-                  .duration(800)
-                  .attr("r", pointRadius)
+              if (!point.node()) return; // Stop if element is removed
+              const currentBase = d3.select(point.node()).attr('r'); // Use current radius as base for pulse magnitude
+              point.transition().duration(800).ease(d3.easeSinInOut)
+                  .attr("r", parseFloat(currentBase) * 1.75) // Augmentation de l'amplitude de la pulsation
+                  .transition().duration(800).ease(d3.easeSinInOut)
+                  .attr("r", currentBase)
                   .on("end", repeat);
           })();
       });
