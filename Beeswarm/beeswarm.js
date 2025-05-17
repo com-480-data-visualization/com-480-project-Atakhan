@@ -25,7 +25,7 @@ function renderSHAPBeeswarm() {
             // Adjust margins and dimensions for better fit
             const margin = {top: 100, right: 180, bottom: 80, left: 180};
             const width = 1000 - margin.left - margin.right;
-            const height = 600 - margin.top - margin.bottom;
+            const height = 500 - margin.top - margin.bottom;  // Reduced height
             
             // Clear any existing SVG
             d3.select("#beeswarm").selectAll("*").remove();
@@ -37,30 +37,6 @@ function renderSHAPBeeswarm() {
                 .append("g")
                 .attr("transform", `translate(${margin.left},${margin.top})`);
 
-            // Add background with gradient
-            const gradient = svg.append("defs")
-                .append("linearGradient")
-                .attr("id", "background-gradient")
-                .attr("x1", "0%")
-                .attr("y1", "0%")
-                .attr("x2", "0%")
-                .attr("y2", "100%");
-            
-            gradient.append("stop")
-                .attr("offset", "0%")
-                .attr("style", "stop-color:#1a1a1a;stop-opacity:1");
-            gradient.append("stop")
-                .attr("offset", "100%")
-                .attr("style", "stop-color:#0d1117;stop-opacity:1");
-
-            svg.append("rect")
-                .attr("width", width)
-                .attr("height", height)
-                .attr("fill", "url(#background-gradient)")
-                .attr("rx", 12)
-                .attr("ry", 12)
-                .style("filter", "drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3))");
-            
             // Add title and explanation with enhanced styling
             svg.append("text")
                 .attr("x", width / 2)
@@ -69,7 +45,7 @@ function renderSHAPBeeswarm() {
                 .attr("class", "visualization-title")
                 .style("font-size", "28px")
                 .style("font-weight", "600")
-                .style("fill", "#58a6ff")
+                .style("fill", "#0969da")  // GitHub blue
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
                 .text("Impact of Key Features on Game Outcome");
 
@@ -78,7 +54,7 @@ function renderSHAPBeeswarm() {
                 .attr("y", -30)
                 .attr("text-anchor", "middle")
                 .style("font-size", "16px")
-                .style("fill", "#8b949e")
+                .style("fill", "#57606a")  // GitHub muted text
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
                 .text("SHAP values (x-axis) show how each feature changes win probability from the baseline (0.0)");
 
@@ -87,7 +63,7 @@ function renderSHAPBeeswarm() {
                 .attr("y", -10)
                 .attr("text-anchor", "middle")
                 .style("font-size", "14px")
-                .style("fill", "#8b949e")
+                .style("fill", "#57606a")
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
                 .text("Example: A SHAP value of +0.1 means that feature increases win probability by 10 percentage points");
             
@@ -95,7 +71,7 @@ function renderSHAPBeeswarm() {
             const yScale = d3.scaleBand()
                 .domain(features.map(d => d.name))
                 .range([0, height])
-                .padding(0.9);
+                .padding(0.85);  // Reduced padding to make swarms thinner
             
             const minShap = d3.min(features, d => d3.min(d.shap_values));
             const maxShap = d3.max(features, d => d3.max(d.shap_values));
@@ -113,7 +89,7 @@ function renderSHAPBeeswarm() {
                 .selectAll("text")
                 .style("font-size", "14px")
                 .style("font-weight", "500")
-                .style("fill", "#c9d1d9")
+                .style("fill", "#24292f")  // GitHub default text color
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif");
             
             // Add X axis with enhanced styling
@@ -124,7 +100,7 @@ function renderSHAPBeeswarm() {
                     .tickFormat(d => d.toFixed(2)))
                 .selectAll("text")
                 .style("font-size", "12px")
-                .style("fill", "#8b949e")
+                .style("fill", "#57606a")
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif");
             
             // Add X axis label with improved styling
@@ -133,7 +109,7 @@ function renderSHAPBeeswarm() {
                 .attr("y", height + 45)
                 .attr("text-anchor", "middle")
                 .style("font-size", "14px")
-                .style("fill", "#8b949e")
+                .style("fill", "#57606a")
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
                 .text("SHAP Value (Impact on Win Probability)");
             
@@ -143,8 +119,8 @@ function renderSHAPBeeswarm() {
                 .interpolator(d3.interpolateRdBu);
             
             // Create violin plots with enhanced styling
-            features.forEach(feature => {
-                const violinWidth = yScale.bandwidth() * 0.7; // Reduced to 70% of band width
+            features.forEach((feature, index) => {
+                const violinWidth = yScale.bandwidth() * 0.7;  // Reduced to 70% of band width
                 
                 const violinPath = d3.area()
                     .x0(d => xScale(d[0]) - d[1] * violinWidth)
@@ -161,8 +137,8 @@ function renderSHAPBeeswarm() {
                 violinG.append("path")
                     .datum(densityPoints)
                     .attr("d", violinPath)
-                    .style("fill", "rgba(255, 255, 255, 0.08)")
-                    .style("stroke", "#30363d")
+                    .style("fill", "rgba(246, 248, 250, 0.6)")  // Light GitHub background color
+                    .style("stroke", "#d0d7de")  // GitHub border color
                     .style("stroke-width", 1);
                 
                 const points = feature.shap_values.map((shap, i) => ({
@@ -175,7 +151,7 @@ function renderSHAPBeeswarm() {
                 const simulation = d3.forceSimulation(points)
                     .force("x", d3.forceX(d => xScale(d.shap)).strength(1))
                     .force("y", d3.forceY(0).strength(0.1))
-                    .force("collide", d3.forceCollide(2.5).strength(0.7))
+                    .force("collide", d3.forceCollide(2).strength(0.7))
                     .stop();
                 
                 for (let i = 0; i < 150; ++i) simulation.tick();
@@ -187,32 +163,39 @@ function renderSHAPBeeswarm() {
                     .append("circle")
                     .attr("cx", d => d.x)
                     .attr("cy", d => d.y)
-                    .attr("r", 2.5)
-                    .style("fill", d => colorScale(d.value))
-                    .style("opacity", 0.85)
-                    .style("stroke", "#30363d")
-                    .style("stroke-width", 1)
+                    .attr("r", 2)
+                    .style("fill", d => {
+                        // Darken first three swarms
+                        if (index < 3) {
+                            const color = d3.color(colorScale(d.value));
+                            color.opacity = 0.9;  // More opaque
+                            return color.darker(0.5);  // Darker color
+                        }
+                        return colorScale(d.value);
+                    })
+                    .style("opacity", index < 3 ? 0.9 : 0.7)  // More opaque for first three
+                    .style("stroke", "#d0d7de")
+                    .style("stroke-width", 0.5)
                     .on("mouseover", function(event, d) {
                         d3.select(this)
                             .transition()
                             .duration(200)
                             .attr("r", 4)
-                            .style("stroke-width", 2)
-                            .style("filter", "drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.3))");
+                            .style("stroke-width", 1.5);
                         
                         // Enhanced tooltip with interpretation
                         const tooltip = d3.select("#beeswarm")
                             .append("div")
                             .attr("class", "tooltip")
                             .style("position", "absolute")
-                            .style("background", "rgba(22, 27, 34, 0.95)")
-                            .style("color", "#c9d1d9")
+                            .style("background", "white")
+                            .style("color", "#24292f")
                             .style("padding", "12px")
                             .style("border-radius", "6px")
                             .style("font-size", "14px")
                             .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
-                            .style("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.3)")
-                            .style("border", "1px solid #30363d")
+                            .style("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.1)")
+                            .style("border", "1px solid #d0d7de")
                             .style("pointer-events", "none")
                             .style("z-index", "1000")
                             .style("left", (event.pageX + 10) + "px")
@@ -249,9 +232,8 @@ function renderSHAPBeeswarm() {
                         d3.select(this)
                             .transition()
                             .duration(200)
-                            .attr("r", 2.5)
-                            .style("stroke-width", 1)
-                            .style("filter", "none");
+                            .attr("r", 2)
+                            .style("stroke-width", 0.5);
                         
                         d3.selectAll(".tooltip").remove();
                     });
@@ -262,7 +244,7 @@ function renderSHAPBeeswarm() {
                     .attr("x2", xScale(0))
                     .attr("y1", -violinWidth / 2)
                     .attr("y2", violinWidth / 2)
-                    .style("stroke", "#484f58")
+                    .style("stroke", "#d0d7de")
                     .style("stroke-width", 1)
                     .style("stroke-dasharray", "4,4");
             });
@@ -272,7 +254,7 @@ function renderSHAPBeeswarm() {
                 .attr("x", width + 10)
                 .attr("y", 0)
                 .style("font-size", "14px")
-                .style("fill", "#8b949e")
+                .style("fill", "#57606a")
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
                 .text("Points are colored by feature value");
 
@@ -280,7 +262,7 @@ function renderSHAPBeeswarm() {
                 .attr("x", width + 10)
                 .attr("y", 20)
                 .style("font-size", "14px")
-                .style("fill", "#8b949e")
+                .style("fill", "#57606a")
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
                 .text("(red=low, blue=high)");
         })
