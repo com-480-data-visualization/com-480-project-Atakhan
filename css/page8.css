@@ -99,7 +99,6 @@ h1 {
   filter: drop-shadow(0 2px 8px #00aaff88);
   opacity: 0;
   animation: fadeInScale 0.7s cubic-bezier(.4,1.4,.6,1) forwards, pulse-glow 1.8s infinite cubic-bezier(.4,1.4,.6,1);
-  background: #1a2333;
   box-sizing: border-box;
 }
 #page8 .monster:hover {

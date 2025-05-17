@@ -1,7 +1,4 @@
-// mapviz.js
 
-// Assure-toi d'inclure D3.js dans ton HTML :
-// <script src="https://d3js.org/d3.v7.min.js"></script>
 
 const stats = {
   dragon: "Dragon\nHP: 3500\nRespawn: 5 min\nBuff: Elemental Soul",
@@ -39,8 +36,8 @@ const monsters = [
     id: "tower",
     src: "assets/tower.png",
     alt: "Tower",
-    x: 335,
-    y: 240,
+    x: 267,
+    y: 270,
     width: 52
   }
 ];
