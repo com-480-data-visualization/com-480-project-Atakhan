@@ -219,7 +219,7 @@ function renderRadarChart() {
         scales: {
           r: {
             beginAtZero: true,
-            backgroundColor: 'rgba(0, 0, 0, 0.0)',
+            backgroundColor: 'rgba(17, 24, 39, 1)',
             grid: {
               color: 'rgba(255, 255, 255, 0.1)',
               circular: true
@@ -228,6 +228,7 @@ function renderRadarChart() {
               color: 'rgba(255, 255, 255, 0.1)'
             },
             ticks: {
+              display: false,
               backdropColor: 'transparent',
               color: 'rgba(255, 255, 255, 0.7)',
               z: 1
