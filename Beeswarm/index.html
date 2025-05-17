@@ -37,6 +37,12 @@
         <h1>Impact of Key Features on Game Outcome</h1>
         <div id="beeswarm"></div>
     </div>
-    <script src="beeswarm.js"></script>
+    <script>
+        // Dynamically set the base path for GitHub Pages or local development
+        const basePath = location.hostname === 'localhost' ? '' : '/com-480-project-Atakhan';
+        const script = document.createElement('script');
+        script.src = `${basePath}/Beeswarm/beeswarm.js`;
+        document.body.appendChild(script);
+    </script>
 </body>
 </html> 
