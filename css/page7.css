@@ -1,0 +1,128 @@
+/* Styles globaux (ex-common.css) */
+.page {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+canvas {
+  max-width: 96%;
+  max-height: 90%;
+  margin-top: 20px;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.indicator-bar {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  width: 14px;
+  height: 14px;
+  background-color: #00aaff;
+}
+
+@media screen and (max-width: 768px) {
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+  .indicator.active {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Styles spécifiques à la page 7 (Radar) */
+#radarChart {
+  width: 600px;
+  height: 600px;
+  max-width: 90vw;
+  max-height: 90vh;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+.radar-container {
+  width: 700px;
+  height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 20px;
+}
+.explanation {
+  max-width: 300px;
+  padding: 15px;
+  background: #1e1e1e;
+  border: 2px solid #00aaff;
+  border-radius: 8px;
+  color: #fff;
+}
+#page7 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+#page7 h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+.radar-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.radar-button {
+  background: #00aaff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.radar-button:hover {
+  background: #0088cc;
+} 

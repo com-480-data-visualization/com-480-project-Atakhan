@@ -1,0 +1,31 @@
+/* Styles spécifiques à la page 4 */
+#page4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+#page4 h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+#page4 .placeholder {
+  font-size: 28px;
+  margin-top: 20px;
+  font-weight: 500;
+  color: #ccc;
+  text-align: center;
+}
+#page4 .dots::after {
+  content: '...';
+  animation: dots 1.5s steps(4, end) infinite;
+}
+@keyframes dots {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: ''; }
+} 

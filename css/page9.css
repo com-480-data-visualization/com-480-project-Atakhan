@@ -1,0 +1,138 @@
+/* Styles globaux (ex-common.css) */
+.page {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+canvas {
+  max-width: 96%;
+  max-height: 90%;
+  margin-top: 20px;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.indicator-bar {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  width: 14px;
+  height: 14px;
+  background-color: #00aaff;
+}
+
+@media screen and (max-width: 768px) {
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+  .indicator.active {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Styles spécifiques à la page 9 (Pyramide animée) */
+#page9 .pyramide {
+  position: relative;
+  width: 300px;
+  height: 260px;
+}
+#page9 .niveau {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: bottom;
+  animation: grow 0.6s ease-out forwards;
+  opacity: 0;
+}
+#page9 .trapeze3 {
+  bottom: 0;
+  width: 220px;
+  height: 60px;
+  background: #123;
+  clip-path: polygon(0% 100%, 10% 0%, 90% 0%, 100% 100%);
+  animation-delay: 0s;
+}
+#page9 .trapeze2 {
+  bottom: 60px;
+  width: 160px;
+  height: 60px;
+  background: #1e5e70;
+  clip-path: polygon(0% 100%, 15% 0%, 85% 0%, 100% 100%);
+  animation-delay: 0.4s;
+}
+#page9 .trapeze1 {
+  bottom: 120px;
+  width: 100px;
+  height: 60px;
+  background: #28b3af;
+  clip-path: polygon(0% 100%, 20% 0%, 80% 0%, 100% 100%);
+  animation-delay: 0.8s;
+}
+#page9 .sommet {
+  bottom: 180px;
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 60px solid #eac46b;
+  animation-delay: 1.2s;
+  transform-origin: bottom center;
+}
+@keyframes grow {
+  to {
+    transform: translateX(-50%) scaleY(1);
+    opacity: 1;
+  }
+}
+
+#page9 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  text-align: center;
+}
+#page9 h1 {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #eab308;
+  margin-bottom: 1.5rem;
+} 

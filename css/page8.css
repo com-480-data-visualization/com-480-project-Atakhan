@@ -1,0 +1,119 @@
+/* Styles globaux (ex-common.css) */
+.page {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+canvas {
+  max-width: 96%;
+  max-height: 90%;
+  margin-top: 20px;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.indicator-bar {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  width: 14px;
+  height: 14px;
+  background-color: #00aaff;
+}
+
+@media screen and (max-width: 768px) {
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+  .indicator.active {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Styles spécifiques à la page 8 (Map) */
+#page8 .map-container {
+  position: relative;
+  width: 945px;
+  height: 628px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+#page8 .map {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  border: 2px solid #444;
+  z-index: 1;
+  position: relative;
+}
+#page8 .monster {
+  position: absolute;
+  width: 70px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease;
+}
+#page8 .monster:hover {
+  transform: scale(1.1);
+}
+#page8 #dragon { top: 350px; left: 540px; }
+#page8 #herald { top: 150px; left: 325px; }
+#page8 #minion { top: 230px; left: 422px; }
+#page8 #tower { top: 280px; left: 335px; width: 40px; height: auto; }
+#page8 .map-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: pre-line;
+  pointer-events: none;
+  z-index: 9999;
+}
+#page8 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+#page8 h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #ffffff;
+} 
