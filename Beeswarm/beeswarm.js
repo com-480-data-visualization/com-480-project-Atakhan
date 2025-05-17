@@ -2,9 +2,8 @@
 function renderSHAPBeeswarm() {
     console.log('Starting to render SHAP beeswarm plot...');
     
-    // Use the GitHub Pages repository path
-    const repoPath = '/com-480-project-Atakhan';
-    fetch(`${repoPath}/Beeswarm/processed_data/shap_beeswarm_data.json`)
+    // Use the full GitHub Pages URL
+    fetch('https://com-480-data-visualization.github.io/com-480-project-Atakhan/Beeswarm/processed_data/shap_beeswarm_data.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
