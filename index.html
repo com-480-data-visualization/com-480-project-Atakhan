@@ -258,7 +258,110 @@
       opacity: 1;
     }
   }
+
+  @keyframes floatAnimation {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+  }
+
+  #champion-visualization-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 30px;
+    perspective: 10000px; /* Rétabli pour la 3D */
+  }
+
+  .champion-card-wrapper {
+    /* --card-glow-color est défini par JS */
+    /* Rétablir la lueur d'origine */
+    box-shadow: 
+        0 0 18px 4px var(--card-glow-color); /* Lueur d'origine */
+    animation: floatAnimation 6s ease-in-out infinite;
+    width: 280px;
+    height: 400px;
+    position: relative; 
+    perspective: 10000px; 
+  }
+
+  .champion-card {
+    width: 100%; /* Prend toute la largeur/hauteur du wrapper */
+    height: 100%;
+    border-radius: 10px;
+    /* L'ombre de profondeur est maintenant sur la carte intérieure */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.7s ease-in-out; /* Uniquement la transition pour le flip */
+    position: relative; /* ou absolute si le wrapper gère la taille */
+    transform-style: preserve-3d; 
+    cursor: pointer;
+    /* L'animation floatAnimation est maintenant sur le wrapper */
+  }
+
+  .champion-card.is-flipped {
+    transform: rotateY(180deg) scale(0.98);
+  }
+
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; 
+    border-radius: 10px;
+    overflow: hidden;
+    transform: translateZ(0px); /* Retrait du scale(1.03) */
+  }
+
+  .card-face--front {
+    background-color: #2a2a4a; /* Couleur de fond pour le recto si l'image ne couvre pas tout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-face--back {
+    /* background-color: #303050; */ /* Supprimé, la couleur vient du .champion-card parent */
+    /* ou background-color: transparent; */
+    transform: rotateY(180deg); 
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .champion-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    margin: 0;
+    border: none;
+  }
+
+  .card-face--back h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    color: #ffc107;
+    text-align: center;
+  }
+
+  .card-face--back p {
+    margin: 6px 0;
+    font-size: 0.9em;
+    color: #e0e0e0;
+  }
+
+  .card-face--back p strong {
+    color: #82aaff;
+    margin-right: 5px;
+  }
 </style>
+
 <!-- ✅ Page 10 – Donut D3 SVG avec effet horloge -->
 <div class="page flex flex-col items-center justify-center min-h-screen px-6 py-10 text-center" id="page10">
   <h1 class="text-4xl font-bold text-cyan-400 mb-6">Horloge Donut Chart (D3.js)</h1>
@@ -276,7 +379,9 @@
     <div class="champ-filters-container w-full max-w-6xl mx-auto p-6 bg-gray-800 bg-opacity-70 rounded-xl shadow-lg mb-8">
         <div class="filter-group">
             <label for="champ-class-filter">Classe:</label>
-            <select id="champ-class-filter" multiple></select>
+            <select id="champ-class-filter">
+                <option value="all">Toutes les classes</option>
+            </select>
         </div>
         <div class="filter-group">
             <label for="champ-difficulty-filter">Difficulté:</label>
@@ -286,7 +391,9 @@
         </div>
         <div class="filter-group">
             <label for="champ-role-filter">Rôle:</label>
-            <select id="champ-role-filter" multiple></select>
+            <select id="champ-role-filter">
+                <option value="all">Tous les rôles</option>
+            </select>
         </div>
         <div class="filter-group">
             <label for="champ-range-type-filter">Type de portée:</label>
@@ -300,13 +407,12 @@
     <div id="champion-visualization-container" class="w-full max-w-7xl mx-auto px-4">
         <!-- Les cartes des champions seront injectées ici par D3.js -->
     </div>
-</div>
 
 <style>
-/* Styles spécifiques pour la page Champion Explorer */
+/* Styles spécifiques pour la page Champion Explorer (et animations de cartes) */
 .champ-explorer-header {
-    background-color: rgba(22, 36, 71, 0.5); /* #162447 avec opacité */
-    border-bottom: 3px solid rgba(31, 64, 104, 0.7); /* #1f4068 avec opacité */
+    background-color: rgba(22, 36, 71, 0.5); 
+    border-bottom: 3px solid rgba(31, 64, 104, 0.7); 
 }
 
 .champ-filters-container {
@@ -335,17 +441,13 @@
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #444;
-    background-color: #2a2a4a; /* Un bleu-gris foncé */
+    background-color: #2a2a4a; 
     color: #e0e0e0;
     font-size: 1em;
 }
 
-.champ-filters-container .filter-group select[multiple] {
-    height: 100px;
-}
-
 .champ-filters-container button {
-    background-color: #e43f5a; /* Rouge-rose pour accent */
+    background-color: #e43f5a; 
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -357,48 +459,73 @@
     background-color: #b83248;
 }
 
+@keyframes floatAnimation {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
 #champion-visualization-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
     padding: 30px;
-    perspective: 1000px;
+    perspective: 10000px; 
+}
+
+.champion-card-wrapper {
+    /* --card-glow-color est défini par JS */
+    /* Rétablir la lueur d'origine */
+    box-shadow: 
+        0 0 18px 4px var(--card-glow-color); /* Lueur d'origine */
+    animation: floatAnimation 6s ease-in-out infinite;
+    width: 280px;
+    height: 400px;
+    position: relative; 
+    perspective: 10000px; 
 }
 
 .champion-card {
-    width: 280px;
-    height: 400px;
+    width: 100%; /* Prend toute la largeur/hauteur du wrapper */
+    height: 100%;
     border-radius: 10px;
+    /* L'ombre de profondeur est maintenant sur la carte intérieure */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.7s ease, box-shadow 0.3s ease;
-    position: relative;
-    transform-style: preserve-3d;
+    transition: transform 0.7s ease-in-out; /* Uniquement la transition pour le flip */
+    position: relative; /* ou absolute si le wrapper gère la taille */
+    transform-style: preserve-3d; 
     cursor: pointer;
+    /* L'animation floatAnimation est maintenant sur le wrapper */
 }
 
 .champion-card.is-flipped {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) scale(0.98);
 }
 
 .card-face {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
+    backface-visibility: hidden; 
     border-radius: 10px;
     overflow: hidden;
+    transform: translateZ(0px); /* Retrait du scale(1.03) */
 }
 
 .card-face--front {
-    background-color: #2a2a4a;
+    background-color: #2a2a4a; /* Couleur de fond pour le recto si l'image ne couvre pas tout */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .card-face--back {
-    background-color: #303050;
-    transform: rotateY(180deg);
+    /* background-color: #303050; */ /* Supprimé, la couleur vient du .champion-card parent */
+    /* ou background-color: transparent; */
+    transform: rotateY(180deg); 
     padding: 20px;
     display: flex;
     flex-direction: column;

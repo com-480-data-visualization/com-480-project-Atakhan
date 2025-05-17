@@ -48,18 +48,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function populateFilters() {
-        // Classes (multiple)
+        // Classes (sera maintenant single-select avec option "all" statique)
         const sortedClasses = Array.from(uniqueClasses).sort();
-        classFilter.selectAll('option').data(sortedClasses).enter().append('option').attr('value', d => d).text(d => d);
+        // L'option "all" est dans le HTML, on ajoute seulement les classes dynamiques
+        classFilter.selectAll('option.dynamic-option').data(sortedClasses).enter().append('option').attr('class', 'dynamic-option').attr('value', d => d).text(d => d);
 
         // Difficulty (single with 'all')
         const difficultyOrder = ['Beginner', 'Intermediate', 'Intermediate_Plus', 'Advanced', 'Expert'];
         const sortedDifficulties = Array.from(uniqueDifficulties).sort((a,b) => difficultyOrder.indexOf(a) - difficultyOrder.indexOf(b));
         difficultyFilter.selectAll('option.dynamic-option').data(sortedDifficulties).enter().append('option').attr('class', 'dynamic-option').attr('value', d => d).text(d => d);
         
-        // Role (multiple)
+        // Role (sera maintenant single-select avec option "all" statique)
         const sortedRoles = Array.from(uniqueRoles).sort();
-        roleFilter.selectAll('option').data(sortedRoles).enter().append('option').attr('value', d => d).text(d => d);
+        // L'option "all" est dans le HTML, on ajoute seulement les rôles dynamiques
+        roleFilter.selectAll('option.dynamic-option').data(sortedRoles).enter().append('option').attr('class', 'dynamic-option').attr('value', d => d).text(d => d);
 
         // Range Type (single with 'all')
         const sortedRangeTypes = Array.from(uniqueRangeTypes).sort();
@@ -76,15 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyFilters() {
-        const selectedClasses = Array.from(classFilter.node().selectedOptions).map(opt => opt.value);
+        const selectedClass = classFilter.property('value'); // Modifié pour single-select
         const selectedDifficulty = difficultyFilter.property('value');
-        const selectedRoles = Array.from(roleFilter.node().selectedOptions).map(opt => opt.value);
+        const selectedRole = roleFilter.property('value'); // Modifié pour single-select
         const selectedRangeType = rangeTypeFilter.property('value');
 
         let filteredChampions = allChampions.filter(champ => {
-            const classMatch = selectedClasses.length === 0 || (champ.ParsedClasses && champ.ParsedClasses.some(c => selectedClasses.includes(c)));
+            const classMatch = selectedClass === 'all' || (champ.ParsedClasses && champ.ParsedClasses.includes(selectedClass)); // Logique adaptée
             const difficultyMatch = selectedDifficulty === 'all' || (champ.Difficulty && champ.Difficulty.trim() === selectedDifficulty);
-            const roleMatch = selectedRoles.length === 0 || (champ.ParsedRoles && champ.ParsedRoles.some(r => selectedRoles.includes(r)));
+            const roleMatch = selectedRole === 'all' || (champ.ParsedRoles && champ.ParsedRoles.includes(selectedRole)); // Logique adaptée
             const rangeTypeMatch = selectedRangeType === 'all' || (champ['Range type'] && champ['Range type'].trim() === selectedRangeType);
             return classMatch && difficultyMatch && roleMatch && rangeTypeMatch;
         });
@@ -92,38 +94,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function resetAllFilters() {
-        // Pour les select multiples, désélectionner toutes les options
-        classFilter.selectAll('option').property('selected', false);
-        // Si vous utilisez une librairie pour styliser les selects multiples, elle peut avoir sa propre API de reset.
-        // Pour un select multiple standard, il faut manuellement mettre à jour son affichage si besoin.
-        // Alternative: déclencher un événement change pour que la logique de style de la librairie s'applique.
-        // classFilter.dispatch('change'); // Décommentez si votre select multiple stylé le nécessite.
-
+        classFilter.property('value', 'all'); // Modifié pour single-select
         difficultyFilter.property('value', 'all');
-        
-        roleFilter.selectAll('option').property('selected', false);
-        // roleFilter.dispatch('change'); // Si besoin pour select multiple stylé
-
+        roleFilter.property('value', 'all'); // Modifié pour single-select
         rangeTypeFilter.property('value', 'all');
         applyFilters();
     }
 
     function renderChampions(championsToRender) {
-        vizContainer.selectAll('.champion-card').remove();
+        vizContainer.selectAll('.champion-card-wrapper').remove(); // Supprime les wrappers existants
 
-        const cards = vizContainer.selectAll('.champion-card')
+        const cardWrappers = vizContainer.selectAll('.champion-card-wrapper')
             .data(championsToRender, d => d.Name)
             .enter()
-            .append('div')
+            .append('div') // Crée le wrapper extérieur
+            .attr('class', 'champion-card-wrapper')
+            .style('--card-glow-color', d => d.DominantColor || '#444444')
+            .style('animation-delay', () => `${Math.random() * 2}s`);
+
+        // Ajoute la carte intérieure (.champion-card) à l'intérieur du wrapper
+        const cards = cardWrappers.append('div')
             .attr('class', 'champion-card')
+            // Applique la couleur dominante comme fond de la carte intérieure elle-même
+            .style('background-color', d => d.DominantColor || '#303050') 
+            // Les gestionnaires de survol sont sur la carte intérieure pour le flip
             .on('mouseenter', function() {
+                d3.interrupt(this); 
                 d3.select(this).classed('is-flipped', true);
             })
             .on('mouseleave', function() {
+                d3.interrupt(this); 
                 d3.select(this).classed('is-flipped', false);
             });
 
-        // Recto de la carte (Image)
         const cardFront = cards.append('div')
             .attr('class', 'card-face card-face--front');
 
@@ -132,29 +135,28 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr('alt', d => d.Name)
             .attr('class', 'champion-image')
             .on('error', function() {
-                d3.select(this).attr('src', 'JulesLeChampion/img_champions/default.png'); // Fallback en minuscule
+                d3.select(this).attr('src', 'JulesLeChampion/img_champions/default.png');
             });
 
-        // Verso de la carte (Texte)
         const cardBack = cards.append('div')
             .attr('class', 'card-face card-face--back');
         
-        // Si vous ajoutez une colonne 'DominantColor' à votre CSV (ex: "#RRGGBB")
-        // cardBack.style('background-color', d => d.DominantColor || '#303050');
-
         cardBack.append('h3').text(d => d.Name);
         cardBack.append('p').html(d => `<strong>Classe(s):</strong> ${d.Classes || 'N/A'}`);
         cardBack.append('p').html(d => `<strong>Difficulté:</strong> ${d.Difficulty || 'N/A'}`);
         cardBack.append('p').html(d => `<strong>Rôle(s):</strong> ${d.Role || 'N/A'}`);
         cardBack.append('p').html(d => `<strong>Portée:</strong> ${d['Range type'] || 'N/A'}`);
         
-        // L'animation d'apparition initiale s'applique à la carte entière
-        cards.style('opacity', 0)
-             .style('transform', 'translateY(20px) rotateY(0deg)') // Commence sans être retournée
+        // L'animation d'apparition initiale s'applique au wrapper pour un positionnement correct
+        cardWrappers.style('opacity', 0)
+             .style('transform', 'translateY(20px)') // Seule la translation Y pour l'apparition du wrapper
              .transition()
              .duration(500)
-             .delay((d, i) => i * 50) // Délai échelonné pour un effet cascade
+             .delay((d, i) => i * 50)
              .style('opacity', 1)
-             .style('transform', 'translateY(0px) rotateY(0deg)');
+             .style('transform', 'translateY(0px)')
+             .on('end', function() {
+                 d3.select(this).style('transform', null); // Important pour l'animation de flottement CSS
+             });
     }
 }); 
