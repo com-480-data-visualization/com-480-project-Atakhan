@@ -15,70 +15,68 @@ const modal = document.querySelector('.radar-modal');
 const overlay = document.querySelector('.radar-modal-overlay');
 const closeBtn = document.querySelector('.radar-modal-close');
 
-// Textes personnalisés pour chaque point du radar
 const customTexts = {
   'WardsPlaced': {
-    'Win': "Texte personnalisé pour les Wards placés en victoire",
-    'Lose': "Texte personnalisé pour les Wards placés en défaite"
+    'Win': "Wards win wars. Ever heard of map awareness, bro?",
+    'Lose': "No wards, no clue, no win. GG."
   },
   'WardsDestroyed': {
-    'Win': "Texte personnalisé pour les Wards détruits en victoire",
-    'Lose': "Texte personnalisé pour les Wards détruits en défaite"
+    'Win': "Sniping enemy wards like a ninja. Stealth mode: ON.",
+    'Lose': "Their wards lived longer than your KDA."
   },
   'FirstBlood': {
-    'Win': "Texte personnalisé pour le First Blood en victoire",
-    'Lose': "Texte personnalisé pour le First Blood en défaite"
+    'Win': "First Blood? Alpha move. Set the tone, crush the game.",
+    'Lose': "Cool First Blood. And then… what happened?"
   },
   'Kills': {
-    'Win': "Texte personnalisé pour les Kills en victoire",
-    'Lose': "Texte personnalisé pour les Kills en défaite"
+    'Win': "Deleted them all. Ctrl+Alt+Delete style.",
+    'Lose': "10 kills, 0 objectives. Classic solo queue tragedy."
   },
   'Deaths': {
-    'Win': "Texte personnalisé pour les Deaths en victoire",
-    'Lose': "Texte personnalisé pour les Deaths en défaite"
+    'Win': "You can't lose fights if you're not dead. Easy math.",
+    'Lose': "Respawn simulator 2025. Press F."
   },
   'Assists': {
-    'Win': "Texte personnalisé pour les Assists en victoire",
-    'Lose': "Texte personnalisé pour les Assists en défaite"
+    'Win': "Assist king. You're the reason they got fed.",
+    'Lose': "All the help, none of the credit. Life’s tough."
   },
   'EliteMonsters': {
-    'Win': "Texte personnalisé pour les Monstres d'élite en victoire",
-    'Lose': "Texte personnalisé pour les Monstres d'élite en défaite"
+    'Win': "Took Baron. Took their base. Took their pride.",
+    'Lose': "Let them have Baron? Might as well /ff at 20."
   },
   'Dragons': {
-    'Win': "Texte personnalisé pour les Dragons en victoire",
-    'Lose': "Texte personnalisé pour les Dragons en défaite"
+    'Win': "Stacking drakes like Pokémon badges. Gotta catch ‘em all.",
+    'Lose': "No drakes, no buffs, no hope."
   },
   'Heralds': {
-    'Win': "Texte personnalisé pour les Hérauts en victoire",
-    'Lose': "Texte personnalisé pour les Hérauts en défaite"
+    'Win': "Herald said hello to your gold lead.",
+    'Lose': "Enemy used Herald. Your turret said bye."
   },
   'TowersDestroyed': {
-    'Win': "Texte personnalisé pour les Tours détruites en victoire",
-    'Lose': "Texte personnalisé pour les Tours détruites en défaite"
+    'Win': "Demolition squad reporting in. Next stop: Nexus.",
+    'Lose': "Still hitting mid Tier 1 at 25 min?"
   },
   'TotalGold': {
-    'Win': "Texte personnalisé pour l'Or total en victoire",
-    'Lose': "Texte personnalisé pour l'Or total en défaite"
+    'Win': "Swimming in gold. Jeff Bezos of Summoner’s Rift.",
+    'Lose': "Your wallet’s as empty as your map control."
   },
   'AvgLevel': {
-    'Win': "Texte personnalisé pour le Niveau moyen en victoire",
-    'Lose': "Texte personnalisé pour le Niveau moyen en défaite"
+    'Win': "Level diff = skill diff. It's science.",
+    'Lose': "Behind in XP? Might as well play with one hand."
   },
   'TotalExperience': {
-    'Win': "Texte personnalisé pour l'Expérience totale en victoire",
-    'Lose': "Texte personnalisé pour l'Expérience totale en défaite"
+    'Win': "XP bar full. You’re the boss fight now.",
+    'Lose': "You’re just cannon fodder at this point."
   },
   'TotalMinionsKilled': {
-    'Win': "Texte personnalisé pour les Sbires tués en victoire",
-    'Lose': "Texte personnalisé pour les Sbires tués en défaite"
+    'Win': "CS god. Laning phase was your playground.",
+    'Lose': "You missed more CS than you landed skillshots."
   },
   'TotalJungleMinionsKilled': {
-    'Win': "Texte personnalisé pour les Monstres de la jungle tués en victoire",
-    'Lose': "Texte personnalisé pour les Monstres de la jungle tués en défaite"
+    'Win': "Jungle cleared, lanes ganked, game over.",
+    'Lose': "Jungle diff? Nah, jungle disappeared."
   }
 };
-
 function closeModal() {
   modal.style.display = 'none';
   overlay.style.display = 'none';
