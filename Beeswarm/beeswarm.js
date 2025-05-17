@@ -2,8 +2,14 @@
 function renderSHAPBeeswarm() {
     console.log('Starting to render SHAP beeswarm plot...');
     
-    // Load data with a path that works consistently on localhost
-    fetch('./Beeswarm/processed_data/shap_beeswarm_data.json')
+    // Determine if we're on GitHub Pages or localhost
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const basePath = isGitHubPages ? '/com-480-project-Atakhan' : '';
+    const dataPath = `${basePath}/Beeswarm/processed_data/shap_beeswarm_data.json`;
+    
+    console.log('Attempting to load data from:', dataPath);
+    
+    fetch(dataPath)
         .then(response => {
             if (!response.ok) {
                 console.error('Failed to load data:', response.status);
