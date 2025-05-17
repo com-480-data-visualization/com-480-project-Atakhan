@@ -25,7 +25,7 @@ function renderSHAPBeeswarm() {
             // Adjust margins and dimensions for better fit
             const margin = {top: 100, right: 180, bottom: 80, left: 180};
             const width = 1000 - margin.left - margin.right;
-            const height = 500 - margin.top - margin.bottom;
+            const height = 500 - margin.top - margin.bottom;  // Reduced height
             
             // Clear any existing SVG
             d3.select("#beeswarm").selectAll("*").remove();
@@ -45,34 +45,33 @@ function renderSHAPBeeswarm() {
                 .attr("class", "visualization-title")
                 .style("font-size", "28px")
                 .style("font-weight", "600")
-                .style("fill", "#0969da")
+                .style("fill", "#0969da")  // GitHub blue
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
                 .text("Impact of Key Features on Game Outcome");
 
-            // Improved explanation text
             svg.append("text")
                 .attr("x", width / 2)
-                .attr("y", -35)
+                .attr("y", -30)
                 .attr("text-anchor", "middle")
-                .style("font-size", "15px")
-                .style("fill", "#24292f")
+                .style("font-size", "16px")
+                .style("fill", "#57606a")  // GitHub muted text
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
-                .text("SHAP Beeswarm plot shows how each feature affects win probability. Each dot represents a game instance.");
+                .text("SHAP values (x-axis) show how each feature changes win probability from the baseline (0.0)");
 
             svg.append("text")
                 .attr("x", width / 2)
-                .attr("y", -15)
+                .attr("y", -10)
                 .attr("text-anchor", "middle")
                 .style("font-size", "14px")
                 .style("fill", "#57606a")
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
-                .text("Dots are spread horizontally by their SHAP value and vertically to avoid overlap. Color indicates feature value.");
+                .text("Example: A SHAP value of +0.1 means that feature increases win probability by 10 percentage points");
             
             // Create scales with improved padding
             const yScale = d3.scaleBand()
                 .domain(features.map(d => d.name))
                 .range([0, height])
-                .padding(0.8);  // Reduced padding for thinner swarms
+                .padding(0.85);  // Reduced padding to make swarms thinner
             
             const minShap = d3.min(features, d => d3.min(d.shap_values));
             const maxShap = d3.max(features, d => d3.max(d.shap_values));
@@ -90,7 +89,7 @@ function renderSHAPBeeswarm() {
                 .selectAll("text")
                 .style("font-size", "14px")
                 .style("font-weight", "500")
-                .style("fill", "#24292f")
+                .style("fill", "#24292f")  // GitHub default text color
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif");
             
             // Add X axis with enhanced styling
@@ -114,67 +113,14 @@ function renderSHAPBeeswarm() {
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
                 .text("SHAP Value (Impact on Win Probability)");
             
-            // Enhanced color scale with more intense colors
+            // Enhanced color scale with GitHub-like colors
             const colorScale = d3.scaleSequential()
                 .domain([-1, 1])
                 .interpolator(d3.interpolateRdBu);
-
-            // Add color bar
-            const colorBarWidth = 20;
-            const colorBarHeight = height / 2;
-            const colorBarMargin = 50;
-            
-            // Create color bar gradient
-            const defs = svg.append("defs");
-            const gradient = defs.append("linearGradient")
-                .attr("id", "colorBarGradient")
-                .attr("x1", "0%")
-                .attr("y1", "100%")
-                .attr("x2", "0%")
-                .attr("y2", "0%");
-            
-            gradient.selectAll("stop")
-                .data(d3.range(0, 1.1, 0.1))
-                .enter()
-                .append("stop")
-                .attr("offset", d => d * 100 + "%")
-                .attr("stop-color", d => colorScale(d * 2 - 1));
-            
-            // Add color bar rectangle
-            svg.append("rect")
-                .attr("x", width + colorBarMargin)
-                .attr("y", height / 4)
-                .attr("width", colorBarWidth)
-                .attr("height", colorBarHeight)
-                .style("fill", "url(#colorBarGradient)");
-            
-            // Add color bar axis
-            const colorBarScale = d3.scaleLinear()
-                .domain([-1, 1])
-                .range([colorBarHeight + height / 4, height / 4]);
-            
-            const colorBarAxis = d3.axisRight(colorBarScale)
-                .ticks(5)
-                .tickFormat(d => d.toFixed(1));
-            
-            svg.append("g")
-                .attr("transform", `translate(${width + colorBarMargin + colorBarWidth}, 0)`)
-                .call(colorBarAxis)
-                .selectAll("text")
-                .style("font-size", "12px")
-                .style("fill", "#57606a");
-            
-            // Add color bar label
-            svg.append("text")
-                .attr("transform", `translate(${width + colorBarMargin + colorBarWidth + 35}, ${height / 2}) rotate(-90)`)
-                .attr("text-anchor", "middle")
-                .style("font-size", "14px")
-                .style("fill", "#57606a")
-                .text("Feature Value");
             
             // Create violin plots with enhanced styling
             features.forEach((feature, index) => {
-                const violinWidth = yScale.bandwidth() * 0.7;
+                const violinWidth = yScale.bandwidth() * 0.7;  // Reduced to 70% of band width
                 
                 const violinPath = d3.area()
                     .x0(d => xScale(d[0]) - d[1] * violinWidth)
@@ -191,8 +137,8 @@ function renderSHAPBeeswarm() {
                 violinG.append("path")
                     .datum(densityPoints)
                     .attr("d", violinPath)
-                    .style("fill", "rgba(246, 248, 250, 0.4)")  // More transparent
-                    .style("stroke", "#d0d7de")
+                    .style("fill", "rgba(246, 248, 250, 0.6)")  // Light GitHub background color
+                    .style("stroke", "#d0d7de")  // GitHub border color
                     .style("stroke-width", 1);
                 
                 const points = feature.shap_values.map((shap, i) => ({
@@ -204,11 +150,11 @@ function renderSHAPBeeswarm() {
                 // Improved force simulation with better separation
                 const simulation = d3.forceSimulation(points)
                     .force("x", d3.forceX(d => xScale(d.shap)).strength(1))
-                    .force("y", d3.forceY(0).strength(0.01))  // Much weaker y-force
-                    .force("collide", d3.forceCollide(3).strength(0.9))  // Stronger collision avoidance
+                    .force("y", d3.forceY(0).strength(0.1))
+                    .force("collide", d3.forceCollide(2).strength(0.7))
                     .stop();
                 
-                for (let i = 0; i < 300; ++i) simulation.tick();  // More iterations
+                for (let i = 0; i < 150; ++i) simulation.tick();
                 
                 // Add points with enhanced styling
                 violinG.selectAll("circle")
@@ -217,12 +163,17 @@ function renderSHAPBeeswarm() {
                     .append("circle")
                     .attr("cx", d => d.x)
                     .attr("cy", d => d.y)
-                    .attr("r", 2.5)
+                    .attr("r", 2)
                     .style("fill", d => {
-                        const color = d3.color(colorScale(d.value));
-                        color.opacity = 0.9;  // More opaque
-                        return color.darker(0.2);  // Slightly darker
+                        // Darken first three swarms
+                        if (index < 3) {
+                            const color = d3.color(colorScale(d.value));
+                            color.opacity = 0.9;  // More opaque
+                            return color.darker(0.5);  // Darker color
+                        }
+                        return colorScale(d.value);
                     })
+                    .style("opacity", index < 3 ? 0.9 : 0.7)  // More opaque for first three
                     .style("stroke", "#d0d7de")
                     .style("stroke-width", 0.5)
                     .on("mouseover", function(event, d) {
@@ -281,7 +232,7 @@ function renderSHAPBeeswarm() {
                         d3.select(this)
                             .transition()
                             .duration(200)
-                            .attr("r", 2.5)
+                            .attr("r", 2)
                             .style("stroke-width", 0.5);
                         
                         d3.selectAll(".tooltip").remove();
@@ -297,6 +248,23 @@ function renderSHAPBeeswarm() {
                     .style("stroke-width", 1)
                     .style("stroke-dasharray", "4,4");
             });
+
+            // Add legend text for point colors
+            svg.append("text")
+                .attr("x", width + 10)
+                .attr("y", 0)
+                .style("font-size", "14px")
+                .style("fill", "#57606a")
+                .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
+                .text("Points are colored by feature value");
+
+            svg.append("text")
+                .attr("x", width + 10)
+                .attr("y", 20)
+                .style("font-size", "14px")
+                .style("fill", "#57606a")
+                .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
+                .text("(red=low, blue=high)");
         })
         .catch(err => console.error("SHAP beeswarm data load error:", err));
 }
