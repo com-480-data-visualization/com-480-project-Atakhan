@@ -4,31 +4,26 @@ function loadHeraldChart() {
     .then(data => {
       const page = document.getElementById("page-herald");
 
-      // Clean up any existing tooltip
-      const oldTooltip = document.getElementById("herald-tooltip");
-      if (oldTooltip) oldTooltip.remove();
-
       page.innerHTML = `
         <h2 id="herald-title" style="
           opacity: 0;
           transition: opacity 1s ease;
           font-family: Orbitron, sans-serif;
           font-size: 22px;
-          color: #00ccff;
+          color: #a259f7;
           text-align: center;
           margin-bottom: 20px;
         "></h2>
-        <div class="monster-layout">
+        <div class="dragon-card monster-layout">
           <img src="assets/herald_draw.webp" alt="Herald" class="monster-image herald-img"/>
           <div id="chart-herald" class="monster-chart"></div>
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>
       `;
 
-      // Now select the new chart container (for D3)
-      // (No need to clear it, as it's freshly created)
+      page.style.background = "linear-gradient(135deg, #2c1e4a, #4b3a6a)";
 
-      // Tooltip (same as dragon)
+      // Floating tooltip
       const tooltip = document.createElement("div");
       tooltip.id = "herald-tooltip";
       Object.assign(tooltip.style, {
@@ -43,45 +38,27 @@ function loadHeraldChart() {
         opacity: 0,
         transition: "opacity 0.2s ease",
         backdropFilter: "blur(4px)",
-        border: "1px solid #00ccff",
-        boxShadow: "0 2px 12px #00ccff55"
+        border: "1px solid #a259f7",
+        boxShadow: "0 2px 12px #a259f755"
       });
       document.body.appendChild(tooltip);
 
-      // Normalization factors (based on max values for each stat)
-      const maxHP = 8000;
-      const maxArmorMR = 110; // Armor + MR
-      const maxGold = 100;
-      // VictoryCorrelation is already a percentage
-
-      // Calculate normalized values
-      const hpVal = (data.HP / maxHP) * 100;
-      const armorMRVal = ((data.Armor + data.MagicResist) / maxArmorMR) * 100;
-      const goldVal = (data.Gold / maxGold) * 100;
-      const victoryVal = data.VictoryCorrelation;
-      // Description arc value: average of the other arcs
-      const descVal = (hpVal + armorMRVal + goldVal + victoryVal) / 4;
-
       const stats = [
         {
-          label: "📜", value: descVal, color: "#A259F7", name: "Description",
-          format: () => data.description || "-"
+          label: "📜", value: 1, color: "#a259f7", name: "Strategic Purpose",
+          format: () => "Helps break enemy lines by dealing heavy damage to towers."
         },
         {
-          label: "❤️", value: hpVal, color: "#1B2B34", name: "PV",
-          format: () => `PV : ${data.HP}`
+          label: "❤️", value: 1, color: "#1B2B34", name: "Health Points",
+          format: () => `${data.HP} HP – Slaying the Herald early gives map pressure.`
         },
         {
-          label: "🛡️", value: armorMRVal, color: "#45B8AC", name: "Armure + Résistance Magique",
-          format: () => `Armure : ${data.Armor}, RM : ${data.MagicResist}`
+          label: "⏰", value: 1, color: "#7c3aed", name: "First Spawn",
+          format: () => "8:00 (appears in the Baron pit)"
         },
         {
-          label: "💰", value: goldVal, color: "#F4C95D", name: "Gold",
-          format: () => `Gold : ${data.Gold}`
-        },
-        {
-          label: "🏆", value: victoryVal, color: "#66BB6A", name: "Corrélation Victoire",
-          format: () => `Taux de victoire : ${data.VictoryCorrelation}%`
+          label: "🎁", value: 1, color: "#f7c259", name: "Drop",
+          format: () => "Eye of Herald (allows you to summon the Herald to attack a tower)"
         }
       ];
 
@@ -110,10 +87,10 @@ function loadHeraldChart() {
         .append("g")
         .attr("class", "arc");
 
-      // Drop shadow filter
+      // Add this before drawing arcs
       const defs = svg.append("defs");
       const filter = defs.append("filter")
-        .attr("id", "dropshadow")
+        .attr("id", "dropshadow-herald")
         .attr("height", "130%");
       filter.append("feDropShadow")
         .attr("dx", 0)
@@ -124,7 +101,7 @@ function loadHeraldChart() {
 
       // Animate arc appearance
       g.append("path")
-        .attr("filter", "url(#dropshadow)")
+        .attr("filter", "url(#dropshadow-herald)")
         .attr("fill", d => d.data.color)
         .attr("d", d3.arc()
           .innerRadius(radius - 80)
@@ -195,14 +172,5 @@ function loadHeraldChart() {
 
         tooltip.style.opacity = 0;
       });
-
-      // Add darker purple fade background to the page
-      page.style.background = "linear-gradient(135deg, #140024 0%, #3a1c5c 100%)";
-
-      // Add glowing border to the Herald image
-      setTimeout(() => {
-        const heraldImg = document.querySelector('.herald-img');
-        if (heraldImg) heraldImg.classList.add('herald-glow');
-      }, 100);
     });
-}
+} 

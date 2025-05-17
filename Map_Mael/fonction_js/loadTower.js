@@ -3,24 +3,27 @@ function loadTowerChart() {
     .then(res => res.json())
     .then(data => {
       const page = document.getElementById("page-tower");
+
       page.innerHTML = `
         <h2 id="tower-title" style="
           opacity: 0;
           transition: opacity 1s ease;
           font-family: Orbitron, sans-serif;
           font-size: 22px;
-          color: #00ccff;
+          color: #00ff99;
           text-align: center;
           margin-bottom: 20px;
         "></h2>
-        <div class="monster-layout">
-          <img src="assets/tower_draw.jpeg" alt="Tower" class="monster-image tower-img"/>
+        <div class="dragon-card monster-layout">
+          <img src="assets/tower_draw.jpeg" alt="Tower" class="monster-image"/>
           <div id="chart-tower" class="monster-chart"></div>
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>
       `;
 
-      // Tooltip (same as dragon)
+      page.style.background = "linear-gradient(135deg, #0f2027, #00ff99)";
+
+      // Floating tooltip
       const tooltip = document.createElement("div");
       tooltip.id = "tower-tooltip";
       Object.assign(tooltip.style, {
@@ -35,31 +38,27 @@ function loadTowerChart() {
         opacity: 0,
         transition: "opacity 0.2s ease",
         backdropFilter: "blur(4px)",
-        border: "1px solid #00ccff",
-        boxShadow: "0 2px 12px #00ccff55"
+        border: "1px solid #00ff99",
+        boxShadow: "0 2px 12px #00ff9955"
       });
       document.body.appendChild(tooltip);
 
       const stats = [
         {
-          label: "📜", value: 1, color: "#F67250", name: "Description",
-          format: () => data.description || "-"
+          label: "🏰", value: 1, color: "#00ff99", name: "Structure",
+          format: () => "Major defensive structure. Destroying the first tower gives a strategic advantage."
         },
         {
-          label: "❤️", value: 1, color: "#1B2B34", name: "PV",
-          format: () => `PV : ${data.HP}`
+          label: "❤️", value: 1, color: "#1B2B34", name: "Health Points",
+          format: () => `${data.HP} HP`
         },
         {
-          label: "🛡️", value: 1, color: "#45B8AC", name: "Armure + Résistance Magique",
-          format: () => `Armure : ${data.Armor}, RM : ${data.MagicResist}`
+          label: "🛡️", value: 1, color: "#45B8AC", name: "Armor",
+          format: () => `40 armor (protects against physical damage)`
         },
         {
           label: "💰", value: 1, color: "#F4C95D", name: "Gold",
-          format: () => `Gold : ${data.Gold}`
-        },
-        {
-          label: "🏆", value: 1, color: "#66BB6A", name: "Corrélation Victoire",
-          format: () => `Taux de victoire : ${data.VictoryCorrelation}%`
+          format: () => "250 team gold, 150 local gold, 400 bonus for the first destroyed tower"
         }
       ];
 
@@ -88,10 +87,10 @@ function loadTowerChart() {
         .append("g")
         .attr("class", "arc");
 
-      // Drop shadow filter
+      // Add this before drawing arcs
       const defs = svg.append("defs");
       const filter = defs.append("filter")
-        .attr("id", "dropshadow")
+        .attr("id", "dropshadow-tower")
         .attr("height", "130%");
       filter.append("feDropShadow")
         .attr("dx", 0)
@@ -102,7 +101,7 @@ function loadTowerChart() {
 
       // Animate arc appearance
       g.append("path")
-        .attr("filter", "url(#dropshadow)")
+        .attr("filter", "url(#dropshadow-tower)")
         .attr("fill", d => d.data.color)
         .attr("d", d3.arc()
           .innerRadius(radius - 80)
@@ -174,4 +173,4 @@ function loadTowerChart() {
         tooltip.style.opacity = 0;
       });
     });
-}
+} 
