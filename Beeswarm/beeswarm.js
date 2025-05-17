@@ -2,7 +2,7 @@
 function renderSHAPBeeswarm() {
     console.log('Starting to render SHAP beeswarm plot...');
     
-    fetch('https://com-480-data-visualization.github.io/project-2023-atakhan/Beeswarm/processed_data/shap_beeswarm_data.json')
+    fetch('processed_data/shap_beeswarm_data.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
