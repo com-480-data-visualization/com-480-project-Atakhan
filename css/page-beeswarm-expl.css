@@ -1,0 +1,40 @@
+/* Style dédié à la page d'explication du beeswarm graph */
+.page-beeswarm-expl {
+  background: linear-gradient(120deg, #232837 60%, #3a2c4d 100%);
+  font-family: 'Rubik', 'Arial', sans-serif;
+}
+.page-beeswarm-expl h1 {
+  font-family: 'Orbitron', 'Rubik', Arial, sans-serif;
+  color: #ff7eb9;
+  text-shadow: 0 2px 12px #0008;
+  letter-spacing: 1px;
+}
+.page-beeswarm-expl .max-w-2xl {
+  background: rgba(40, 44, 60, 0.97);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  border: 2px solid #ff7eb9;
+  color: #f3eaff;
+}
+.page-beeswarm-expl ul {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 1.5em;
+}
+.page-beeswarm-expl li {
+  margin-bottom: 0.3em;
+  list-style: disc inside;
+}
+.page-beeswarm-expl img {
+  border: 2px solid #ff7eb9;
+  box-shadow: 0 4px 24px #000a;
+  background: #fff;
+}
+@media (max-width: 600px) {
+  .page-beeswarm-expl .max-w-2xl {
+    padding: 1em;
+  }
+  .page-beeswarm-expl h1 {
+    font-size: 1.3rem;
+  }
+} 

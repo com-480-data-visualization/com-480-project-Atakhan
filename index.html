@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/page10.css" />
   <link rel="stylesheet" href="css/monsters.css" />
   <link rel="stylesheet" href="RadarPlot/css/radar.css" />
+  <link rel="stylesheet" href="css/page-beeswarm-expl.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
   <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -105,6 +106,27 @@
     <div class="page flex flex-col items-center justify-center min-h-screen px-6 py-10 text-center" id="page3">
       <h1 class="text-4xl font-bold text-cyan-400 mb-6">Impact of Key Features on Game Outcome</h1>
       <div id="beeswarm" class="w-full max-w-6xl h-[600px] bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-600"></div>
+    </div>
+
+    <!-- ✅ Page Beeswarm Explication -->
+    <div class="page page-beeswarm-expl flex flex-col items-center justify-center min-h-screen px-6 py-10 text-center text-white" id="page-beeswarm-expl">
+      <h1 class="text-4xl font-bold text-pink-400 mb-6">Qu'est-ce qu'un Beeswarm Graph&nbsp;?</h1>
+      <div class="max-w-2xl bg-gray-800 bg-opacity-80 rounded-xl shadow-lg p-8 border border-gray-600 text-lg leading-relaxed text-left">
+        <p>
+          Un <b>beeswarm graph</b> (ou "nuage d'abeilles") est une visualisation de données qui permet de représenter la distribution d'un ensemble de points le long d'un axe, tout en évitant le chevauchement des points. Contrairement à un simple nuage de points, les points sont "poussés" latéralement pour ne pas se superposer, ce qui donne un effet de nuée ou d'essaim d'abeilles.<br><br>
+          <b>Utilité :</b> Le beeswarm graph est particulièrement utile pour visualiser la densité, la répartition et les valeurs individuelles d'un jeu de données, tout en gardant chaque point visible.<br><br>
+          <b>Exemple d'utilisation :</b> En data science, il est souvent utilisé pour comparer la distribution d'une variable entre plusieurs groupes (par exemple, la répartition des scores entre deux équipes).<br><br>
+          <b>Avantages :</b>
+          <ul class="list-disc pl-6">
+            <li>Affiche chaque donnée individuellement</li>
+            <li>Permet de voir la densité et la dispersion</li>
+            <li>Évite le chevauchement des points</li>
+          </ul>
+          <br>
+          <b>À retenir :</b> Le beeswarm graph est un excellent compromis entre le nuage de points classique et l'histogramme, combinant lisibilité et précision.
+        </p>
+        <img src="assets/beeswarm_example.png" alt="Exemple de beeswarm graph" class="mt-6 rounded-lg shadow-md mx-auto" style="max-width: 400px;"/>
+      </div>
     </div>
 
     <div class="page" id="page4">
