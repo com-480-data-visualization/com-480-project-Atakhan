@@ -153,6 +153,25 @@ button.radar-button:hover {
     backdrop-filter: blur(2px);
 }
 
+.radar-modal-explanation {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ffffff;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.win .radar-modal-explanation {
+    border-left: 4px solid rgba(0, 255, 0, 0.5);
+}
+
+.lose .radar-modal-explanation {
+    border-left: 4px solid rgba(255, 0, 0, 0.5);
+}
+
 @keyframes modalFadeIn {
     from {
         opacity: 0;

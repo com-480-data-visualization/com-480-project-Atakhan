@@ -15,6 +15,70 @@ const modal = document.querySelector('.radar-modal');
 const overlay = document.querySelector('.radar-modal-overlay');
 const closeBtn = document.querySelector('.radar-modal-close');
 
+// Textes personnalisés pour chaque point du radar
+const customTexts = {
+  'WardsPlaced': {
+    'Win': "Texte personnalisé pour les Wards placés en victoire",
+    'Lose': "Texte personnalisé pour les Wards placés en défaite"
+  },
+  'WardsDestroyed': {
+    'Win': "Texte personnalisé pour les Wards détruits en victoire",
+    'Lose': "Texte personnalisé pour les Wards détruits en défaite"
+  },
+  'FirstBlood': {
+    'Win': "Texte personnalisé pour le First Blood en victoire",
+    'Lose': "Texte personnalisé pour le First Blood en défaite"
+  },
+  'Kills': {
+    'Win': "Texte personnalisé pour les Kills en victoire",
+    'Lose': "Texte personnalisé pour les Kills en défaite"
+  },
+  'Deaths': {
+    'Win': "Texte personnalisé pour les Deaths en victoire",
+    'Lose': "Texte personnalisé pour les Deaths en défaite"
+  },
+  'Assists': {
+    'Win': "Texte personnalisé pour les Assists en victoire",
+    'Lose': "Texte personnalisé pour les Assists en défaite"
+  },
+  'EliteMonsters': {
+    'Win': "Texte personnalisé pour les Monstres d'élite en victoire",
+    'Lose': "Texte personnalisé pour les Monstres d'élite en défaite"
+  },
+  'Dragons': {
+    'Win': "Texte personnalisé pour les Dragons en victoire",
+    'Lose': "Texte personnalisé pour les Dragons en défaite"
+  },
+  'Heralds': {
+    'Win': "Texte personnalisé pour les Hérauts en victoire",
+    'Lose': "Texte personnalisé pour les Hérauts en défaite"
+  },
+  'TowersDestroyed': {
+    'Win': "Texte personnalisé pour les Tours détruites en victoire",
+    'Lose': "Texte personnalisé pour les Tours détruites en défaite"
+  },
+  'TotalGold': {
+    'Win': "Texte personnalisé pour l'Or total en victoire",
+    'Lose': "Texte personnalisé pour l'Or total en défaite"
+  },
+  'AvgLevel': {
+    'Win': "Texte personnalisé pour le Niveau moyen en victoire",
+    'Lose': "Texte personnalisé pour le Niveau moyen en défaite"
+  },
+  'TotalExperience': {
+    'Win': "Texte personnalisé pour l'Expérience totale en victoire",
+    'Lose': "Texte personnalisé pour l'Expérience totale en défaite"
+  },
+  'TotalMinionsKilled': {
+    'Win': "Texte personnalisé pour les Sbires tués en victoire",
+    'Lose': "Texte personnalisé pour les Sbires tués en défaite"
+  },
+  'TotalJungleMinionsKilled': {
+    'Win': "Texte personnalisé pour les Monstres de la jungle tués en victoire",
+    'Lose': "Texte personnalisé pour les Monstres de la jungle tués en défaite"
+  }
+};
+
 function closeModal() {
   modal.style.display = 'none';
   overlay.style.display = 'none';
@@ -33,33 +97,11 @@ function showModal(label, statName, value, rawData) {
   // Titre de la modale
   modalTitle.textContent = `${label} - ${statName}`;
   
-  // Contenu de la modale
-  const stats = [];
-  if (statName === 'Kills' || statName === 'Deaths' || statName === 'Assists') {
-    stats.push(['KDA Impact', ((value * 100).toFixed(1) + '%')]);
-    stats.push(['Team Fight Contribution', ((value * 85).toFixed(1) + '%')]);
-    stats.push(['Combat Score', (value * 1000).toFixed(0)]);
-  } else if (statName.includes('Gold') || statName.includes('Experience')) {
-    stats.push(['Resource Efficiency', ((value * 100).toFixed(1) + '%')]);
-    stats.push(['Economy Impact', ((value * 90).toFixed(1) + '%')]);
-    stats.push(['Farming Score', (value * 1000).toFixed(0)]);
-  } else if (statName.includes('Monsters') || statName.includes('Dragons')) {
-    stats.push(['Objective Control', ((value * 100).toFixed(1) + '%')]);
-    stats.push(['Map Pressure', ((value * 95).toFixed(1) + '%')]);
-    stats.push(['Jungle Dominance', (value * 1000).toFixed(0)]);
-  } else {
-    stats.push(['Performance Score', ((value * 100).toFixed(1) + '%')]);
-    stats.push(['Impact Rating', ((value * 90).toFixed(1) + '%')]);
-    stats.push(['Raw Value', rawData.toFixed(2)]);
-  }
+  // Récupération du texte personnalisé
+  const customText = customTexts[statName]?.[label] || "Texte à personnaliser";
   
-  // Génération du HTML pour les stats
-  modalStats.innerHTML = stats.map(([label, value]) => `
-    <div class="radar-modal-stat">
-      <span>${label}</span>
-      <span>${value}</span>
-    </div>
-  `).join('');
+  // Affichage du texte personnalisé
+  modalStats.innerHTML = `<div class="radar-modal-explanation">${customText}</div>`;
   
   // Affichage de la modale
   modal.style.display = 'block';
