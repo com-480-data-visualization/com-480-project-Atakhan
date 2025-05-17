@@ -4,21 +4,27 @@ function renderSHAPBeeswarm() {
     
     fetch('http://localhost:8000/processed_data/shap_beeswarm_data.json')
         .then(response => {
-            console.log('Data fetch response:', response.status);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         })
         .then(data => {
-            console.log('Data loaded:', data);
             if (!data || !data.features) {
                 throw new Error('Invalid data format');
             }
             
-            const margin = {top: 40, right: 120, bottom: 40, left: 200};
-            const width = 900 - margin.left - margin.right;
-            const height = 600 - margin.top - margin.bottom;
+            // Filter for specific features
+            const targetFeatures = ['Deaths', 'Gold Difference', 'Experience Difference', 'Dragons'];
+            const features = data.features.filter(f => targetFeatures.includes(f.name));
+            
+            // Sort features by absolute importance
+            features.sort((a, b) => Math.abs(b.importance) - Math.abs(a.importance));
+            
+            // Adjust margins to center the visualization
+            const margin = {top: 100, right: 200, bottom: 40, left: 200};
+            const width = 1000 - margin.left - margin.right;
+            const height = 400 - margin.top - margin.bottom;  // Increased height from 300 to 400
             
             // Clear any existing SVG
             d3.select("#beeswarm").selectAll("*").remove();
@@ -30,27 +36,60 @@ function renderSHAPBeeswarm() {
                 .append("g")
                 .attr("transform", `translate(${margin.left},${margin.top})`);
             
-            const features = data.features;
+            // Add title and explanation
+            svg.append("text")
+                .attr("x", width / 2)
+                .attr("y", -70)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("font-weight", "bold")
+                .text("Impact of Key Features on Game Outcome");
+
+            svg.append("text")
+                .attr("x", width / 2)
+                .attr("y", -50)
+                .attr("text-anchor", "middle")
+                .style("font-size", "12px")
+                .style("fill", "#666")
+                .text("SHAP values (x-axis) show how each feature changes win probability from the baseline (0.0)");
+
+            svg.append("text")
+                .attr("x", width / 2)
+                .attr("y", -35)
+                .attr("text-anchor", "middle")
+                .style("font-size", "12px")
+                .style("fill", "#666")
+                .text("Example: A SHAP value of +0.1 means that feature increases win probability by 10 percentage points");
+
+            svg.append("text")
+                .attr("x", width / 2)
+                .attr("y", -20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "12px")
+                .style("fill", "#666")
+                .text("Points are colored by feature value (red=low, blue=high) and spread vertically to show density");
             
             // Create scales
             const yScale = d3.scaleBand()
                 .domain(features.map(d => d.name))
                 .range([0, height])
-                .padding(0.2);
+                .padding(0.5);  // Increased padding between features from 0.4 to 0.5
             
             // Find min and max SHAP values across all features
             const minShap = d3.min(features, d => d3.min(d.shap_values));
             const maxShap = d3.max(features, d => d3.max(d.shap_values));
+            const absMax = Math.max(Math.abs(minShap), Math.abs(maxShap));
             
             const xScale = d3.scaleLinear()
-                .domain([minShap, maxShap])
+                .domain([-absMax, absMax])
                 .range([0, width]);
             
-            // Add Y axis
+            // Add Y axis with larger font
             svg.append("g")
                 .call(d3.axisLeft(yScale))
                 .selectAll("text")
-                .style("font-size", "12px");
+                .style("font-size", "14px")
+                .style("font-weight", "bold");
             
             // Add X axis
             svg.append("g")
@@ -59,20 +98,28 @@ function renderSHAPBeeswarm() {
                 .selectAll("text")
                 .style("font-size", "12px");
             
-            // Create color scale for feature values
-            const colorScale = d3.scaleSequential(d3.interpolateRdBu)
-                .domain([1, -1]);  // Reversed domain for RdBu
+            // Add X axis label
+            svg.append("text")
+                .attr("x", width / 2)
+                .attr("y", height + margin.bottom - 5)
+                .attr("text-anchor", "middle")
+                .style("font-size", "14px")
+                .text("SHAP Value (Impact on Win Probability)");
             
-            // Create violin plots
+            // Create color scale for feature values
+            const colorScale = d3.scaleSequential()
+                .domain([-1, 1])
+                .interpolator(d3.interpolateRdBu);
+            
+            // Create violin plots with enhanced styling
             features.forEach(feature => {
                 const violinWidth = yScale.bandwidth();
                 
                 // Create path for violin shape
                 const violinPath = d3.area()
-                    .x0(d => xScale(d[0]))
-                    .x1(d => xScale(d[0]))
-                    .y0(d => -d[1] * violinWidth / 2)
-                    .y1(d => d[1] * violinWidth / 2)
+                    .x0(d => xScale(d[0]) - d[1] * violinWidth)
+                    .x1(d => xScale(d[0]) + d[1] * violinWidth)
+                    .y(d => 0)
                     .curve(d3.curveCatmullRom);
                 
                 // Combine x and y coordinates for density
@@ -86,26 +133,58 @@ function renderSHAPBeeswarm() {
                 violinG.append("path")
                     .datum(densityPoints)
                     .attr("d", violinPath)
-                    .style("fill", "rgba(200, 200, 200, 0.3)")
+                    .style("fill", "rgba(200, 200, 200, 0.15)")
                     .style("stroke", "#000")
-                    .style("stroke-width", 1);
+                    .style("stroke-width", 0.5);
                 
-                // Add individual points with jittering
-                const jitterWidth = violinWidth * 0.4;
+                // Add individual points with force-based jittering
                 const points = feature.shap_values.map((shap, i) => ({
                     shap: shap,
-                    value: feature.feature_values[i]
+                    value: feature.feature_values[i],
+                    y: 0
                 }));
                 
+                // Create force simulation for point placement
+                const simulation = d3.forceSimulation(points)
+                    .force("y", d3.forceY(0).strength(0.15))  // Increased y-force for tighter vertical clustering
+                    .force("x", d3.forceX(d => xScale(d.shap)).strength(0.3))  // Increased x-force for better separation
+                    .force("collide", d3.forceCollide(1.2))  // Reduced collision radius for tighter packing
+                    .stop();
+                
+                // Run the simulation
+                for (let i = 0; i < 120; ++i) simulation.tick();  // Increased iterations for better distribution
+                
+                // Add points with enhanced styling
                 violinG.selectAll("circle")
                     .data(points)
                     .enter()
                     .append("circle")
-                    .attr("cx", d => xScale(d.shap))
-                    .attr("cy", d => (Math.random() - 0.5) * jitterWidth)
-                    .attr("r", 2)
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y)
+                    .attr("r", 1.5)
                     .style("fill", d => colorScale(d.value))
-                    .style("opacity", 0.6);
+                    .style("opacity", feature.name === 'Dragons' ? 0.4 : 0.8)  // Half opacity for Dragons
+                    .style("stroke", "none")
+                    .append("title")
+                    .text(d => `SHAP value: ${d.shap.toFixed(3)}\nFeature value: ${d.value.toFixed(3)}`);
+                
+                // Add hover area for violin plot explanation
+                const explanationText = {
+                    'Deaths': 'Higher death counts negatively impact win probability. Red points (high deaths) typically have negative SHAP values, showing they decrease win chances.',
+                    'Gold Difference': 'Gold advantage is crucial for winning. Blue points (positive gold difference) generally have positive SHAP values, indicating increased win probability.',
+                    'Experience Difference': 'XP advantage correlates with win probability. Blue points (XP advantage) typically show positive impact on winning.',
+                    'Dragons': 'Dragon control influences game outcome. Blue points (more dragons) generally indicate positive contribution to winning.'
+                };
+
+                // Add invisible hover area
+                violinG.append("rect")
+                    .attr("x", xScale.range()[0])
+                    .attr("y", -violinWidth)
+                    .attr("width", xScale.range()[1] - xScale.range()[0])
+                    .attr("height", violinWidth * 2)
+                    .style("fill", "transparent")
+                    .append("title")
+                    .text(d => explanationText[feature.name]);
                 
                 // Add a line at x=0
                 violinG.append("line")
@@ -118,23 +197,7 @@ function renderSHAPBeeswarm() {
                     .style("stroke-dasharray", "2,2");
             });
             
-            // Add title
-            svg.append("text")
-                .attr("x", width / 2)
-                .attr("y", -margin.top / 2)
-                .attr("text-anchor", "middle")
-                .style("font-size", "16px")
-                .text("SHAP Values Impact on Game Outcome");
-            
-            // Add X axis label
-            svg.append("text")
-                .attr("x", width / 2)
-                .attr("y", height + margin.bottom - 5)
-                .attr("text-anchor", "middle")
-                .style("font-size", "14px")
-                .text("SHAP Value");
-            
-            // Add color legend
+            // Add color legend with better positioning and styling
             const legendWidth = 20;
             const legendHeight = 150;
             
@@ -145,7 +208,7 @@ function renderSHAPBeeswarm() {
             const legend = svg.append("g")
                 .attr("transform", `translate(${width + 40}, ${height/2 - legendHeight/2})`);
             
-            // Create gradient
+            // Create gradient with more color stops
             const defs = svg.append("defs");
             const gradient = defs.append("linearGradient")
                 .attr("id", "colorGradient")
@@ -154,11 +217,13 @@ function renderSHAPBeeswarm() {
                 .attr("x2", "0%")
                 .attr("y2", "0%");
             
+            // Add more color stops for smoother transition
+            const stops = d3.range(-1, 1.01, 0.1);
             gradient.selectAll("stop")
-                .data(d3.range(-1, 1.1, 0.1))
+                .data(stops)
                 .enter()
                 .append("stop")
-                .attr("offset", (d, i) => `${i * 10}%`)
+                .attr("offset", (d, i) => `${(i / (stops.length - 1)) * 100}%`)
                 .attr("stop-color", d => colorScale(d));
             
             // Add gradient rectangle
@@ -174,7 +239,9 @@ function renderSHAPBeeswarm() {
             
             legend.append("g")
                 .attr("transform", `translate(${legendWidth},0)`)
-                .call(legendAxis);
+                .call(legendAxis)
+                .selectAll("text")
+                .style("font-size", "12px");
             
             // Add legend title
             legend.append("text")
