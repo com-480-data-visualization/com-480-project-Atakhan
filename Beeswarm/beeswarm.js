@@ -80,13 +80,22 @@ function renderSHAPBeeswarm() {
                 .style("font-size", "16px")
                 .style("fill", "#8b949e")
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
-                .text("SHAP values indicate how each feature influences win probability");
+                .text("SHAP values (x-axis) show how each feature changes win probability from the baseline (0.0)");
+
+            svg.append("text")
+                .attr("x", width / 2)
+                .attr("y", -10)
+                .attr("text-anchor", "middle")
+                .style("font-size", "14px")
+                .style("fill", "#8b949e")
+                .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
+                .text("Example: A SHAP value of +0.1 means that feature increases win probability by 10 percentage points");
             
             // Create scales with improved padding
             const yScale = d3.scaleBand()
                 .domain(features.map(d => d.name))
                 .range([0, height])
-                .padding(0.7);
+                .padding(0.9);
             
             const minShap = d3.min(features, d => d3.min(d.shap_values));
             const maxShap = d3.max(features, d => d3.max(d.shap_values));
@@ -135,7 +144,7 @@ function renderSHAPBeeswarm() {
             
             // Create violin plots with enhanced styling
             features.forEach(feature => {
-                const violinWidth = yScale.bandwidth();
+                const violinWidth = yScale.bandwidth() * 0.7; // Reduced to 70% of band width
                 
                 const violinPath = d3.area()
                     .x0(d => xScale(d[0]) - d[1] * violinWidth)
@@ -162,11 +171,11 @@ function renderSHAPBeeswarm() {
                     y: 0
                 }));
                 
-                // Improved force simulation
+                // Improved force simulation with better separation
                 const simulation = d3.forceSimulation(points)
+                    .force("x", d3.forceX(d => xScale(d.shap)).strength(1))
                     .force("y", d3.forceY(0).strength(0.1))
-                    .force("x", d3.forceX(d => xScale(d.shap)).strength(0.2))
-                    .force("collide", d3.forceCollide(3))
+                    .force("collide", d3.forceCollide(2.5).strength(0.7))
                     .stop();
                 
                 for (let i = 0; i < 150; ++i) simulation.tick();
@@ -178,20 +187,20 @@ function renderSHAPBeeswarm() {
                     .append("circle")
                     .attr("cx", d => d.x)
                     .attr("cy", d => d.y)
-                    .attr("r", 3)
+                    .attr("r", 2.5)
                     .style("fill", d => colorScale(d.value))
-                    .style("opacity", feature.name === 'Dragons' ? 0.7 : 0.85)
+                    .style("opacity", 0.85)
                     .style("stroke", "#30363d")
                     .style("stroke-width", 1)
                     .on("mouseover", function(event, d) {
                         d3.select(this)
                             .transition()
                             .duration(200)
-                            .attr("r", 5)
+                            .attr("r", 4)
                             .style("stroke-width", 2)
                             .style("filter", "drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.3))");
                         
-                        // Enhanced tooltip
+                        // Enhanced tooltip with interpretation
                         const tooltip = d3.select("#beeswarm")
                             .append("div")
                             .attr("class", "tooltip")
@@ -208,61 +217,42 @@ function renderSHAPBeeswarm() {
                             .style("z-index", "1000")
                             .style("left", (event.pageX + 10) + "px")
                             .style("top", (event.pageY - 10) + "px");
+
+                        // Interpretive tooltip text based on feature
+                        let interpretation = '';
+                        if (feature.name === 'Deaths') {
+                            interpretation = d.shap > 0 ? 
+                                'High death count reduces win probability' :
+                                'Low death count increases win probability';
+                        } else if (feature.name === 'Gold Difference') {
+                            interpretation = d.shap > 0 ? 
+                                'Gold advantage increases win probability' :
+                                'Gold disadvantage decreases win probability';
+                        } else if (feature.name === 'Experience Difference') {
+                            interpretation = d.shap > 0 ? 
+                                'XP advantage increases win probability' :
+                                'XP disadvantage decreases win probability';
+                        } else if (feature.name === 'Dragons') {
+                            interpretation = d.shap > 0 ? 
+                                'More dragons secured increases win probability' :
+                                'Fewer dragons secured decreases win probability';
+                        }
                         
                         tooltip.html(`
                             <strong>${feature.name}</strong><br>
-                            SHAP value: ${d.shap.toFixed(3)}<br>
-                            Feature value: ${d.value.toFixed(3)}
+                            Impact: ${(d.shap * 100).toFixed(1)}% ${d.shap > 0 ? 'increase' : 'decrease'} in win probability<br>
+                            ${interpretation}<br>
+                            Feature value: ${d.value.toFixed(2)}
                         `);
                     })
                     .on("mouseout", function() {
                         d3.select(this)
                             .transition()
                             .duration(200)
-                            .attr("r", 3)
+                            .attr("r", 2.5)
                             .style("stroke-width", 1)
                             .style("filter", "none");
                         
-                        d3.selectAll(".tooltip").remove();
-                    });
-                
-                // Add feature explanations with improved styling
-                const explanationText = {
-                    'Deaths': 'Higher death counts significantly reduce win probability',
-                    'Gold Difference': 'Positive gold difference strongly increases win chances',
-                    'Experience Difference': 'XP advantage correlates with higher win probability',
-                    'Dragons': 'More dragons secured improves winning odds'
-                };
-
-                // Add hover area for explanations with enhanced styling
-                violinG.append("rect")
-                    .attr("x", -margin.left)
-                    .attr("y", -violinWidth)
-                    .attr("width", margin.left - 10)
-                    .attr("height", violinWidth * 2)
-                    .style("fill", "transparent")
-                    .on("mouseover", function(event) {
-                        const tooltip = d3.select("#beeswarm")
-                            .append("div")
-                            .attr("class", "tooltip")
-                            .style("position", "absolute")
-                            .style("background", "rgba(22, 27, 34, 0.95)")
-                            .style("color", "#c9d1d9")
-                            .style("padding", "12px")
-                            .style("border-radius", "6px")
-                            .style("font-size", "14px")
-                            .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
-                            .style("max-width", "300px")
-                            .style("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.3)")
-                            .style("border", "1px solid #30363d")
-                            .style("pointer-events", "none")
-                            .style("z-index", "1000")
-                            .style("left", (event.pageX - 320) + "px")
-                            .style("top", (event.pageY - 40) + "px");
-                        
-                        tooltip.html(`<strong>${feature.name}</strong><br>${explanationText[feature.name]}`);
-                    })
-                    .on("mouseout", function() {
                         d3.selectAll(".tooltip").remove();
                     });
                 
@@ -272,76 +262,29 @@ function renderSHAPBeeswarm() {
                     .attr("x2", xScale(0))
                     .attr("y1", -violinWidth / 2)
                     .attr("y2", violinWidth / 2)
-                    .style("stroke", "#30363d")
+                    .style("stroke", "#484f58")
                     .style("stroke-width", 1)
                     .style("stroke-dasharray", "4,4");
             });
-            
-            // Add enhanced color legend
-            const legendWidth = 40;
-            const legendHeight = 200;
-            
-            const legendScale = d3.scaleLinear()
-                .domain([-1, 1])
-                .range([legendHeight, 0]);
-            
-            const legend = svg.append("g")
-                .attr("transform", `translate(${width + 60}, ${height/2 - legendHeight/2})`);
-            
-            // Create gradient with improved colors
-            const defs = svg.append("defs");
-            const legendGradient = defs.append("linearGradient")
-                .attr("id", "colorGradient")
-                .attr("x1", "0%")
-                .attr("y1", "100%")
-                .attr("x2", "0%")
-                .attr("y2", "0%");
-            
-            const stops = d3.range(-1, 1.01, 0.05);
-            legendGradient.selectAll("stop")
-                .data(stops)
-                .enter()
-                .append("stop")
-                .attr("offset", (d, i) => `${(i / (stops.length - 1)) * 100}%`)
-                .attr("stop-color", d => colorScale(d));
-            
-            // Add gradient rectangle with improved styling
-            legend.append("rect")
-                .attr("width", legendWidth)
-                .attr("height", legendHeight)
-                .style("fill", "url(#colorGradient)")
-                .style("stroke", "#30363d")
-                .style("stroke-width", 1)
-                .style("rx", 4)
-                .style("ry", 4);
-            
-            // Add legend axis with improved styling
-            const legendAxis = d3.axisRight(legendScale)
-                .ticks(5)
-                .tickFormat(d => d.toFixed(1));
-            
-            legend.append("g")
-                .attr("transform", `translate(${legendWidth},0)`)
-                .call(legendAxis)
-                .selectAll("text")
-                .style("font-size", "12px")
-                .style("fill", "#8b949e")
-                .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif");
-            
-            // Add legend title with improved styling
-            legend.append("text")
-                .attr("x", -legendHeight/2)
-                .attr("y", -50)
-                .attr("transform", "rotate(-90)")
-                .style("text-anchor", "middle")
+
+            // Add legend text for point colors
+            svg.append("text")
+                .attr("x", width + 10)
+                .attr("y", 0)
                 .style("font-size", "14px")
                 .style("fill", "#8b949e")
                 .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
-                .text("Feature Value");
+                .text("Points are colored by feature value");
+
+            svg.append("text")
+                .attr("x", width + 10)
+                .attr("y", 20)
+                .style("font-size", "14px")
+                .style("fill", "#8b949e")
+                .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
+                .text("(red=low, blue=high)");
         })
-        .catch(error => {
-            console.error('Error loading or processing data:', error);
-        });
+        .catch(err => console.error("SHAP beeswarm data load error:", err));
 }
 
 // Call the render function when the page loads
