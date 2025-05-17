@@ -18,7 +18,7 @@ We will use the LOL Diamond Ranked Games (10 Min) dataset from Kaggle [Kaggle li
 
 
 ### Problematic
-Our project aims to analyze early-game factors that contribute to a team’s victory in League of Legends, moving beyond basic win rate comparisons between the blue and red teams.
+Our project aims to analyze early-game factors that contribute to a team's victory in League of Legends, moving beyond basic win rate comparisons between the blue and red teams.
 
 
 
@@ -51,7 +51,7 @@ The winning team consistently earns more gold than the losing team. This confirm
 
 ## Average KDA for Winning vs. Losing Teams
 The winning team consistently has a higher KDA, meaning kills and fewer deaths play a crucial role in determining victory.
-When the blue team wins, their KDA is significantly higher than the red team’s KDA, and vice versa.
+When the blue team wins, their KDA is significantly higher than the red team's KDA, and vice versa.
 
 ![Average KDA](figures/average_kda.png)
 
@@ -91,4 +91,50 @@ Here is the [PDF of Milestone 2](milestone_2_project_atakhan.pdf), and [here is 
 
 - < 24h: 80% of the grade for the milestone
 - < 48h: 70% of the grade for the milestone
+
+## Running the Visualization Locally
+
+To run this visualization on your local machine:
+
+1. Clone the repository:
+```bash
+git clone https://github.com/com-480-data-visualization/com-480-project-Atakhan.git
+cd com-480-project-Atakhan
+```
+
+2. Start a local server (choose one method):
+
+Using Python:
+```bash
+# Python 3
+python -m http.server 8000
+
+# Python 2
+python -m SimpleHTTPServer 8000
+```
+
+Using Node.js:
+```bash
+# Install http-server if you haven't already
+npm install -g http-server
+# Start the server
+http-server
+```
+
+3. Open your browser and navigate to:
+- If using Python: `http://localhost:8000`
+- If using Node.js: `http://localhost:8080`
+
+### Troubleshooting
+
+If you see a blank visualization or get console errors:
+
+1. Check your browser's console (F12) for error messages
+2. Verify that all files are in their correct locations:
+   - Main visualization file: `Beeswarm/beeswarm.js`
+   - Data file: `Beeswarm/processed_data/shap_beeswarm_data.json`
+3. Make sure you're running through a local server (not opening the HTML file directly)
+4. Clear your browser cache if you've made recent changes
+
+For any issues, please check the GitHub Issues page or create a new issue.
 
