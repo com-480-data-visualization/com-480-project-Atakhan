@@ -100,6 +100,43 @@
 </div>
 
 
+    <!-- ✅ Page 4 – Data Visualizations Overview -->
+    <div class="page flex flex-col items-center justify-center h-screen px-6 text-center text-white" id="page-visualizations-overview">
+      <h1 class="text-5xl md:text-6xl font-bold text-indigo-400 mb-8 uppercase tracking-wide" style="font-family: 'Orbitron', sans-serif;">
+        Data Visualizations Overview
+      </h1>
+      <div class="max-w-4xl w-full bg-gray-800 bg-opacity-90 rounded-2xl shadow-2xl p-8 border border-gray-700 mb-10">
+        <h2 class="text-3xl font-semibold text-amber-300 mb-4">Our Datasets</h2>
+        <p class="text-lg text-gray-200 mb-2">
+          <b>1. high_diamond_ranked_10min.csv</b>: Contains detailed statistics from high-level ranked League of Legends games, focusing on the first 10 minutes. It includes team objectives, gold, kills, and more, for advanced game analysis.
+        </p>
+        <p class="text-lg text-gray-200 mb-6">
+          <b>2. champions.csv</b>: Provides comprehensive information about every champion in the game: class, difficulty, roles, resource type, and base stats. This dataset powers the Champion Explorer.
+        </p>
+        <hr class="my-6 border-indigo-400">
+        <h2 class="text-3xl font-semibold text-emerald-300 mb-4">What will you explore?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="viz-card bg-gray-900 bg-opacity-80 rounded-xl p-6 shadow-lg border-l-4 border-pink-400 flex flex-col items-center">
+            <h3 class="text-2xl font-bold text-pink-300 mb-2">Beeswarm Graph</h3>
+            <p class="text-gray-300">Visualize the impact of key features on game outcome. Each point represents a match, showing the distribution and density of important variables.</p>
+          </div>
+          <div class="viz-card bg-gray-900 bg-opacity-80 rounded-xl p-6 shadow-lg border-l-4 border-cyan-400 flex flex-col items-center">
+            <h3 class="text-2xl font-bold text-cyan-300 mb-2">Radar Plot</h3>
+            <p class="text-gray-300">Compare key statistics between winning and losing teams. The radar plot highlights strengths and weaknesses in different aspects of the game.</p>
+          </div>
+          <div class="viz-card bg-gray-900 bg-opacity-80 rounded-xl p-6 shadow-lg border-l-4 border-amber-400 flex flex-col items-center">
+            <h3 class="text-2xl font-bold text-amber-300 mb-2">Interactive Map</h3>
+            <p class="text-gray-300">Explore the Summoner's Rift map interactively. Click on objectives to see detailed statistics about dragons, heralds, minions, and towers.</p>
+          </div>
+          <div class="viz-card bg-gray-900 bg-opacity-80 rounded-xl p-6 shadow-lg border-l-4 border-emerald-400 flex flex-col items-center">
+            <h3 class="text-2xl font-bold text-emerald-300 mb-2">Champion Explorer</h3>
+            <p class="text-gray-300">Find your ideal champion! Filter and search all champions by class, difficulty, role, and more, using our interactive explorer.</p>
+          </div>
+        </div>
+      </div>
+      <link rel="stylesheet" href="css/page-visualizations-overview.css" />
+    </div>
+
     <!-- ✅ Page 3 -->
     <div class="page flex flex-col items-center justify-center min-h-screen px-6 py-10 text-center" id="page3">
       <h1 class="text-4xl font-bold text-cyan-400 mb-6">Impact of Key Features on Game Outcome</h1>
@@ -339,6 +376,32 @@
 </style>
 
 
+
+<!-- ✅ Page Champion Explorer Filters Explanation -->
+<div class="page flex flex-col items-center justify-center min-h-screen px-6 py-10 text-center text-white" id="page-champ-filters-expl">
+  <h1 class="text-4xl md:text-5xl font-bold text-emerald-400 mb-6 uppercase">
+    Champion Explorer: Filters Guide
+  </h1>
+  <div class="max-w-3xl w-full bg-gray-800 bg-opacity-90 rounded-xl shadow-lg p-8 border border-gray-600 text-lg leading-relaxed text-left mb-8">
+    <p class="mb-6 text-center text-xl font-semibold text-emerald-300">Everybody has a champion who fits perfectly to them. Why don't you try to find yours?</p>
+    <p class="mb-4">
+      The <b>Champion Explorer</b> lets you search and filter League of Legends champions using several criteria:
+    </p>
+    <ul class="list-disc pl-8 mb-4">
+      <li><b>Search by name</b>: Type a champion's name to find them instantly.</li>
+      <li><b>Class</b>: Filter by the champion's main class (e.g., Marksman, Assassin, Tank, etc.).</li>
+      <li><b>Difficulty</b>: Show champions by their difficulty level (Beginner, Intermediate, Advanced, Expert...)</li>
+      <li><b>Role</b>: Select the roles played by the champion (Top, Jungle, Middle, Bottom, Support).</li>
+      <li><b>Range type</b>: Choose between ranged or melee champions.</li>
+      <li><b>Reset</b>: Click to clear all filters and show all champions.</li>
+    </ul>
+    <p>
+      Combine these filters to explore, compare, and find the champion that matches your playstyle and preferences!
+    </p>
+  </div>
+</div>
+
+<link rel="stylesheet" href="css/page-champ-filters-expl.css" />
 
 <!-- ✅ Page Champion Explorer (JulesLeChampion) -->
 <div class="page flex flex-col items-center justify-start min-h-screen py-10 text-white" id="page-champion-explorer">

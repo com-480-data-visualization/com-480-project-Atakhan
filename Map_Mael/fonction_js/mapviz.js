@@ -13,7 +13,7 @@ const monsters = [
     src: "assets/dragon.png",
     alt: "Dragon",
     x: 505,
-    y: 330,
+    y: 300,
     width: 90
   },
   {
@@ -21,7 +21,7 @@ const monsters = [
     src: "assets/Rift_Herald_Render.webp",
     alt: "Herald",
     x: 300,
-    y: 130,
+    y: 110,
     width: 90
   },
   {
@@ -29,7 +29,7 @@ const monsters = [
     src: "assets/minion.png",
     alt: "Minion",
     x: 412,
-    y: 217,
+    y: 197,
     width: 70
   },
   {
@@ -37,7 +37,7 @@ const monsters = [
     src: "assets/tower.png",
     alt: "Tower",
     x: 267,
-    y: 270,
+    y: 250,
     width: 52
   }
 ];

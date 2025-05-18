@@ -1,0 +1,87 @@
+/* Champion Explorer Filters Explanation Page Styles (EN, fullscreen, compact) */
+#page-champ-filters-expl {
+  background: linear-gradient(120deg, #0f172a 60%, #1e293b 100%);
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+#page-champ-filters-expl h1 {
+  font-family: 'Orbitron', 'Rubik', sans-serif;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 16px #10b98144;
+  margin-bottom: 1.2em;
+}
+#page-champ-filters-expl .max-w-3xl {
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 32px 0 rgba(16,185,129,0.18);
+  border: 1.5px solid rgba(16,185,129,0.18);
+  font-size: 1.05em;
+  margin-top: 0;
+  margin-bottom: 2em;
+  padding: 1.5em 1.2em 1.2em 1.2em;
+}
+#page-champ-filters-expl ul.list-disc {
+  color: #a7f3d0;
+  font-size: 1em;
+  margin-bottom: 1.2em;
+}
+#page-champ-filters-expl ul.list-disc li {
+  margin-bottom: 0.4em;
+  padding-left: 0.2em;
+  line-height: 1.5;
+}
+#page-champ-filters-expl b {
+  color: #34d399;
+}
+#page-champ-filters-expl i {
+  color: #60a5fa;
+}
+#champ-filters-viz {
+  min-height: 320px;
+  background: linear-gradient(90deg, #1e293b 60%, #334155 100%);
+  border-radius: 1.2em;
+  box-shadow: 0 4px 24px 0 rgba(16,185,129,0.10);
+  border: 1.5px solid rgba(52,211,153,0.10);
+  padding: 2.5em 1.5em 2em 1.5em;
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* D3.js viz: animated filter icons or bubbles */
+.champ-filter-bubble {
+  stroke: #fff;
+  stroke-width: 2.5px;
+  filter: drop-shadow(0 2px 12px #10b98144);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.champ-filter-bubble:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 4px 24px #10b98199);
+}
+.champ-filter-label {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.1em;
+  fill: #a7f3d0;
+  text-shadow: 0 2px 8px #000a;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  #page-champ-filters-expl .max-w-3xl {
+    max-width: 98vw;
+    padding: 1em 0.5em;
+    font-size: 0.98em;
+  }
+  #champ-filters-viz {
+    padding: 1.2em 0.5em 1em 0.5em;
+  }
+} 
