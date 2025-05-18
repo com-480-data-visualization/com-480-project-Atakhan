@@ -1,5 +1,13 @@
-/* === RADAR PAGE CSS UNIQUEMENT === */
+html, body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
 
+#page7 {
+  overflow-y: hidden;
+}
+
+/* === RADAR PAGE CSS UNIQUEMENT === */
 
 .chart-section {
   display: flex;
@@ -7,27 +15,137 @@
   align-items: center;
   gap: 40px;
   padding: 30px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 80vh;
+  box-sizing: border-box;
+}
+
+#radarChartD3Container svg {
+  font-family: 'Segoe UI', 'Rubik', 'Orbitron', sans-serif;
 }
 
 #radarChart {
   width: 700px;
   height: 700px;
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 98vw;
   background-color: transparent;
-  border: 1px solid #444;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  border: 1px solid #222;
+  border-radius: 16px;
+  box-shadow: 0 0 24px 2px #00ffe7, 0 0 0 1px #222;
+  margin: 0 auto;
 }
 
-/* Animation pour les coins */
-@keyframes pulse-points {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.4); }
-  100% { transform: scale(1); }
+.radar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 0 auto;
 }
-/* Boutons Win / Lose */
+
+#radarChartD3Container {
+  width: 100%;
+  max-width: 700px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .chart-section {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .radar-container, #radarChartD3Container {
+    max-width: 98vw;
+  }
+}
+
+/* Neon grid and axes */
+.gridCircle {
+  stroke: rgba(0,255,255,0.13) !important;
+  stroke-width: 1.5px;
+}
+.axis line {
+  stroke: rgba(0,255,255,0.18) !important;
+  stroke-width: 2px;
+}
+.legend {
+  font-size: 15px !important;
+  fill: #e0e0e0 !important;
+  text-shadow: 0 2px 8px #000, 0 0 8px #00ffe7;
+  letter-spacing: 0.5px;
+}
+
+/* Radar areas with glow */
+.radarArea.win {
+  fill: url(#winGradient);
+  stroke: #00ff80;
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 18px #00ff80);
+}
+.radarArea.lose {
+  fill: url(#loseGradient);
+  stroke: #ff4040;
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 18px #ff4040);
+}
+
+/* Points with glow and pulse */
+.radarPoint.Win, .radarPoint.Lose {
+  animation: radar-pulse-glow 1.8s infinite cubic-bezier(.4,1.4,.6,1);
+}
+@keyframes radar-pulse-glow {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px #00ff80);
+  }
+  50% {
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 24px #00ff80) brightness(1.18);
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px #00ff80);
+  }
+}
+.radarPoint.Lose {
+  filter: drop-shadow(0 0 8px #ff4040);
+}
+.radarPoint.Lose {
+  animation: radar-pulse-glow-lose 1.8s infinite cubic-bezier(.4,1.4,.6,1);
+}
+@keyframes radar-pulse-glow-lose {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px #ff4040);
+  }
+  50% {
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 24px #ff4040) brightness(1.18);
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px #ff4040);
+  }
+}
+
+/* Neon legend */
+.chart-legend {
+  background: rgba(20, 20, 30, 0.7);
+  border-radius: 8px;
+  padding: 8px 18px;
+  box-shadow: 0 2px 12px rgba(0,255,255,0.18);
+}
+.chart-legend text {
+  fill: #fff !important;
+  font-size: 15px !important;
+  font-family: 'Orbitron', 'Segoe UI', sans-serif;
+}
+
+/* Neon buttons */
 .radar-buttons {
   display: flex;
   justify-content: center;
@@ -36,111 +154,120 @@
 }
 button.radar-button {
   font-size: 18px;
-  padding: 12px 24px;
-  border: 2px solid #00aaff;
-  background-color: #1a1a1a;
-  color: #00aaff;
-  border-radius: 8px;
+  padding: 12px 28px;
+  border: 2px solid #00ffe7;
+  background-color: #181c24;
+  color: #00ffe7;
+  border-radius: 10px;
   cursor: pointer;
-  transition: 0.3s ease;
+  font-family: 'Orbitron', 'Segoe UI', sans-serif;
+  box-shadow: 0 0 8px #00ffe7;
+  transition: 0.3s cubic-bezier(.4,2,.6,1);
 }
 button.radar-button:hover {
-  background-color: #00aaff;
-  color: #000;
-  transform: scale(1.08);
+  background-color: #00ffe7;
+  color: #181c24;
+  box-shadow: 0 0 18px #00ffe7;
+  transform: scale(1.09);
 }
 
-/* Explication */
+/* Neon explanation box */
 #radarExplanation {
-  max-width: 300px;
-  padding: 15px 20px;
-  background: #1a1a1a;
-  border: 2px solid #00aaff;
-  border-radius: 10px;
+  max-width: 340px;
+  padding: 18px 24px;
+  background: rgba(20, 30, 40, 0.95);
+  border: 2px solid #00ffe7;
+  border-radius: 12px;
+  color: #e0e0e0;
+  font-size: 17px;
+  box-shadow: 0 0 18px #00ffe7;
+  font-family: 'Segoe UI', 'Rubik', sans-serif;
+  line-height: 1.6;
+  margin-left: 18px;
+}
+
+/* Tooltip style */
+.radartooltip {
+  background: rgba(20, 30, 40, 0.98);
+  border: 2px solid #00ffe7;
+  border-radius: 8px;
   color: #fff;
-  font-size: 16px;
-  box-shadow: 0 0 12px rgba(0,170,255,0.3);
-  font-family: 'Segoe UI', sans-serif;
-  line-height: 1.5;
+  font-size: 15px;
+  box-shadow: 0 0 12px #00ffe7;
+  font-family: 'Segoe UI', 'Rubik', sans-serif;
+  padding: 10px 16px;
+  pointer-events: none;
+  z-index: 9999;
 }
 
-@keyframes pulse-points {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.25); }
-  100% { transform: scale(1); }
-}
-
-.radar-point {
-  animation: pulse-points 2s ease-in-out infinite;
-}
-
+/* Modal modern style */
 .radar-modal {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(15, 15, 15, 0.95);
-    border: 2px solid;
-    border-radius: 12px;
-    padding: 20px;
+    background: rgba(15, 15, 25, 0.98);
+    border: 2.5px solid;
+    border-radius: 16px;
+    padding: 28px 28px 22px 28px;
     z-index: 1000;
-    min-width: 300px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    min-width: 340px;
+    box-shadow: 0 4px 32px #00ffe7, 0 0 0 1px #222;
     animation: modalFadeIn 0.3s ease-out;
 }
-
 .radar-modal.win {
-    border-color: #00ff00;
+    border-color: #00ff80;
+    box-shadow: 0 0 32px #00ff80;
 }
-
 .radar-modal.lose {
-    border-color: #ff0000;
+    border-color: #ff4040;
+    box-shadow: 0 0 32px #ff4040;
 }
-
 .radar-modal-content {
-    color: white;
+    color: #fff;
     font-family: 'Segoe UI', sans-serif;
 }
-
 .radar-modal-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.5px;
 }
-
-.radar-modal-stat {
-    display: flex;
-    justify-content: space-between;
-    margin: 8px 0;
-    padding: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 6px;
+.radar-modal-explanation {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #ffffff;
+    padding: 18px;
+    background: rgba(0,255,255,0.07);
+    border-radius: 10px;
+    margin-top: 10px;
+    text-align: left;
+    border-left: 4px solid #00ffe7;
 }
-
-.radar-modal-stat:hover {
-    background: rgba(255, 255, 255, 0.1);
+.win .radar-modal-explanation {
+    border-left: 4px solid #00ff80;
 }
-
+.lose .radar-modal-explanation {
+    border-left: 4px solid #ff4040;
+}
 .radar-modal-close {
     position: absolute;
     top: 10px;
     right: 10px;
     background: none;
     border: none;
-    color: white;
-    font-size: 20px;
+    color: #fff;
+    font-size: 24px;
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.2s;
 }
-
 .radar-modal-close:hover {
     opacity: 1;
 }
-
 .radar-modal-overlay {
     display: none;
     position: fixed;
@@ -152,26 +279,6 @@ button.radar-button:hover {
     z-index: 999;
     backdrop-filter: blur(2px);
 }
-
-.radar-modal-explanation {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #ffffff;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    margin-top: 10px;
-    text-align: left;
-}
-
-.win .radar-modal-explanation {
-    border-left: 4px solid rgba(0, 255, 0, 0.5);
-}
-
-.lose .radar-modal-explanation {
-    border-left: 4px solid rgba(255, 0, 0, 0.5);
-}
-
 @keyframes modalFadeIn {
     from {
         opacity: 0;
@@ -181,4 +288,18 @@ button.radar-button:hover {
         opacity: 1;
         transform: translate(-50%, -50%);
     }
+}
+
+.radar-title {
+  font-family: 'Orbitron', 'Segoe UI', 'Rubik', sans-serif;
+  font-size: 2.7rem;
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(90deg, #00ffe7 0%, #00ff80 60%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 24px #00ffe7cc, 0 0 8px #00ff80cc;
+  letter-spacing: 1.5px;
+  margin-bottom: 18px;
+  margin-top: 10px;
 }

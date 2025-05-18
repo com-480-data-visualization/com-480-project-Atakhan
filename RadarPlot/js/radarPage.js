@@ -15,67 +15,74 @@ const modal = document.querySelector('.radar-modal');
 const overlay = document.querySelector('.radar-modal-overlay');
 const closeBtn = document.querySelector('.radar-modal-close');
 
+// === ENGLISH LABELS ===
+const englishLabels = [
+  "Wards Placed", "Wards Destroyed", "First Blood", "Kills", "Deaths", "Assists",
+  "Elite Monsters", "Dragons", "Heralds", "Towers Destroyed", "Total Gold",
+  "Avg Level", "Total Experience", "Total Minions Killed", "Total Jungle Minions Killed"
+];
+
 // Textes personnalisés pour chaque point du radar
 const customTexts = {
-  'WardsPlaced': {
-    'Win': "Wards win wars. Ever heard of map awareness, bro?",
-    'Lose': "No wards, no clue, no win. GG."
+  'Wards Placed': {
+    'Win': "Wards win games. Map awareness is key!",
+    'Lose': "No wards, no vision, no win. GG."
   },
-  'WardsDestroyed': {
-    'Win': "Sniping enemy wards like a ninja. Stealth mode: ON.",
-    'Lose': "Their wards lived longer than your KDA."
+  'Wards Destroyed': {
+    'Win': "Clearing enemy wards like a pro. Stealth mode: ON.",
+    'Lose': "Enemy vision outlived your KDA."
   },
-  'FirstBlood': {
-    'Win': "First Blood? Alpha move. Set the tone, crush the game.",
-    'Lose': "Cool First Blood. And then… what happened?"
+  'First Blood': {
+    'Win': "First Blood? Set the tone, crush the game.",
+    'Lose': "First Blood... but what next?"
   },
   'Kills': {
-    'Win': "Deleted them all. Ctrl+Alt+Delete style.",
-    'Lose': "10 kills, 0 objectives. Classic solo queue tragedy."
+    'Win': "Dominated the scoreboard. GG!",
+    'Lose': "Kills don't win games if you ignore objectives."
   },
   'Deaths': {
-    'Win': "You can't lose fights if you're not dead. Easy math.",
-    'Lose': "Respawn simulator 2025. Press F."
+    'Win': "Low deaths, high impact. Smart play!",
+    'Lose': "Respawn simulator. Press F."
   },
   'Assists': {
-    'Win': "Assist king. You're the reason they got fed.",
-    'Lose': "All the help, none of the credit. Life's tough."
+    'Win': "Team player! Your assists made the difference.",
+    'Lose': "All the help, none of the glory."
   },
-  'EliteMonsters': {
-    'Win': "Took Baron. Took their base. Took their pride.",
-    'Lose': "Let them have Baron? Might as well /ff at 20."
+  'Elite Monsters': {
+    'Win': "Secured Baron/Dragon. Objective control!",
+    'Lose': "Lost every major objective. Ouch."
   },
   'Dragons': {
-    'Win': "Stacking drakes like Pokémon badges. Gotta catch 'em all.",
+    'Win': "Stacked dragons for the win!",
     'Lose': "No drakes, no buffs, no hope."
   },
   'Heralds': {
-    'Win': "Herald said hello to your gold lead.",
-    'Lose': "Enemy used Herald. Your turret said bye."
+    'Win': "Herald gave you the gold lead.",
+    'Lose': "Enemy Herald = lost turret."
   },
-  'TowersDestroyed': {
-    'Win': "Demolition squad reporting in. Next stop: Nexus.",
-    'Lose': "Still hitting mid Tier 1 at 25 min?"
+  'Towers Destroyed': {
+    'Win': "Demolition crew! Nexus next.",
+    'Lose': "Still stuck on Tier 1 at 25 min?"
   },
-  'TotalGold': {
-    'Win': "Swimming in gold. Jeff Bezos of Summoner's Rift.",
-    'Lose': "Your wallet's as empty as your map control."
+  'Total Gold': {
+    'Win': "Gold advantage = power spike!",
+    'Lose': "Broke and out of options."
   },
-  'AvgLevel': {
-    'Win': "Level diff = skill diff. It's science.",
-    'Lose': "Behind in XP? Might as well play with one hand."
+  'Avg Level': {
+    'Win': "Level lead = stat lead. Well played!",
+    'Lose': "Behind in XP? Hard comeback."
   },
-  'TotalExperience': {
-    'Win': "XP bar full. You're the boss fight now.",
-    'Lose': "You're just cannon fodder at this point."
+  'Total Experience': {
+    'Win': "XP bar full. You're the boss now.",
+    'Lose': "Just cannon fodder at this point."
   },
-  'TotalMinionsKilled': {
-    'Win': "CS god. Laning phase was your playground.",
-    'Lose': "You missed more CS than you landed skillshots."
+  'Total Minions Killed': {
+    'Win': "CS king! Laning phase domination.",
+    'Lose': "Missed more CS than you hit skillshots."
   },
-  'TotalJungleMinionsKilled': {
+  'Total Jungle Minions Killed': {
     'Win': "Jungle cleared, lanes ganked, game over.",
-    'Lose': "Jungle diff? Nah, jungle disappeared."
+    'Lose': "Jungle diff? Or just missing?"
   }
 };
 
@@ -126,8 +133,8 @@ function highlightTeam(team) {
   }
 
   const text = team === 'Win'
-    ? '✅ En victoire : plus de kills, assists, or et vision, moins de deaths.'
-    : '❌ En défaite : moins de kills, plus de deaths, moins de vision et gold.';
+    ? '✅ In victory: more kills, assists, gold, and vision, fewer deaths.'
+    : '❌ In defeat: fewer kills, more deaths, less vision and gold.';
   const box = document.getElementById('radarExplanation');
   box.textContent = text;
   box.classList.add('visible');
@@ -138,7 +145,7 @@ function renderRadarChart() {
     fetch('radar_x2_norm.json').then(r => r.json()),
     fetch('radar_raw.json').then(r => r.json())
   ]).then(([norm, raw]) => {
-    const stats = norm.labels;
+    const stats = englishLabels; // Use English labels
     const numAxes = stats.length;
     const angleSlice = Math.PI * 2 / numAxes;
 
@@ -230,7 +237,7 @@ function renderRadarChart() {
       .datum(winDataD3)
       .attr("class", "radarArea win win-element")
       .attr("d", radarLine)
-      .style("fill", "rgba(0,255,0,0.15)")
+      .style("fill", "url(#winGradient)")
       .style("stroke", "rgba(0,255,0,0.8)")
       .style("stroke-width", "2px");
 
@@ -239,7 +246,7 @@ function renderRadarChart() {
       .datum(loseDataD3)
       .attr("class", "radarArea lose lose-element")
       .attr("d", radarLine)
-      .style("fill", "rgba(255,0,0,0.15)")
+      .style("fill", "url(#loseGradient)")
       .style("stroke", "rgba(255,0,0,0.8)")
       .style("stroke-width", "2px");
 
@@ -248,47 +255,37 @@ function renderRadarChart() {
 
     // Function to draw points and handle interactions
     function drawPoints(dataset, teamClass) {
-      const points = svg.selectAll(`.point-${teamClass}`)
+      const groups = svg.selectAll(`.point-group-${teamClass}`)
         .data(dataset)
-        .enter().append("circle")
+        .enter().append("g")
+        .attr("class", `point-group-${teamClass} ${teamClass}-element`)
+        .attr("transform", (d, i) => {
+          const x = rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2);
+          const y = rScale(d.value) * Math.sin(angleSlice * i - Math.PI / 2);
+          return `translate(${x},${y})`;
+        });
+
+      groups.append("circle")
         .attr("class", `radarPoint ${teamClass} ${teamClass}-element`)
         .attr("r", pointRadius)
-        .attr("cx", (d, i) => rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2))
-        .attr("cy", (d, i) => rScale(d.value) * Math.sin(angleSlice * i - Math.PI / 2))
         .style("fill", teamClass === 'Win' ? "rgba(0,255,0,1)" : "rgba(255,0,0,1)")
         .style("stroke", "#fff")
         .style("stroke-width", "1.5px")
         .style("cursor", "pointer")
-        .on("click", (event, d) => {
+        .on("click", function(event, d) {
           showModal(d.team, d.axis, d.value, d.rawValue);
         })
         .on("mouseover", function(event, d) {
           d3.select(this).transition().duration(100).attr("r", hoverPointRadius);
-          // Basic tooltip (can be expanded)
           tooltip.style("opacity", 1)
                  .html(`<strong>${d.team} - ${d.axis}</strong><br/>Value: ${d.rawValue.toFixed(2)}<br/><em>Click for details</em>`)
                  .style("left", (event.pageX + 15) + "px")
                  .style("top", (event.pageY - 28) + "px");
         })
-        .on("mouseout", function(event,d) {
+        .on("mouseout", function(event, d) {
           d3.select(this).transition().duration(100).attr("r", pointRadius);
           tooltip.style("opacity", 0);
         });
-      
-      // Pulse animation
-      points.each(function pulseAnimation(d, i) {
-          const point = d3.select(this);
-          const baseRadius = teamClass === 'Win' ? pointRadius : pointRadius * 0.8;
-          (function repeat() {
-              if (!point.node()) return; // Stop if element is removed
-              const currentBase = d3.select(point.node()).attr('r'); // Use current radius as base for pulse magnitude
-              point.transition().duration(800).ease(d3.easeSinInOut)
-                  .attr("r", parseFloat(currentBase) * 1.75) // Augmentation de l'amplitude de la pulsation
-                  .transition().duration(800).ease(d3.easeSinInOut)
-                  .attr("r", currentBase)
-                  .on("end", repeat);
-          })();
-      });
     }
 
     drawPoints(winDataD3, 'Win');
@@ -335,6 +332,30 @@ function renderRadarChart() {
         .attr("alignment-baseline", "middle");
     });
 
+    // === ADD NEON GRADIENTS ===
+    const svgDefs = d3.select("#radarChartD3Container svg").append("defs");
+    svgDefs.append("radialGradient")
+      .attr("id", "winGradient")
+      .attr("cx", "50%").attr("cy", "50%")
+      .selectAll("stop")
+      .data([
+        {offset: "0%", color: "rgba(0,255,128,0.25)"},
+        {offset: "100%", color: "rgba(0,255,0,0.10)"}
+      ])
+      .enter().append("stop")
+      .attr("offset", d => d.offset)
+      .attr("stop-color", d => d.color);
+    svgDefs.append("radialGradient")
+      .attr("id", "loseGradient")
+      .attr("cx", "50%").attr("cy", "50%")
+      .selectAll("stop")
+      .data([
+        {offset: "0%", color: "rgba(255,64,64,0.25)"},
+        {offset: "100%", color: "rgba(255,0,0,0.10)"}
+      ])
+      .enter().append("stop")
+      .attr("offset", d => d.offset)
+      .attr("stop-color", d => d.color);
 
     globalChartData = { svg, winDataD3, loseDataD3, pointRadius }; // Store for highlightTeam
     highlightTeam('Win'); // Initial highlight

@@ -125,4 +125,8 @@ h1 {
 }
 .radar-button:hover {
   background: #0088cc;
+}
+
+html, body {
+  overflow-x: hidden;
 } 
