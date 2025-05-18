@@ -100,10 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr('class', 'champion-card');
 
         cards.append('h3').text(d => d.Name);
-        cards.append('p').html(d => `<strong>Classe(s):</strong> ${d.Classes || 'N/A'}`);
-        cards.append('p').html(d => `<strong>Difficulté:</strong> ${d.Difficulty || 'N/A'}`);
-        cards.append('p').html(d => `<strong>Rôle(s):</strong> ${d.Role || 'N/A'}`);
-        cards.append('p').html(d => `<strong>Portée:</strong> ${d['Range type'] || 'N/A'}`);
+        cards.append('p').html(d => `<strong>Type:</strong> ${d.Classes || 'N/A'}`);
+        cards.append('p').html(d => `<strong>Difficulty:</strong> ${d.Difficulty || 'N/A'}`);
+        cards.append('p').html(d => `<strong>Role(s):</strong> ${d.Role || 'N/A'}`);
+        cards.append('p').html(d => `<strong>Range:</strong> ${d['Range type'] || 'N/A'}`);
         
         cards.style('opacity', 0)
              .style('transform', 'translateY(20px)')

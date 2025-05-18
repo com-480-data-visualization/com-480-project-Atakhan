@@ -6,12 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const roleFilter = d3.select('#champ-role-filter');
     const rangeTypeFilter = d3.select('#champ-range-type-filter');
     const resetFiltersButton = d3.select('#champ-reset-filters');
+    const searchBar = d3.select('#champ-search-bar');
 
     let allChampions = [];
     let uniqueClasses = new Set();
     let uniqueDifficulties = new Set();
     let uniqueRoles = new Set();
     let uniqueRangeTypes = new Set();
+    let currentSearchTerm = '';
 
     // Charger les données CSV depuis le dossier JulesLeChampion
     d3.csv("JulesLeChampion/champions.csv").then(data => {
@@ -75,6 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (resetFiltersButton.node()) {
             resetFiltersButton.on('click', resetAllFilters);
         }
+
+        if (searchBar.node()) {
+            searchBar.on('input', function() {
+                currentSearchTerm = this.value.toLowerCase();
+                applyFilters();
+            });
+        }
     }
 
     function applyFilters() {
@@ -88,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const difficultyMatch = selectedDifficulty === 'all' || (champ.Difficulty && champ.Difficulty.trim() === selectedDifficulty);
             const roleMatch = selectedRole === 'all' || (champ.ParsedRoles && champ.ParsedRoles.includes(selectedRole)); // Logique adaptée
             const rangeTypeMatch = selectedRangeType === 'all' || (champ['Range type'] && champ['Range type'].trim() === selectedRangeType);
-            return classMatch && difficultyMatch && roleMatch && rangeTypeMatch;
+            const searchMatch = !currentSearchTerm || (champ.Name && champ.Name.toLowerCase().includes(currentSearchTerm));
+            return classMatch && difficultyMatch && roleMatch && rangeTypeMatch && searchMatch;
         });
         renderChampions(filteredChampions);
     }
@@ -142,10 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr('class', 'card-face card-face--back');
         
         cardBack.append('h3').text(d => d.Name);
-        cardBack.append('p').html(d => `<strong>Classe(s):</strong> ${d.Classes || 'N/A'}`);
-        cardBack.append('p').html(d => `<strong>Difficulté:</strong> ${d.Difficulty || 'N/A'}`);
-        cardBack.append('p').html(d => `<strong>Rôle(s):</strong> ${d.Role || 'N/A'}`);
-        cardBack.append('p').html(d => `<strong>Portée:</strong> ${d['Range type'] || 'N/A'}`);
+        cardBack.append('p').html(d => `<strong>Class:</strong> ${d.Classes || 'N/A'}`);
+        cardBack.append('p').html(d => `<strong>Difficulty:</strong> ${d.Difficulty || 'N/A'}`);
+        cardBack.append('p').html(d => `<strong>Role:</strong> ${d.Role || 'N/A'}`);
+        cardBack.append('p').html(d => `<strong>Range:</strong> ${d['Range type'] || 'N/A'}`);
         
         // L'animation d'apparition initiale s'applique au wrapper pour un positionnement correct
         cardWrappers.style('opacity', 0)

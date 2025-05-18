@@ -372,195 +372,50 @@
 <div class="page flex flex-col items-center justify-start min-h-screen py-10 text-white" id="page-champion-explorer">
     <header class="w-full py-6 mb-8 champ-explorer-header">
         <h1 class="text-4xl md:text-5xl font-bold text-amber-400 uppercase text-center">
-            Explorateur de Champions
+            Champion Explorer
         </h1>
     </header>
 
-    <div class="champ-filters-container w-full max-w-6xl mx-auto p-6 bg-gray-800 bg-opacity-70 rounded-xl shadow-lg mb-8">
-        <div class="filter-group">
-            <label for="champ-class-filter">Classe:</label>
-            <select id="champ-class-filter">
-                <option value="all">Toutes les classes</option>
-            </select>
+    <div class="champ-navigator-container w-full max-w-6xl mx-auto p-6 bg-gray-900 bg-opacity-80 rounded-2xl shadow-2xl mb-8 flex flex-col md:flex-row md:items-end gap-6">
+        <div class="navigator-search flex-1 flex flex-col">
+            <label for="champ-search-bar" class="mb-2 text-lg font-semibold text-cyan-300">Search a champion</label>
+            <input type="text" id="champ-search-bar" placeholder="Type a champion name..." class="champ-search-bar px-4 py-3 rounded-lg border border-cyan-400 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" />
         </div>
-        <div class="filter-group">
-            <label for="champ-difficulty-filter">Difficulté:</label>
-            <select id="champ-difficulty-filter">
-                <option value="all">Toutes</option>
-            </select>
+        <div class="navigator-filters flex flex-wrap gap-4 flex-1 justify-end">
+            <div class="filter-group">
+                <label for="champ-class-filter">Class:</label>
+                <select id="champ-class-filter">
+                    <option value="all">All classes</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="champ-difficulty-filter">Difficulty:</label>
+                <select id="champ-difficulty-filter">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="champ-role-filter">Role:</label>
+                <select id="champ-role-filter">
+                    <option value="all">All roles</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="champ-range-type-filter">Range type:</label>
+                <select id="champ-range-type-filter">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <button id="champ-reset-filters">Reset filters</button>
         </div>
-        <div class="filter-group">
-            <label for="champ-role-filter">Rôle:</label>
-            <select id="champ-role-filter">
-                <option value="all">Tous les rôles</option>
-            </select>
-        </div>
-        <div class="filter-group">
-            <label for="champ-range-type-filter">Type de portée:</label>
-            <select id="champ-range-type-filter">
-                <option value="all">Tous</option>
-            </select>
-        </div>
-        <button id="champ-reset-filters">Réinitialiser les filtres</button>
     </div>
 
     <div id="champion-visualization-container" class="w-full max-w-7xl mx-auto px-4">
-        <!-- Les cartes des champions seront injectées ici par D3.js -->
+        <!-- Champion cards will be injected here by D3.js -->
     </div>
 
-<style>
-/* Styles spécifiques pour la page Champion Explorer (et animations de cartes) */
-.champ-explorer-header {
-    background-color: rgba(22, 36, 71, 0.5); 
-    border-bottom: 3px solid rgba(31, 64, 104, 0.7); 
-}
-
-.champ-filters-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    gap: 20px;
-    align-items: flex-end;
-}
-
-.champ-filters-container .filter-group {
-    display: flex;
-    flex-direction: column;
-    min-width: 180px;
-}
-
-.champ-filters-container .filter-group label {
-    margin-bottom: 8px;
-    font-size: 0.95em;
-    color: #c0c0c0;
-}
-
-.champ-filters-container .filter-group select,
-.champ-filters-container button {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #444;
-    background-color: #2a2a4a; 
-    color: #e0e0e0;
-    font-size: 1em;
-}
-
-.champ-filters-container button {
-    background-color: #e43f5a; 
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    height: fit-content;
-    align-self: flex-end;
-}
-
-.champ-filters-container button:hover {
-    background-color: #b83248;
-}
-
-@keyframes floatAnimation {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-#champion-visualization-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 30px;
-    perspective: 10000px; 
-}
-
-.champion-card-wrapper {
-    /* --card-glow-color est défini par JS */
-    /* Rétablir la lueur d'origine */
-    box-shadow: 
-        0 0 18px 4px var(--card-glow-color); /* Lueur d'origine */
-    animation: floatAnimation 6s ease-in-out infinite;
-    width: 280px;
-    height: 400px;
-    position: relative; 
-    perspective: 10000px; 
-}
-
-.champion-card {
-    width: 100%; /* Prend toute la largeur/hauteur du wrapper */
-    height: 100%;
-    border-radius: 10px;
-    /* L'ombre de profondeur est maintenant sur la carte intérieure */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.7s ease-in-out; /* Uniquement la transition pour le flip */
-    position: relative; /* ou absolute si le wrapper gère la taille */
-    transform-style: preserve-3d; 
-    cursor: pointer;
-    /* L'animation floatAnimation est maintenant sur le wrapper */
-}
-
-.champion-card.is-flipped {
-    transform: rotateY(180deg) scale(0.98);
-}
-
-.card-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden; 
-    border-radius: 10px;
-    overflow: hidden;
-    transform: translateZ(0px); /* Retrait du scale(1.03) */
-}
-
-.card-face--front {
-    background-color: #2a2a4a; /* Couleur de fond pour le recto si l'image ne couvre pas tout */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-face--back {
-    /* background-color: #303050; */ /* Supprimé, la couleur vient du .champion-card parent */
-    /* ou background-color: transparent; */
-    transform: rotateY(180deg); 
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-sizing: border-box;
-}
-
-.champion-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 0;
-    margin: 0;
-    border: none;
-}
-
-.card-face--back h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.8em;
-    color: #ffc107;
-    text-align: center;
-}
-
-.card-face--back p {
-    margin: 6px 0;
-    font-size: 0.9em;
-    color: #e0e0e0;
-}
-
-.card-face--back p strong {
-    color: #82aaff;
-    margin-right: 5px;
-}
-</style>
+<!-- Ajout du lien vers la nouvelle feuille de style -->
+<link rel="stylesheet" href="css/page11.css" />
 
 </div>
 <script src="JulesLeChampion/champion_viz.js" defer></script>
