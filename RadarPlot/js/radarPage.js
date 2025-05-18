@@ -142,8 +142,8 @@ function highlightTeam(team) {
 
 function renderRadarChart() {
   Promise.all([
-    fetch('radar_x2_norm.json').then(r => r.json()),
-    fetch('radar_raw.json').then(r => r.json())
+    fetch('RadarPlot/json/radar_x2_norm.json').then(r => r.json()),
+    fetch('RadarPlot/json/radar_raw.json').then(r => r.json())
   ]).then(([norm, raw]) => {
     const stats = englishLabels; // Use English labels
     const numAxes = stats.length;
