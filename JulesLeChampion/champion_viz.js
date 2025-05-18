@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr('alt', d => d.Name)
             .attr('class', 'champion-image')
             .on('error', function() {
-                d3.select(this).attr('src', 'JulesLeChampion/img_champions/default.png');
+                d3.select(this).attr('src', 'JulesLeChampion/img_champions/aatrox.png');
             });
 
         const cardBack = cards.append('div')
