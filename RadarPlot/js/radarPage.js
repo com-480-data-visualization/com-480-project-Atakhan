@@ -163,8 +163,8 @@ function renderRadarChart() {
     }));
 
     const margin = { top: 100, right: 100, bottom: 100, left: 100 };
-    const width = 700 - margin.left - margin.right;
-    const height = 700 - margin.top - margin.bottom;
+    const width = 500 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
     const radius = Math.min(width, height) / 2;
 
     d3.select("#radarChartD3Container").select("svg").remove();
@@ -222,8 +222,8 @@ function renderRadarChart() {
       .style("fill", "rgba(255, 255, 255, 0.9)")
       .attr("text-anchor", "middle")
       .attr("dy", "0.35em")
-      .attr("x", (d, i) => rScale(1.25) * Math.cos(angleSlice * i - Math.PI / 2))
-      .attr("y", (d, i) => rScale(1.25) * Math.sin(angleSlice * i - Math.PI / 2))
+      .attr("x", (d, i) => rScale(1.45) * Math.cos(angleSlice * i - Math.PI / 2))
+      .attr("y", (d, i) => rScale(1.45) * Math.sin(angleSlice * i - Math.PI / 2))
       .text(d => d);
 
     // Path generator
@@ -311,7 +311,7 @@ function renderRadarChart() {
     ];
     const legend = svg.append("g")
       .attr("class", "chart-legend")
-      .attr("transform", `translate(${-(width/2)}, ${-(height/2) - margin.top/2 - 15})`);
+      .attr("transform", `translate(${-width/2 - 40}, ${-(height/2) - margin.top/2 - 40})`);
 
     legendData.forEach((item, index) => {
       const legendItem = legend.append("g")
