@@ -157,6 +157,14 @@ document.addEventListener('DOMContentLoaded', () => {
         cardBack.append('p').html(d => `<strong>Role:</strong> ${d.Role || 'N/A'}`);
         cardBack.append('p').html(d => `<strong>Range:</strong> ${d['Range type'] || 'N/A'}`);
         
+        // Ajout du surnom
+        cardBack.append('h4') // Utilisez h4 pour le surnom
+            .attr('class', 'champion-nickname') // Ajoutez une classe pour le style
+            .text(d => d['Nick Name'] || 'N/A') // Affiche le surnom
+            .style('text-align', 'center') // Centre le texte
+            .style('font-size', '1.5em') // Taille de police (ajustez selon vos besoins)
+            .style('color', '#FFD700'); // Couleur du texte (ajustez selon vos besoins)
+
         // L'animation d'apparition initiale s'applique au wrapper pour un positionnement correct
         cardWrappers.style('opacity', 0)
              .style('transform', 'translateY(20px)') // Seule la translation Y pour l'apparition du wrapper
