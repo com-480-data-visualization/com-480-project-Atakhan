@@ -47,17 +47,6 @@ function renderSHAPBeeswarm() {
             // Add title and explanation with enhanced styling
             svg.append("text")
                 .attr("x", width / 2)
-                .attr("y", -60)
-                .attr("text-anchor", "middle")
-                .attr("class", "visualization-title")
-                .style("font-size", "28px")
-                .style("font-weight", "600")
-                .style("fill", "#0969da")  // GitHub blue
-                .style("font-family", "'Segoe UI', system-ui, -apple-system, sans-serif")
-                .text("Impact of Key Features on Game Outcome");
-
-            svg.append("text")
-                .attr("x", width / 2)
                 .attr("y", -30)
                 .attr("text-anchor", "middle")
                 .style("font-size", "16px")
