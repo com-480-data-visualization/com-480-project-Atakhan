@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let uniqueRangeTypes = new Set();
 
     // Charger les données CSV depuis le dossier JulesLeChampion
-    d3.csv("JulesLeChampion/champions.csv").then(data => {
+    d3.csv("Champion_explorer/champions.csv").then(data => {
         if (!data || data.length === 0) {
             console.error("Aucune donnée chargée depuis champions.csv ou le fichier est vide.");
             vizContainer.html("<p style='color:red;'>Aucune donnée de champion n'a été trouvée. Vérifiez le fichier 'JulesLeChampion/champions.csv'.</p>");

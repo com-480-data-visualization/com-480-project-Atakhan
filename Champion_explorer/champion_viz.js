@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSearchTerm = '';
 
     // Charger les données CSV depuis le dossier JulesLeChampion
-    d3.csv("JulesLeChampion/champions.csv").then(data => {
+    d3.csv("Champion_explorer/champions.csv").then(data => {
         if (!data || data.length === 0) {
             console.error("Aucune donnée chargée depuis champions.csv ou le fichier est vide.");
             vizContainer.html("<p style='color:red;'>Aucune donnée de champion n'a été trouvée. Vérifiez le fichier 'JulesLeChampion/champions.csv'.</p>");
@@ -141,11 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr('class', 'card-face card-face--front');
 
         cardFront.append('img')
-            .attr('src', d => `JulesLeChampion/img_champions/${d.ImageName}`)
+            .attr('src', d => `Champion_explorer/img_champions/${d.ImageName}`)
             .attr('alt', d => d.Name)
             .attr('class', 'champion-image')
             .on('error', function() {
-                d3.select(this).attr('src', 'JulesLeChampion/img_champions/aatrox.png');
+                d3.select(this).attr('src', 'Champion_explorer/img_champions/aatrox.png');
             });
 
         const cardBack = cards.append('div')
