@@ -30,9 +30,9 @@ function renderSHAPBeeswarm() {
             features.sort((a, b) => Math.abs(b.mean_shap) - Math.abs(a.mean_shap));
             
             // Adjust margins and dimensions for better fit
-            const margin = {top: 100, right: 300, bottom: 80, left: 200};
-            const width = 1400 - margin.left - margin.right;
-            const height = 600 - margin.top - margin.bottom;
+            const margin = {top: 68, right: 255, bottom: 68, left: 170};
+            const width = 1190 - margin.left - margin.right;
+            const height = 510 - margin.top - margin.bottom;
             
             // Clear any existing SVG
             d3.select("#beeswarm").selectAll("*").remove();
