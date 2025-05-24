@@ -303,7 +303,7 @@ function renderSHAPBeeswarm() {
             // Add color bar legend with adjusted positioning
             const legendWidth = 30;
             const legendHeight = height * 0.8;
-            const legendX = width + 80;
+            const legendX = width + 120;
             const legendY = height * 0.1;
 
             // Create gradient
