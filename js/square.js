@@ -42,6 +42,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Add hashchange event listener for hash-based navigation
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.replace('#', '');
+    let found = false;
+    allPages.forEach(page => {
+      if (page.id === hash) {
+        page.style.display = 'flex';
+        found = true;
+      } else {
+        page.style.display = 'none';
+      }
+    });
+    // If hash is not found, show the first page
+    if (!found && allPages.length > 0) {
+      allPages[0].style.display = 'flex';
+    }
+  });
+
   createIndicators();
   showPage(currentPage);
 });
