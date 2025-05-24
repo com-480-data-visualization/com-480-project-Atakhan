@@ -10,7 +10,7 @@ const stats = {
 const monsters = [
   {
     id: "dragon",
-    src: "assets/dragon.png",
+    src: "Map/assets/dragon.png",
     alt: "Dragon",
     x: 505,
     y: 300,
@@ -18,7 +18,7 @@ const monsters = [
   },
   {
     id: "herald",
-    src: "assets/Rift_Herald_Render.webp",
+    src: "Map/assets/Rift_Herald_Render.webp",
     alt: "Herald",
     x: 300,
     y: 110,
@@ -26,7 +26,7 @@ const monsters = [
   },
   {
     id: "minion",
-    src: "assets/minion.png",
+    src: "Map/assets/minion.png",
     alt: "Minion",
     x: 412,
     y: 197,
@@ -34,7 +34,7 @@ const monsters = [
   },
   {
     id: "tower",
-    src: "assets/tower.png",
+    src: "Map/assets/tower.png",
     alt: "Tower",
     x: 267,
     y: 250,
@@ -63,7 +63,7 @@ function generateInteractiveMapD3() {
     .style("height", "600px");
 
   mapContainer.append("img")
-    .attr("src", "assets/Map.webp")
+    .attr("src", "Map/assets/Map.webp")
     .attr("class", "map")
     .attr("alt", "Summoner's Rift Map")
     .style("width", "100%")

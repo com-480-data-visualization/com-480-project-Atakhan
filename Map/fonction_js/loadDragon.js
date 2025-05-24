@@ -1,31 +1,31 @@
-function loadHeraldChart() {
-  fetch("Map_Mael/json/herald.json")
+function loadDragonChart() {
+  fetch("Map/json/dragon.json")
     .then(res => res.json())
     .then(data => {
-      const page = document.getElementById("page-herald");
+      const page = document.getElementById("page-dragon");
 
       page.innerHTML = `
-        <h2 id="herald-title" style="
+        <h2 id="dragon-title" style="
           opacity: 0;
           transition: opacity 1s ease;
           font-family: Orbitron, sans-serif;
           font-size: 22px;
-          color: #a259f7;
+          color: #00ccff;
           text-align: center;
           margin-bottom: 20px;
         "></h2>
         <div class="dragon-card monster-layout">
-          <img src="assets/herald_draw.webp" alt="Herald" class="monster-image herald-img"/>
-          <div id="chart-herald" class="monster-chart"></div>
+          <img src="assets/dragon_draw.webp" alt="Dragon" class="monster-image dragon-img"/>
+          <div id="chart-dragon" class="monster-chart"></div>
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>
       `;
 
-      page.style.background = "linear-gradient(135deg, #2c1e4a, #4b3a6a)";
+      page.style.background = "linear-gradient(135deg, #0f2027, #2c5364)";
 
       // Floating tooltip
       const tooltip = document.createElement("div");
-      tooltip.id = "herald-tooltip";
+      tooltip.id = "dragon-tooltip";
       Object.assign(tooltip.style, {
         position: "absolute",
         padding: "8px 12px",
@@ -38,27 +38,31 @@ function loadHeraldChart() {
         opacity: 0,
         transition: "opacity 0.2s ease",
         backdropFilter: "blur(4px)",
-        border: "1px solid #a259f7",
-        boxShadow: "0 2px 12px #a259f755"
+        border: "1px solid #00ccff",
+        boxShadow: "0 2px 12px #00ccff55"
       });
       document.body.appendChild(tooltip);
 
       const stats = [
         {
-          label: "📜", value: 1, color: "#a259f7", name: "Strategic Purpose",
-          format: () => "Helps break enemy lines by dealing heavy damage to towers."
+          label: "📜", value: 1, color: "#F67250", name: "Strategic Purpose",
+          format: () => "Grants permanent elemental bonuses and enables the Dragon Soul when captured repeatedly."
         },
         {
           label: "❤️", value: 1, color: "#1B2B34", name: "Health Points",
-          format: () => `${data.HP} HP – Slaying the Herald early gives map pressure.`
+          format: () => `${data.HP} HP – Slaying the dragon early takes time and requires coordination.`
         },
         {
-          label: "⏰", value: 1, color: "#7c3aed", name: "First Spawn",
-          format: () => "8:00 (appears in the Baron pit)"
+          label: "🛡️", value: 1, color: "#45B8AC", name: "Defense",
+          format: () => `Armor: ${data.Armor}, Magic Resist: ${data.MagicResist}`
         },
         {
-          label: "🎁", value: 1, color: "#f7c259", name: "Drop",
-          format: () => "Eye of Herald (allows you to summon the Herald to attack a tower)"
+          label: "💰", value: 1, color: "#F4C95D", name: "Reward",
+          format: () => `${data.Gold} Gold granted when killed`
+        },
+        {
+          label: "🏆", value: 1, color: "#66BB6A", name: "Victory Impact",
+          format: () => `${data.VictoryCorrelation}% correlation with winning`
         }
       ];
 
@@ -66,7 +70,7 @@ function loadHeraldChart() {
       const height = 500;
       const radius = Math.min(width, height) / 2;
 
-      const svg = d3.select("#chart-herald")
+      const svg = d3.select("#chart-dragon")
         .append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("width", width)
@@ -90,7 +94,7 @@ function loadHeraldChart() {
       // Add this before drawing arcs
       const defs = svg.append("defs");
       const filter = defs.append("filter")
-        .attr("id", "dropshadow-herald")
+        .attr("id", "dropshadow")
         .attr("height", "130%");
       filter.append("feDropShadow")
         .attr("dx", 0)
@@ -101,7 +105,7 @@ function loadHeraldChart() {
 
       // Animate arc appearance
       g.append("path")
-        .attr("filter", "url(#dropshadow-herald)")
+        .attr("filter", "url(#dropshadow)")
         .attr("fill", d => d.data.color)
         .attr("d", d3.arc()
           .innerRadius(radius - 80)
@@ -117,7 +121,7 @@ function loadHeraldChart() {
         })
         .on("end", function(_, i) {
           if (i === stats.length - 1) {
-            const titleEl = document.getElementById("herald-title");
+            const titleEl = document.getElementById("dragon-title");
             titleEl.textContent = `Pie Chart: ${data.name}`;
             titleEl.style.opacity = 1;
           }
@@ -173,4 +177,4 @@ function loadHeraldChart() {
         tooltip.style.opacity = 0;
       });
     });
-} 
+}

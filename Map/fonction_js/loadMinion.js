@@ -1,31 +1,31 @@
-function loadDragonChart() {
-  fetch("Map_Mael/json/dragon.json")
+function loadMinionChart() {
+  fetch("Map/json/minion.json")
     .then(res => res.json())
     .then(data => {
-      const page = document.getElementById("page-dragon");
+      const page = document.getElementById("page-minion");
 
       page.innerHTML = `
-        <h2 id="dragon-title" style="
+        <h2 id="minion-title" style="
           opacity: 0;
           transition: opacity 1s ease;
           font-family: Orbitron, sans-serif;
           font-size: 22px;
-          color: #00ccff;
+          color: #ff00cc;
           text-align: center;
           margin-bottom: 20px;
         "></h2>
         <div class="dragon-card monster-layout">
-          <img src="assets/dragon_draw.webp" alt="Dragon" class="monster-image dragon-img"/>
-          <div id="chart-dragon" class="monster-chart"></div>
+          <img src="assets/minion_draw.jpg" alt="Minion" class="monster-image"/>
+          <div id="chart-minion" class="monster-chart"></div>
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>
       `;
 
-      page.style.background = "linear-gradient(135deg, #0f2027, #2c5364)";
+      page.style.background = "linear-gradient(135deg, #2c5364, #ff00cc)";
 
       // Floating tooltip
       const tooltip = document.createElement("div");
-      tooltip.id = "dragon-tooltip";
+      tooltip.id = "minion-tooltip";
       Object.assign(tooltip.style, {
         position: "absolute",
         padding: "8px 12px",
@@ -38,31 +38,27 @@ function loadDragonChart() {
         opacity: 0,
         transition: "opacity 0.2s ease",
         backdropFilter: "blur(4px)",
-        border: "1px solid #00ccff",
-        boxShadow: "0 2px 12px #00ccff55"
+        border: "1px solid #ff00cc",
+        boxShadow: "0 2px 12px #ff00cc55"
       });
       document.body.appendChild(tooltip);
 
       const stats = [
         {
-          label: "📜", value: 1, color: "#F67250", name: "Strategic Purpose",
-          format: () => "Grants permanent elemental bonuses and enables the Dragon Soul when captured repeatedly."
+          label: "🗡️", value: 1, color: "#ff00cc", name: "Type",
+          format: () => "Melee minion (main source of gold and experience)"
         },
         {
           label: "❤️", value: 1, color: "#1B2B34", name: "Health Points",
-          format: () => `${data.HP} HP – Slaying the dragon early takes time and requires coordination.`
+          format: () => `${data.HP} HP`
         },
         {
-          label: "🛡️", value: 1, color: "#45B8AC", name: "Defense",
-          format: () => `Armor: ${data.Armor}, Magic Resist: ${data.MagicResist}`
+          label: "💰", value: 1, color: "#F4C95D", name: "Gold",
+          format: () => "21 gold per kill (varies by minion type)"
         },
         {
-          label: "💰", value: 1, color: "#F4C95D", name: "Reward",
-          format: () => `${data.Gold} Gold granted when killed`
-        },
-        {
-          label: "🏆", value: 1, color: "#66BB6A", name: "Victory Impact",
-          format: () => `${data.VictoryCorrelation}% correlation with winning`
+          label: "⏰", value: 1, color: "#00ccff", name: "Spawn Interval",
+          format: () => "Spawns every 30 seconds on each lane"
         }
       ];
 
@@ -70,7 +66,7 @@ function loadDragonChart() {
       const height = 500;
       const radius = Math.min(width, height) / 2;
 
-      const svg = d3.select("#chart-dragon")
+      const svg = d3.select("#chart-minion")
         .append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("width", width)
@@ -94,7 +90,7 @@ function loadDragonChart() {
       // Add this before drawing arcs
       const defs = svg.append("defs");
       const filter = defs.append("filter")
-        .attr("id", "dropshadow")
+        .attr("id", "dropshadow-minion")
         .attr("height", "130%");
       filter.append("feDropShadow")
         .attr("dx", 0)
@@ -105,7 +101,7 @@ function loadDragonChart() {
 
       // Animate arc appearance
       g.append("path")
-        .attr("filter", "url(#dropshadow)")
+        .attr("filter", "url(#dropshadow-minion)")
         .attr("fill", d => d.data.color)
         .attr("d", d3.arc()
           .innerRadius(radius - 80)
@@ -121,7 +117,7 @@ function loadDragonChart() {
         })
         .on("end", function(_, i) {
           if (i === stats.length - 1) {
-            const titleEl = document.getElementById("dragon-title");
+            const titleEl = document.getElementById("minion-title");
             titleEl.textContent = `Pie Chart: ${data.name}`;
             titleEl.style.opacity = 1;
           }
@@ -177,4 +173,4 @@ function loadDragonChart() {
         tooltip.style.opacity = 0;
       });
     });
-}
+} 

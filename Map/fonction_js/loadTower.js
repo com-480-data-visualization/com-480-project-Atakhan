@@ -1,31 +1,31 @@
-function loadMinionChart() {
-  fetch("Map_Mael/json/minion.json")
+function loadTowerChart() {
+  fetch("Map/json/tower.json")
     .then(res => res.json())
     .then(data => {
-      const page = document.getElementById("page-minion");
+      const page = document.getElementById("page-tower");
 
       page.innerHTML = `
-        <h2 id="minion-title" style="
+        <h2 id="tower-title" style="
           opacity: 0;
           transition: opacity 1s ease;
           font-family: Orbitron, sans-serif;
           font-size: 22px;
-          color: #ff00cc;
+          color: #00ff99;
           text-align: center;
           margin-bottom: 20px;
         "></h2>
         <div class="dragon-card monster-layout">
-          <img src="assets/minion_draw.jpg" alt="Minion" class="monster-image"/>
-          <div id="chart-minion" class="monster-chart"></div>
+          <img src="assets/tower_draw.jpeg" alt="Tower" class="monster-image"/>
+          <div id="chart-tower" class="monster-chart"></div>
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>
       `;
 
-      page.style.background = "linear-gradient(135deg, #2c5364, #ff00cc)";
+      page.style.background = "linear-gradient(135deg, #0f2027, #00ff99)";
 
       // Floating tooltip
       const tooltip = document.createElement("div");
-      tooltip.id = "minion-tooltip";
+      tooltip.id = "tower-tooltip";
       Object.assign(tooltip.style, {
         position: "absolute",
         padding: "8px 12px",
@@ -38,27 +38,27 @@ function loadMinionChart() {
         opacity: 0,
         transition: "opacity 0.2s ease",
         backdropFilter: "blur(4px)",
-        border: "1px solid #ff00cc",
-        boxShadow: "0 2px 12px #ff00cc55"
+        border: "1px solid #00ff99",
+        boxShadow: "0 2px 12px #00ff9955"
       });
       document.body.appendChild(tooltip);
 
       const stats = [
         {
-          label: "🗡️", value: 1, color: "#ff00cc", name: "Type",
-          format: () => "Melee minion (main source of gold and experience)"
+          label: "🏰", value: 1, color: "#00ff99", name: "Structure",
+          format: () => "Major defensive structure. Destroying the first tower gives a strategic advantage."
         },
         {
           label: "❤️", value: 1, color: "#1B2B34", name: "Health Points",
           format: () => `${data.HP} HP`
         },
         {
-          label: "💰", value: 1, color: "#F4C95D", name: "Gold",
-          format: () => "21 gold per kill (varies by minion type)"
+          label: "🛡️", value: 1, color: "#45B8AC", name: "Armor",
+          format: () => `40 armor (protects against physical damage)`
         },
         {
-          label: "⏰", value: 1, color: "#00ccff", name: "Spawn Interval",
-          format: () => "Spawns every 30 seconds on each lane"
+          label: "💰", value: 1, color: "#F4C95D", name: "Gold",
+          format: () => "250 team gold, 150 local gold, 400 bonus for the first destroyed tower"
         }
       ];
 
@@ -66,7 +66,7 @@ function loadMinionChart() {
       const height = 500;
       const radius = Math.min(width, height) / 2;
 
-      const svg = d3.select("#chart-minion")
+      const svg = d3.select("#chart-tower")
         .append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("width", width)
@@ -90,7 +90,7 @@ function loadMinionChart() {
       // Add this before drawing arcs
       const defs = svg.append("defs");
       const filter = defs.append("filter")
-        .attr("id", "dropshadow-minion")
+        .attr("id", "dropshadow-tower")
         .attr("height", "130%");
       filter.append("feDropShadow")
         .attr("dx", 0)
@@ -101,7 +101,7 @@ function loadMinionChart() {
 
       // Animate arc appearance
       g.append("path")
-        .attr("filter", "url(#dropshadow-minion)")
+        .attr("filter", "url(#dropshadow-tower)")
         .attr("fill", d => d.data.color)
         .attr("d", d3.arc()
           .innerRadius(radius - 80)
@@ -117,7 +117,7 @@ function loadMinionChart() {
         })
         .on("end", function(_, i) {
           if (i === stats.length - 1) {
-            const titleEl = document.getElementById("minion-title");
+            const titleEl = document.getElementById("tower-title");
             titleEl.textContent = `Pie Chart: ${data.name}`;
             titleEl.style.opacity = 1;
           }

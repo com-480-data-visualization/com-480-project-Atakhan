@@ -1,31 +1,31 @@
-function loadTowerChart() {
-  fetch("Map_Mael/json/tower.json")
+function loadHeraldChart() {
+  fetch("Map/json/herald.json")
     .then(res => res.json())
     .then(data => {
-      const page = document.getElementById("page-tower");
+      const page = document.getElementById("page-herald");
 
       page.innerHTML = `
-        <h2 id="tower-title" style="
+        <h2 id="herald-title" style="
           opacity: 0;
           transition: opacity 1s ease;
           font-family: Orbitron, sans-serif;
           font-size: 22px;
-          color: #00ff99;
+          color: #a259f7;
           text-align: center;
           margin-bottom: 20px;
         "></h2>
         <div class="dragon-card monster-layout">
-          <img src="assets/tower_draw.jpeg" alt="Tower" class="monster-image"/>
-          <div id="chart-tower" class="monster-chart"></div>
+          <img src="assets/herald_draw.webp" alt="Herald" class="monster-image herald-img"/>
+          <div id="chart-herald" class="monster-chart"></div>
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>
       `;
 
-      page.style.background = "linear-gradient(135deg, #0f2027, #00ff99)";
+      page.style.background = "linear-gradient(135deg, #2c1e4a, #4b3a6a)";
 
       // Floating tooltip
       const tooltip = document.createElement("div");
-      tooltip.id = "tower-tooltip";
+      tooltip.id = "herald-tooltip";
       Object.assign(tooltip.style, {
         position: "absolute",
         padding: "8px 12px",
@@ -38,27 +38,27 @@ function loadTowerChart() {
         opacity: 0,
         transition: "opacity 0.2s ease",
         backdropFilter: "blur(4px)",
-        border: "1px solid #00ff99",
-        boxShadow: "0 2px 12px #00ff9955"
+        border: "1px solid #a259f7",
+        boxShadow: "0 2px 12px #a259f755"
       });
       document.body.appendChild(tooltip);
 
       const stats = [
         {
-          label: "🏰", value: 1, color: "#00ff99", name: "Structure",
-          format: () => "Major defensive structure. Destroying the first tower gives a strategic advantage."
+          label: "📜", value: 1, color: "#a259f7", name: "Strategic Purpose",
+          format: () => "Helps break enemy lines by dealing heavy damage to towers."
         },
         {
           label: "❤️", value: 1, color: "#1B2B34", name: "Health Points",
-          format: () => `${data.HP} HP`
+          format: () => `${data.HP} HP – Slaying the Herald early gives map pressure.`
         },
         {
-          label: "🛡️", value: 1, color: "#45B8AC", name: "Armor",
-          format: () => `40 armor (protects against physical damage)`
+          label: "⏰", value: 1, color: "#7c3aed", name: "First Spawn",
+          format: () => "8:00 (appears in the Baron pit)"
         },
         {
-          label: "💰", value: 1, color: "#F4C95D", name: "Gold",
-          format: () => "250 team gold, 150 local gold, 400 bonus for the first destroyed tower"
+          label: "🎁", value: 1, color: "#f7c259", name: "Drop",
+          format: () => "Eye of Herald (allows you to summon the Herald to attack a tower)"
         }
       ];
 
@@ -66,7 +66,7 @@ function loadTowerChart() {
       const height = 500;
       const radius = Math.min(width, height) / 2;
 
-      const svg = d3.select("#chart-tower")
+      const svg = d3.select("#chart-herald")
         .append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("width", width)
@@ -90,7 +90,7 @@ function loadTowerChart() {
       // Add this before drawing arcs
       const defs = svg.append("defs");
       const filter = defs.append("filter")
-        .attr("id", "dropshadow-tower")
+        .attr("id", "dropshadow-herald")
         .attr("height", "130%");
       filter.append("feDropShadow")
         .attr("dx", 0)
@@ -101,7 +101,7 @@ function loadTowerChart() {
 
       // Animate arc appearance
       g.append("path")
-        .attr("filter", "url(#dropshadow-tower)")
+        .attr("filter", "url(#dropshadow-herald)")
         .attr("fill", d => d.data.color)
         .attr("d", d3.arc()
           .innerRadius(radius - 80)
@@ -117,7 +117,7 @@ function loadTowerChart() {
         })
         .on("end", function(_, i) {
           if (i === stats.length - 1) {
-            const titleEl = document.getElementById("tower-title");
+            const titleEl = document.getElementById("herald-title");
             titleEl.textContent = `Pie Chart: ${data.name}`;
             titleEl.style.opacity = 1;
           }
