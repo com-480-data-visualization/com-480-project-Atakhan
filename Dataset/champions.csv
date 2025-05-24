@@ -1,0 +1,138 @@
+Name,Nick Name,Classes,Release Date,Last Changed,Blue Essence,RP,Difficulty,Role,Range type,Resourse type,Base HP,Base mana,DominantColor
+Aatrox,The darkin blade,Juggernaut,2013-06-13,V14.14,4800,880,Advanced,Top,Melee,Blood Well,650,0,#23171f
+Ahri,The nine-tailed fox,Burst,2011-12-14,V14.18,3150,790,Intermediate,Middle,Ranged,Mana,590,418,#a9bdc9
+Akali,The rogue assassin,Assassin,2010-05-11,V14.18,3150,790,Expert,"Top,Middle",Melee,Energy,600,200,#734d52
+Alistar,The minotaur,Vanguard,2009-02-21,V14.16,1350,585,Novice,Support,Melee,Mana,685,350,#555147
+Amumu,The sad mummy,Vanguard,2009-06-26,V14.9,450,260,Beginner,"Jungle,Support",Melee,Mana,685,285,#6cb873
+Anivia,The cryophoenix,Battlemage,2009-07-10,V13.22,3150,790,Intermediate_Plus,Middle,Ranged,Mana,550,495,#0e0739
+Annie,The dark child,Burst,2009-02-21,V14.4,450,260,Beginner,Middle,Ranged,Mana,560,418,#251f13
+Aphelios,The weapon of the faithful,Marksman,2019-12-11,V14.14,4800,880,Expert,Bottom,Ranged,Mana,580,348,#24151c
+Ashe,The frost archer,Marksman,2009-02-21,V14.12,450,260,Beginner,"Bottom,Support",Ranged,Mana,640,280,#524b61
+Aurelion Sol,The star forger,Battlemage,2016-03-24,V14.15,4800,880,Intermediate_Plus,Middle,Ranged,Mana,620,530,#141a6a
+Azir,The emperor of the sands,Specialist,2014-09-16,V14.18,4800,880,Expert,Middle,Ranged,Mana,550,320,#91877f
+Bard,The wandering caretaker,Catcher,2015-03-12,V14.15,4800,880,Advanced,Support,Ranged,Mana,630,350,#100c19
+Blitzcrank,The great steam golem,Catcher,2009-09-02,V14.13,1350,585,Novice,Support,Melee,Mana,600,267,#6a4f70
+Brand,The burning vengeance,Burst,2011-04-12,V14.14,450,260,Novice,"Jungle,Support,Middle",Ranged,Mana,570,469,#392c22
+Braum,The heart of the freljord,Warden,2014-05-12,V14.9,3150,790,Novice,Support,Melee,Mana,610,311,#0d0c2f
+Caitlyn,The sheriff of piltover,Marksman,2011-01-04,V14.11,450,260,Advanced,Bottom,Ranged,Mana,580,315,#000000
+Camille,The steel shadow,Diver,2016-12-07,V14.15,4800,880,Expert,"Top,Support",Melee,Mana,670,339,#2a2f2a
+Cassiopeia,The serpent's embrace,Battlemage,2010-12-14,V14.16,4800,880,Intermediate,Middle,Ranged,Mana,630,350,#050504
+Cho'gath,The terror of the void,Specialist,2009-06-26,V14.14,1350,585,Beginner,Top,Melee,Mana,644,270,#21142a
+Corki,The daring bombardier,Marksman,2009-09-19,V14.18,3150,790,Intermediate,Middle,Ranged,Mana,640,350,#150e20
+Darius,The hand of noxus,Juggernaut,2012-05-23,V14.9,450,260,Novice,Top,Melee,Mana,652,263,#59382e
+Diana,Scorn of the moon,Assassin  Diver,2012-08-07,V14.9,450,260,Novice,"Jungle,Middle",Melee,Mana,640,375,#8188a5
+Dr. mundo,The madman of zaun,Juggernaut,2009-09-02,V14.15,450,260,Beginner,Bottom,Ranged,Mana,675,361,#6f4871
+Draven,The glorious executioner,Marksman,2012-06-06,V14.11,4800,880,Advanced,Top,Melee,none,613,0,#08070c
+Ekko,The boy who shattered time,Assassin,2015-05-29,V13.16,3150,790,Intermediate,"Jungle,Middle",Melee,Mana,655,280,#14080a
+Elise,The spider queen,Diver,2012-10-26,V14.12,4800,880,Intermediate,Jungle,Ranged,Mana,650,324,#05060b
+Evelynn,Agony's embrace,Assassin,2009-05-01,V14.11,1350,585,Intermediate_Plus,Jungle,Melee,Mana,642,315,#1a0f26
+Ezreal,The prodigal explorer,Marksman,2010-03-16,V14.15,1350,585,Intermediate,Bottom,Ranged,Mana,600,375,#473735
+Fiddlesticks,The ancient fear,Specialist,2009-02-21,V14.14,1350,585,Intermediate_Plus,Jungle,Ranged,Mana,650,500,#3d4348
+Fiora,The grand duelist,Skirmisher,2012-02-29,V14.9,4800,880,Intermediate,Top,Melee,Mana,620,300,#1f2740
+Fizz,The tidal trickster,Assassin,2011-11-15,V14.2,1350,585,Intermediate,Middle,Melee,Mana,640,317,#535246
+Galio,The colossus,Warden,2010-08-10,V14.8,3150,790,Novice,"Middle,Support",Melee,Mana,632,500,#737e8f
+Gangplank,The saltwater scourge,Specialist,2009-08-19,V14.13,3150,790,Expert,Top,Melee,Mana,630,280,#010101
+Garen,The might of demacia,Juggernaut,2010-04-27,V14.9,450,260,Beginner,Top,Melee,none,690,0,#4353ae
+Gnar,The missing link,Specialist,2014-08-14,V14.18,4800,880,Intermediate_Plus,Top,Ranged,Rage,540,100,#3a140c
+Gragas,The rabble rouser,Vanguard,2010-02-02,V14.13,3150,790,Intermediate,"Jungle,Top,Middle",Melee,Mana,640,400,#211a20
+Graves,The outlaw,Specialist,2011-10-19,V14.13,4800,880,Intermediate,Jungle,Ranged,Mana,625,325,#020202
+Hecarim,The shadow of war,Diver,2012-04-18,V14.14,4800,880,Novice,Jungle,Melee,Mana,625,280,#164747
+Heimerdinger,The revered inventor,Specialist,2009-10-10,V14.11,3150,790,Intermediate_Plus,"Support,Top,Middle",Ranged,Mana,558,385,#704d18
+Illaoi,The kraken priestess,Juggernaut,2015-11-24,V14.9,3150,790,Intermediate_Plus,Top,Melee,Mana,656,350,#222e14
+Irelia,The blade dancer,Diver,2010-11-16,V14.15,3150,790,Expert,"Top,Middle",Melee,Mana,590,350,#271f30
+Ivern,The green father,Catcher,2016-10-05,V14.18,4800,880,Intermediate_Plus,Jungle,Ranged,Mana,630,450,#534b31
+Janna,The storm's fury,Enchanter,2009-09-02,V14.9,1350,585,Beginner,Support,Ranged,Mana,570,360,#22374f
+Jarvan Iv,The exemplar of demacia,Diver,2011-03-01,V14.18,3150,790,Novice,Jungle,Melee,Mana,640,300,#5d2b07
+Jax,Grandmaster at arms,Skirmisher,2009-02-21,V14.18,1350,585,Novice,"Top,Jungle",Melee,Mana,665,339,#1f2743
+Jayce,The defender of tomorrow,Artillery,2012-07-07,V14.18,4800,880,Intermediate_Plus,"Top,Middle",Melee,Mana,590,375,#150c11
+Jhin,The virtuoso,Marksman  Catcher,2016-02-01,V14.8,4444,880,Intermediate_Plus,Bottom,Ranged,Mana,655,300,#010101
+Jinx,The loose cannon,Marksman,2013-10-10,V14.18,3150,790,Beginner,Bottom,Ranged,Mana,630,260,#221622
+Kai'sa,Daughter of the void,Marksman,2018-03-07,V14.8,1350,585,Intermediate,Bottom,Ranged,Mana,600,300,#333758
+Kalista,The spear of vengeance,Marksman,2014-11-20,V14.13,4800,880,Intermediate_Plus,"Middle,Support,Top",Ranged,Mana,630,374,#010101
+Karma,The enlightened one,Burst  Enchanter,2011-02-01,V14.13,3150,790,Novice,Jungle,Ranged,Mana,620,467,#46355a
+Karthus,The deathsinger,Battlemage,2009-06-12,V14.15,3150,790,Novice,Middle,Melee,Mana,646,400,#1a1c21
+Kassadin,The void walker,Assassin,2009-08-07,V14.10,3150,790,Intermediate,Middle,Melee,none,672,0,#362a39
+Katarina,The sinister blade,Assassin,2009-09-19,V14.16,3150,790,Expert,Top,Melee,Mana,670,330,#bf6269
+Kayle,The righteous,Specialist,2009-02-21,V14.9,4800,260,Intermediate_Plus,Jungle,Melee,Mana,655,410,#685157
+Kayn,The shadow reaper,Skirmisher,2017-07-12,V14.7,3150,790,Intermediate,Top,Ranged,Energy,580,200,#0e1214
+Kennen,The heart of the tempest,Specialist,2010-04-08,V14.13,4800,880,Intermediate,Jungle,Melee,Mana,643,327,#05080b
+Kha'zix,Kha'zix the voidreaver,Assassin,2012-09-27,V14.11,4800,880,Intermediate,Jungle,Ranged,Mana,610,300,#240f16
+Kindred,The eternal hunters,Marksman,2015-10-14,V14.14,4800,880,Advanced,Top,Melee,Courage,410,100,#2c3035
+Kled,The cantankerous cavalier,Skirmisher,2016-08-10,V14.9,4800,880,Intermediate_Plus,Bottom,Ranged,Mana,635,325,#010101
+Kog'maw,Kog'maw the mouth of the abyss,Marksman,2010-06-24,V14.14,4800,880,Novice,Top,Melee,Mana,625,320,#110d0a
+LeBlanc,The deceiver,Burst,2010-11-02,V14.14,3150,790,Advanced,Middle,Ranged,Mana,598,400,#694239
+Lee Sin,Sin the blind monk,Diver,2011-04-01,V14.14,1350,585,Expert,Jungle,Melee,Energy,645,200,#dbcbb1
+Leona,The radiant dawn,Vanguard,2011-07-13,V14.18,450,260,Novice,Support,Melee,Mana,646,302,#673b28
+Lissandra,The ice witch,Burst,2013-04-30,V14.18,4800,880,Intermediate,Middle,Ranged,Mana,620,475,#08374a
+Lucian,The purifier,Marksman,2013-08-22,V14.16,1350,585,Novice,Bottom,Ranged,Mana,641,320,#100511
+Lulu,The fae sorceress,Enchanter,2012-03-20,V14.18,4800,880,Novice,Support,Ranged,Mana,595,350,#49437d
+Lux,The lady of luminosity,Burst  Artillery,2010-10-19,V14.10,450,260,Novice,"Middle,Support",Ranged,Mana,580,480,#ffffff
+Malphite,Shard of the monolith,Vanguard,2009-09-02,V14.18,450,260,Beginner,"Top,Middle,Support",Melee,Mana,644,280,#090509
+Malzahar,The prophet of the void,Battlemage,2009-06-01,V14.9,4800,880,Beginner,Middle,Ranged,Mana,580,375,#9075fd
+Maokai,The twisted treant,Vanguard,2011-02-16,V14.18,4800,880,Beginner,"Support,Jungle",Melee,Mana,635,375,#281e22
+Master Yi ,Yi the wuju bladesman,Skirmisher,2009-02-21,V14.12,450,260,Beginner,Jungle,Melee,Mana,669,251,#323b44
+Miss Fortune ,Fortune the bounty hunter,Marksman,2010-09-08,V14.18,450,260,Beginner,Bottom,Ranged,Mana,640,300,#232b26
+Mordekaiser,The iron revenant,Juggernaut,2010-02-24,V14.15,1350,585,Intermediate_Plus,Top,Melee,Shield,645,100,#121116
+Morgana,The fallen,Catcher,2009-02-21,V14.18,1350,585,Novice,Support,Ranged,Mana,630,340,#291a35
+Nami,The tidecaller,Enchanter,2012-12-07,V14.11,3150,790,Intermediate,Support,Ranged,Mana,560,365,#102b4b
+Nasus,The curator of the sands,Juggernaut,2009-10-01,V14.18,1350,585,Beginner,Top,Melee,Mana,631,326,#2a152a
+Nautilus,The titan of the depths,Vanguard,2012-02-14,V14.12,4800,880,Beginner,Support,Melee,Mana,646,400,#f98441
+Neeko,The curious chameleon,Burst  Catcher,2018-12-05,V14.16,4800,880,Novice,"Middle,Support",Ranged,Mana,610,450,#9de8d8
+Nidalee,The bestial huntress,Specialist,2009-12-17,V14.14,3150,790,Expert,Jungle,Ranged,Mana,610,295,#231008
+Nocturne,The eternal nightmare,Assassin,2011-03-15,V14.9,3150,790,Beginner,Jungle,Melee,Mana,655,275,#080510
+Nunu & Willump,& willump the boy and his yeti,Vanguard,2009-02-21,V13.19,450,260,Beginner,Jungle,Melee,Mana,610,280,#303050
+Olaf,The berserker,Diver,2010-06-09,V14.9,3150,790,Beginner,Top,Melee,Mana,645,316,#869586
+Orianna,The lady of clockwork,Burst,2011-06-01,V14.16,4800,880,Advanced,Middle,Ranged,Mana,585,418,#000000
+Ornn,The fire below the mountain,Vanguard,2017-08-23,V14.15,4800,880,Intermediate,Top,Melee,Mana,660,341,#050305
+Pantheon,The unbreakable spear,Diver,2010-02-02,V14.13,1350,585,Novice,"Top,Support,Jungle,Middle",Melee,Mana,650,317,#52473f
+Poppy,Keeper of the hammer,Warden,2010-01-13,V14.9,450,260,Intermediate,"Top,Jungle",Melee,Mana,610,280,#271615
+Pyke,The bloodharbor ripper,Assassin  Catcher,2018-05-31,V14.18,3150,790,Intermediate,Support,Melee,Mana,670,415,#232924
+Qiyana,Empress of the elements,Assassin,2019-06-28,V14.16,4800,880,Expert,Middle,Melee,Mana,590,375,#25121d
+Quinn,Demacia's wings,Specialist,2013-03-01,V14.4,4800,880,Intermediate_Plus,Top,Ranged,Mana,565,269,#9f7397
+Rakan,The charmer,Catcher,2017-04-19,V14.10,4800,880,Intermediate,Support,Melee,Mana,610,315,#ad8e99
+Rammus,The armordillo,Vanguard,2009-07-10,V14.2,1350,585,Beginner,Jungle,Melee,Mana,675,310,#b7d076
+Rek'sai,Rek'sai the void burrower,Diver,2014-12-11,V14.12,4800,880,Intermediate,Jungle,Melee,Rage,600,100,#4f52ad
+Rengar,The pridestalker,Assassin  Diver,2012-08-21,V14.12,4800,880,Intermediate_Plus,"Jungle,Top",Melee,Ferocity,590,4,#010101
+Riven,The exile,Skirmisher,2011-09-14,V14.2,4800,880,Expert,Top,Melee,none,630,0,#240d11
+Rumble,The mechanized menace,Battlemage,2011-04-26,V14.18,4800,880,Intermediate_Plus,"Top,Middle",Melee,Heat,625,150,#2f1c16
+Ryze,The rune mage,Battlemage,2009-02-21,V14.8,4800,260,Intermediate_Plus,Middle,Ranged,Mana,645,300,#271c5e
+Sejuani,Fury of the north,Vanguard,2012-01-17,V14.15,450,260,Novice,Jungle,Melee,Mana,630,400,#0f0e15
+Senna,The redeemer,Marksman  Enchanter,2019-11-10,V14.16,3150,790,Advanced,"Bottom,Support",Ranged,Mana,530,350,#040505
+Sett,The boss,Juggernaut,2020-01-14,V14.10,1350,585,Intermediate,Top,Melee,Grit,670,0,#010101
+Shaco,The demon jester,Assassin,2009-10-10,V14.3,3150,790,Intermediate_Plus,"Jungle,Support",Melee,Mana,630,297,#370711
+Shen,The eye of twilight,Warden,2010-03-24,V14.18,3150,790,Novice,"Top,Support",Melee,Energy,610,400,#3d1f53
+Shyvana,The half-dragon,Juggernaut,2011-11-01,V14.15,3150,790,Beginner,Jungle,Melee,Fury,665,100,#b85f37
+Singed,The mad chemist,Specialist,2009-04-18,V14.11,4800,260,Intermediate_Plus,Top,Melee,Mana,650,330,#3a2317
+Sion,The undead juggernaut,Vanguard,2009-02-21,V14.14,1350,585,Novice,Top,Melee,Mana,655,400,#2c1619
+Sivir,The battle mistress,Marksman,2009-02-21,V14.5,450,260,Beginner,Bottom,Ranged,Mana,600,340,#605741
+Skarner,The primordial sovereign,Vanguard,2011-08-09,V14.18,4800,880,Beginner,"Jungle,Top",Melee,Mana,610,320,#1d233c
+Sona,Maven of the strings,Enchanter,2010-09-21,V14.7,450,260,Novice,Support,Ranged,Mana,550,340,#271d37
+Soraka,The starchild,Enchanter,2009-02-21,V14.4,450,260,Beginner,Support,Ranged,Mana,605,425,#9a5b5e
+Swain,The noxian grand general,Battlemage,2010-10-05,V14.18,3150,790,Novice,"Support,Middle",Ranged,Mana,595,468,#0a0c09
+Sylas,The unshackled,Burst  Skirmisher,2019-01-25,V14.16,3150,790,Advanced,"Middle,Top",Melee,Mana,575,400,#4d578f
+Syndra,The dark sovereign,Burst,2012-09-13,V14.16,3150,790,Advanced,Middle,Ranged,Mana,563,480,#9c91ac
+Tahm Kench ,The river king,Warden,2015-07-09,V14.15,4800,880,Beginner,"Top,Support",Melee,Mana,640,325,#000000
+Taliyah,The stoneweaver,Battlemage,2016-05-18,V14.16,4800,880,Intermediate_Plus,"Jungle,Middle",Ranged,Mana,550,470,#4d252c
+Talon,The blade's shadow,Assassin,2011-08-24,V14.15,3150,790,Intermediate,"Middle,Jungle",Melee,Mana,658,400,#ccffff
+Taric,The shield of valoran,Enchanter  Warden,2009-08-19,V14.15,1350,585,Novice,"Support,Middle",Melee,Mana,645,300,#c695dc
+Teemo,The swift scout,Specialist,2009-02-21,V14.8,450,260,Beginner,"Top,Jungle,Support",Ranged,Mana,598,334,#272e25
+Thresh,The chain warden,Catcher,2013-01-23,V14.8,3150,790,Advanced,Support,Ranged,Mana,600,274,#0d272f
+Tristana,The yordle gunner,Marksman,2009-02-21,V14.14,1350,585,Beginner,"Bottom,Middle",Ranged,Mana,640,250,#010101
+Trundle,The troll king,Juggernaut,2010-12-01,V14.5,3150,790,Beginner,"Top,Jungle",Melee,Mana,650,340,#292037
+Tryndamere,The barbarian king,Skirmisher,2009-05-01,V14.12,1350,585,Novice,Top,Melee,Fury,696,100,#a5b5bb
+Twisted Fate, The card master,Burst,2009-02-21,V14.12,4800,585,Intermediate,"Middle,Bottom,Top",Ranged,Mana,604,333,#312329
+Twitch,The plague rat,Marksman,2009-05-01,V14.12,3150,790,Intermediate,"Bottom,Support",Ranged,Mana,630,300,#22292c
+Udyr,The spirit walker,Juggernaut,2009-12-02,V14.3,1350,585,Beginner,"Top,Jungle",Melee,Mana,664,271,#795149
+Urgot,The dreadnought,Juggernaut,2010-08-24,V14.10,3150,790,Intermediate_Plus,Top,Ranged,Mana,655,340,#0f0e0c
+Varus,The arrow of retribution,Marksman  Artillery,2012-05-08,V14.18,4800,880,Intermediate,Bottom,Ranged,Mana,600,360,#3a2141
+Vayne,The night hunter,Marksman,2011-05-10,V14.6,3150,790,Intermediate,"Bottom,Top",Ranged,Mana,550,232,#131822
+Veigar,The tiny master of evil,Burst,2009-07-24,V14.9,1350,585,Novice,"Middle,Support",Ranged,Mana,580,490,#121328
+Vel'koz,The eye of the void,Artillery,2014-02-27,V14.9,3141,880,Intermediate,"Support,Middle",Ranged,Mana,590,469,#111321
+Vi,The piltover enforcer,Diver,2012-12-19,V14.18,1350,585,Novice,Jungle,Melee,Mana,655,295,#996152
+Viktor,The machine herald,Battlemage,2011-12-29,V14.12,4800,880,Intermediate,Middle,Ranged,Mana,600,405,#19100a
+Vladimir,The crimson reaper,Battlemage,2010-07-27,V14.18,3150,790,Intermediate_Plus,"Middle,Top",Ranged,Crimson Rush,607,2,#737061
+Volibear,The relentless storm,Juggernaut,2011-11-29,V14.10,1350,585,Novice,"Top,Jungle",Melee,Mana,650,350,#0b0a0c
+Warwick,The uncaged wrath of zaun,Diver,2009-02-21,V14.9,450,260,Novice,"Jungle,Top",Melee,Mana,620,280,#0f170f
+Zac,The secret weapon,Vanguard,2013-03-29,V14.13,4800,880,Novice,"Jungle,Top,Support",Melee,none,685,0,#17461a
+Zed,The master of shadows,Assassin,2012-11-13,V14.15,1350,585,Advanced,"Middle,Jungle",Melee,Energy,654,200,#07090e
+Zyra,Rise of the thorns,Catcher,2012-07-24 00:00:00,V14.15,3150,790,Intermediate_Plus,Support,Ranged,Mana,574,418,#130f0a
