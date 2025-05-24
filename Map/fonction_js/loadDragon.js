@@ -15,7 +15,7 @@ function loadDragonChart() {
           margin-bottom: 20px;
         "></h2>
         <div class="dragon-card monster-layout">
-          <img src="assets/dragon_draw.webp" alt="Dragon" class="monster-image dragon-img"/>
+          <img src="Map/assets/dragon_draw.webp" alt="Dragon" class="monster-image dragon-img"/>
           <div id="chart-dragon" class="monster-chart"></div>
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>

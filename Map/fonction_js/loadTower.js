@@ -15,7 +15,7 @@ function loadTowerChart() {
           margin-bottom: 20px;
         "></h2>
         <div class="dragon-card monster-layout">
-          <img src="assets/tower_draw.jpeg" alt="Tower" class="monster-image"/>
+          <img src="Map/assets/tower_draw.jpeg" alt="Tower" class="monster-image"/>
           <div id="chart-tower" class="monster-chart"></div>
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>

@@ -15,7 +15,7 @@ function loadHeraldChart() {
           margin-bottom: 20px;
         "></h2>
         <div class="dragon-card monster-layout">
-          <img src="assets/herald_draw.webp" alt="Herald" class="monster-image herald-img"/>
+          <img src="Map/assets/herald_draw.webp" alt="Herald" class="monster-image herald-img"/>
           <div id="chart-herald" class="monster-chart"></div>
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>
