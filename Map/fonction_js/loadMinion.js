@@ -15,7 +15,7 @@ function loadMinionChart() {
           margin-bottom: 20px;
         "></h2>
         <div class="dragon-card monster-layout">
-          <img src="assets/minion_draw.jpg" alt="Minion" class="monster-image"/>
+          <img src="Map/assets/minion_draw.jpg" alt="Minion" class="monster-image"/>
           <div id="chart-minion" class="monster-chart"></div>
         </div>
         <button class="return-btn" onclick="returnToMap()">⬅ Return to Map</button>
