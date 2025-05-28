@@ -74,6 +74,9 @@ function loadTowerChart() {
         .append("g")
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
+      // Ajoutez la classe pour désactiver les événements de la souris
+      svg.classed("no-pointer-events", true);
+
       const arc = d3.arc()
         .innerRadius(radius - 80)
         .outerRadius(radius - 20);
@@ -117,6 +120,8 @@ function loadTowerChart() {
         })
         .on("end", function(_, i) {
           if (i === stats.length - 1) {
+            // Retirez la classe pour réactiver les événements de la souris
+            svg.classed("no-pointer-events", false);
             const titleEl = document.getElementById("tower-title");
             titleEl.textContent = `Pie Chart: ${data.name}`;
             titleEl.style.opacity = 1;
@@ -173,4 +178,4 @@ function loadTowerChart() {
         tooltip.style.opacity = 0;
       });
     });
-} 
+}

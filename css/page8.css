@@ -197,3 +197,7 @@ h1 {
     font-size: 1.2rem;
   }
 } 
+
+.no-pointer-events {
+  pointer-events: none;
+}
