@@ -4,7 +4,7 @@ const stats = {
   dragon: "Dragon\nHP: 3500\nRespawn: 5 min\nBuff: Elemental Soul",
   herald: "Rift Herald\nHP: 8000\nFirst spawn: 8:00\nDrops: Eye of Herald",
   minion: "Minion\nHP: 450–1000\nGold: 14–60\nSpawns every 30s",
-  tower: "Tower\nHP: 5000–5500\nArmor: +40 early\nGold: 250 team gold + 150 local gold\nFirst Tower: +400 bonus gold"
+  tower: "Tower\nHP: 5000–5500\nArmor: +40 early\nGold: 250 team gold\nFirst Tower: +400 bonus gold"
 };
 
 const monsters = [
