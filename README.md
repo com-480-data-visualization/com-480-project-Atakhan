@@ -86,6 +86,8 @@ Here is the [PDF of Milestone 2](Milestone/Milestone_2/milestone_2_project_atakh
 
 **80% of the final grade**
 There is our [process book](process_book.pdf) and [the website](https://com-480-data-visualization.github.io/com-480-project-Atakhan/).
+and here is the [vidéo presentation](https://www.youtube.com/watch?v=EihmxrgYejI)
+
 
 
 
